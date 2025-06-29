@@ -1,0 +1,3 @@
+[submodule "clearml-helm-charts"]
+	path = clearml-helm-charts
+	url = https://github.com/levkovalenko/clearml-helm-charts.git
