@@ -66,7 +66,7 @@ def dataset_train_test_split(
     result_path.mkdir(exist_ok=True, parents=True)
     train.to_csv(result_path / "train.csv")
     test.to_csv(result_path / "test.csv")
-    prepared_dataset = Dataset.get(
+    prepared_dataset = Dataset.create(
         dataset_name=dataset_name,
         dataset_project=dataset_project,
         dataset_version=f"{dataset_version}.1",
