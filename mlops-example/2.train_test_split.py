@@ -11,7 +11,7 @@ pipe = PipelineController(
     project="Amazon reviews",
     version="0.0.1",
     packages=["./mlops-example"],
-    docker="python:3.12.0-slim-bookworm",
+    docker="python:3.11.13-slim-bookworm",
     enable_local_imports=True,
     # working_dir="./mlops-example",
 )

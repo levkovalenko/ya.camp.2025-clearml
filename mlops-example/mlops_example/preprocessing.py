@@ -1,6 +1,8 @@
 import re
+from typing import Any
 
 import nltk
+import numpy as np
 import polars as pl
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -41,3 +43,28 @@ def dataframe_preprocessing(data: pl.DataFrame, col_name: str) -> pl.DataFrame:
             .alias("corpus")
         )
     )
+
+
+class Preprocess(object):
+    def __init__(self):
+        # set internal state, this will be called only once. (i.e. not per request)
+        pass
+
+    def preprocess(
+        self, body: dict, state: dict, collect_custom_statistics_fn=None
+    ) -> Any:
+        # we expect to get two valid on the dict x0, and x1
+        text = body.get("text", None)
+        processed_words = text_preprocessing(text).split(" ")
+        lemmatizer = WordNetLemmatizer()
+        processed_text = " ".join(
+            [lemmatizer.lemmatize(token) for token in processed_words]
+        )
+        return [processed_text]
+
+    def postprocess(
+        self, data: Any, state: dict, collect_custom_statistics_fn=None
+    ) -> dict:
+        # post process the data returned from the model inference engine
+        # data is the return value from model.predict we will put is inside a return value as Y
+        return dict(y=data.tolist() if isinstance(data, np.ndarray) else data)
