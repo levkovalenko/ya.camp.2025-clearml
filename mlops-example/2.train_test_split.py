@@ -36,16 +36,15 @@ def dataset_train_test_split(
     dataset_name, dataset_project, dataset_version, test_size, random_state
 ):
     import sys
+
+    sys.path.append("./mlops-example")
+
     from pathlib import Path
 
     import pandas as pd
     import polars as pl
     import pyarrow
     from clearml import Dataset, Logger
-
-    sys.path.append("./mlops-example")
-    sys.path.append("./mlops-example/mlops_example")
-
     from mlops_example.visualisation import class_distribution
     from sklearn.model_selection import train_test_split
 
