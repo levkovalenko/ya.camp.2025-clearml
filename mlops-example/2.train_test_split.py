@@ -10,6 +10,8 @@ pipe = PipelineController(
         "polars>=1.31.0,<2",
         "pandas>=2.3.0,<3",
         "pyarrow>=20.0.0,<21",
+        "plotly>=6.2.0,<7",
+        "plotly-express>=0.4.1,<0.5",
     ],
     docker="python:3.12.0-slim-bookworm",
 )
@@ -44,7 +46,8 @@ def dataset_train_test_split(
     import pandas as pd
     import polars as pl
     import pyarrow
-    from clearml import Dataset
+    from clearml import Dataset, Logger
+    from mlops_example.visualisation import class_distribution
     from sklearn.model_selection import train_test_split
 
     print(pyarrow.__version__)
@@ -62,6 +65,8 @@ def dataset_train_test_split(
     train, test = train_test_split(
         data.to_pandas(), test_size=float(test_size), random_state=int(random_state)
     )
+    train_distrib = class_distribution(train, "Polarity")
+    test_distrib = class_distribution(test, "Polarity")
     result_path = Path("data/prepared/split")
     result_path.mkdir(exist_ok=True, parents=True)
     train.to_csv(result_path / "train.csv")
@@ -73,7 +78,17 @@ def dataset_train_test_split(
     )
     prepared_dataset.add_files(result_path)
     prepared_dataset.upload()
+    prepared_dataset.get_logger().report_plotly(
+        "Class distribution", "Train", train_distrib
+    )
+    prepared_dataset.get_logger().report_plotly(
+        "Class distribution", "Test", test_distrib
+    )
     prepared_dataset.finalize()
+
+    pipe_logger = Logger.current_logger()
+    pipe_logger.report_plotly("Class distribution", "Train", train_distrib)
+    pipe_logger.report_plotly("Class distribution", "Test", test_distrib)
     return train, test
 
 
