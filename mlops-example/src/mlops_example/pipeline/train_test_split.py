@@ -1,7 +1,17 @@
 from clearml import PipelineController
 
 pipe = PipelineController(
-    name="Pipeline Controller", project="Amazon reviews", version="1.0.0"
+    name="Pipeline Controller",
+    project="Amazon reviews",
+    version="1.0.0",
+    packages=[
+        "clearml>=2.0.1,<3",
+        "scikit-learn>=1.7.0,<2",
+        "polars>=1.31.0,<2",
+        "pandas>=2.3.0,<3",
+        "pyarrow>=20.0.0,<21",
+    ],
+    docker="python:3.12.0-slim-bookworm",
 )
 pipe.add_parameter(
     name="dataset_name",
@@ -77,14 +87,6 @@ pipe.add_function_step(
     function_return=["train_dataframe", "test_dataframe"],
     cache_executed_step=True,
     execution_queue="default",
-    packages=[
-        "clearml>=2.0.1,<3",
-        "scikit-learn>=1.7.0,<2",
-        "polars>=1.31.0,<2",
-        "pandas>=2.3.0,<3",
-        "pyarrow>=20.0.0,<21",
-    ],
-    docker="python:3.12.0-slim-bookworm",
 )
 
 pipe.start("default")
