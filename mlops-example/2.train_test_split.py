@@ -35,9 +35,10 @@ pipe.add_parameter(
 def dataset_train_test_split(
     dataset_name, dataset_project, dataset_version, test_size, random_state
 ):
+    import os
     import sys
 
-    sys.path.append("./mlops-example")
+    sys.path.append(os.path.join(sys.path[0], "mlops-example"))
 
     from pathlib import Path
 
