@@ -43,8 +43,11 @@ def dataset_train_test_split(
 
     import pandas as pd
     import polars as pl
+    import pyarrow
     from clearml import Dataset
     from sklearn.model_selection import train_test_split
+
+    print(pyarrow.__version__)
 
     dataset = Dataset.get(
         dataset_name=dataset_name,
