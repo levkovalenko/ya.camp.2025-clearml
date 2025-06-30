@@ -2,13 +2,10 @@ import re
 from typing import Any
 
 import nltk
+import numpy as np
+import polars as pl
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-
-try:
-    import polars as pl
-except ImportError:
-    print("No polars package")
 
 nltk.download("stopwords")
 nltk.download("wordnet")
@@ -70,4 +67,4 @@ class Preprocess(object):
     ) -> dict:
         # post process the data returned from the model inference engine
         # data is the return value from model.predict we will put is inside a return value as Y
-        return dict(y=list(data))
+        return dict(y=data.tolist() if isinstance(data, np.ndarray) else data)

@@ -156,6 +156,7 @@ pipe.add_function_step(
     cache_executed_step=True,
     execution_queue="default",
     helper_functions=[class_distribution],
+    packages=["numpy==1.26.4"],
 )
 
 pipe.add_function_step(
@@ -175,6 +176,7 @@ pipe.add_function_step(
     execution_queue="default",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
     parents=["train_test_split"],
+    packages=["numpy==1.26.4"],
 )
 
 pipe.add_function_step(
@@ -194,6 +196,7 @@ pipe.add_function_step(
     execution_queue="default",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
     parents=["train_test_split"],
+    packages=["numpy==1.26.4"],
 )
 
 
