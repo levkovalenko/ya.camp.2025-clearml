@@ -62,16 +62,16 @@ def dataset_train_test_split(
     train, test = train_test_split(
         data.to_pandas(), test_size=float(test_size), random_state=int(random_state)
     )
-    result_path = Path("data/prepared/")
+    result_path = Path("data/prepared/split")
     result_path.mkdir(exist_ok=True, parents=True)
-    train.to_csv(result_path / "split" / "train.csv")
-    test.to_csv(result_path / "split" / "test.csv")
+    train.to_csv(result_path / "train.csv")
+    test.to_csv(result_path / "test.csv")
     prepared_dataset = Dataset.get(
         dataset_name=dataset_name,
         dataset_project=dataset_project,
         dataset_version=f"{dataset_version}.1",
     )
-    prepared_dataset.add_files(result_path / "split")
+    prepared_dataset.add_files(result_path)
     prepared_dataset.upload()
     prepared_dataset.finalize()
     return train, test
