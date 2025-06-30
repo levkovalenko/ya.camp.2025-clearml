@@ -8,6 +8,8 @@ pipe = PipelineController(
         "./mlops-example",
     ],
     docker="python:3.12.0-slim-bookworm",
+    enable_local_imports=True,
+    working_dir="./mlops-example",
 )
 pipe.add_parameter(
     name="dataset_name",
@@ -39,6 +41,8 @@ def dataset_train_test_split(
     import sys
 
     sys.path.append(os.path.join(sys.path[0], "mlops-example"))
+    sys.path.append(os.path.join(sys.path[0], "mlops-example/mlops_example"))
+    sys.path.append(os.path.join(sys.path[0], "mlops_example"))
 
     from pathlib import Path
 
