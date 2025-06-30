@@ -79,6 +79,7 @@ def dataset_train_test_split(
         dataset_name=dataset_name,
         dataset_project=dataset_project,
         dataset_version=f"{dataset_version}.{version_postfix}",
+        parent_datasets=[dataset],
     )
     prepared_dataset.add_files(result_path)
     prepared_dataset.upload()
@@ -96,11 +97,13 @@ def dataset_train_test_split(
     return (
         pl.from_pandas(train, include_index=False),
         pl.from_pandas(test, include_index=False),
+        prepared_dataset.id,
     )
 
 
 def dataset_preprocessing(
     dataframe,
+    parent_dataset,
     dataset_name,
     dataset_project,
     dataset_version,
@@ -123,18 +126,19 @@ def dataset_preprocessing(
         dataset_name=dataset_name,
         dataset_project=dataset_project,
         dataset_version=f"{dataset_version}.{version_postfix}",
+        parent_datasets=[parent_dataset],
     )
     dataframe: pl.DataFrame
     processed_dataframe = dataframe_preprocessing(dataframe, "Review")
 
     result_path = Path("data/prepared/processed")
     result_path.mkdir(exist_ok=True, parents=True)
-    processed_dataframe.write_csv(result_path / f"processed_{frame_name}.csv")
+    processed_dataframe.write_parquet(result_path / f"processed_{frame_name}.parquet")
 
     prepared_dataset.add_files(result_path)
     prepared_dataset.upload()
     prepared_dataset.finalize()
-    return processed_dataframe
+    return processed_dataframe, prepared_dataset.id
 
 
 pipe.add_function_step(
@@ -148,7 +152,7 @@ pipe.add_function_step(
         random_state="${pipeline.random_state}",
         version_postfix="1",
     ),
-    function_return=["raw_train_dataframe", "raw_test_dataframe"],
+    function_return=["raw_train_dataframe", "raw_test_dataframe", "splited_dataset_id"],
     cache_executed_step=True,
     execution_queue="default",
     helper_functions=[class_distribution],
@@ -159,13 +163,14 @@ pipe.add_function_step(
     function=dataset_preprocessing,
     function_kwargs=dict(
         dataframe="${train_test_split.raw_train_dataframe}",
+        parent_dataset="${train_test_split.splited_dataset_id}",
         dataset_name="${pipeline.dataset_name}",
         dataset_project="${pipeline.dataset_project}",
         dataset_version="${pipeline.dataset_version}",
         version_postfix="2",
         frame_name="train",
     ),
-    function_return=["processed_train_dataframe"],
+    function_return=["processed_train_dataframe", "dataset_id"],
     cache_executed_step=True,
     execution_queue="default",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
@@ -177,13 +182,14 @@ pipe.add_function_step(
     function=dataset_preprocessing,
     function_kwargs=dict(
         dataframe="${train_test_split.raw_test_dataframe}",
+        parent_dataset="${train_test_split.splited_dataset_id}",
         dataset_name="${pipeline.dataset_name}",
         dataset_project="${pipeline.dataset_project}",
         dataset_version="${pipeline.dataset_version}",
         version_postfix="3",
         frame_name="test",
     ),
-    function_return=["processed_test_dataframe"],
+    function_return=["processed_test_dataframe", "dataset_id"],
     cache_executed_step=True,
     execution_queue="default",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
