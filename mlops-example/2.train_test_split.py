@@ -10,7 +10,7 @@ pipe = PipelineController(
     name="DataPrepare",
     project="Amazon reviews",
     version="0.0.1",
-    packages=["./mlops-example"],
+    packages=["./mlops-example", "numpy==1.26.4"],
     docker="python:3.11.13-slim-bookworm",
     enable_local_imports=True,
     # working_dir="./mlops-example",
