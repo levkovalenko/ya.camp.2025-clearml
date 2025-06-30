@@ -5,13 +5,7 @@ pipe = PipelineController(
     project="Amazon reviews",
     version="0.0.1",
     packages=[
-        "clearml>=2.0.1,<3",
-        "scikit-learn>=1.7.0,<2",
-        "polars>=1.31.0,<2",
-        "pandas>=2.3.0,<3",
-        "pyarrow>=20.0.0,<21",
-        "plotly>=6.2.0,<7",
-        "plotly-express>=0.4.1,<0.5",
+        "./mlops-example",
     ],
     docker="python:3.12.0-slim-bookworm",
 )
@@ -41,12 +35,17 @@ pipe.add_parameter(
 def dataset_train_test_split(
     dataset_name, dataset_project, dataset_version, test_size, random_state
 ):
+    import sys
     from pathlib import Path
 
     import pandas as pd
     import polars as pl
     import pyarrow
     from clearml import Dataset, Logger
+
+    sys.path.append("./mlops-example")
+    sys.path.append("./mlops-example/mlops_example")
+
     from mlops_example.visualisation import class_distribution
     from sklearn.model_selection import train_test_split
 
