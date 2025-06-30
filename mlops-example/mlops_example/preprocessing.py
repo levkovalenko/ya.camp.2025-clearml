@@ -3,9 +3,13 @@ from typing import Any
 
 import nltk
 import numpy as np
-import polars as pl
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+
+try:
+    import polars as pl
+except ImportError:
+    print("No polars package")
 
 nltk.download("stopwords")
 nltk.download("wordnet")

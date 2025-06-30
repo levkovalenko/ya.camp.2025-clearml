@@ -1200,7 +1200,7 @@ packages:
 - pypi: ./
   name: mlops-example
   version: 0.1.0
-  sha256: 17a8942f88db9c5a19e50ae620cedcef3d9671d19022d625e228130536964455
+  sha256: 52b8d30ee4edc11fae5116bea4d697455458e852988e5c5579d96a98d438fa6b
   requires_dist:
   - clearml>=2.0.1,<3
   - jupyter>=1.1.1,<2
@@ -1208,7 +1208,7 @@ packages:
   - plotly-express>=0.4.1,<0.5
   - clearml-serving>=1.3.5,<2
   - scikit-learn==1.2.2
-  - numpy==1.*
+  - numpy==1.26.4
   - pandas>=2.3.0,<3
   - polars>=1.31.0,<2
   - nltk>=3.9.1,<4
