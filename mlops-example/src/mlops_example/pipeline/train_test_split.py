@@ -1,9 +1,9 @@
 from clearml import PipelineController
 
 pipe = PipelineController(
-    name="Pipeline Controller",
+    name="DataPrepare",
     project="Amazon reviews",
-    version="1.0.0",
+    version="0.0.1",
     packages=[
         "clearml>=2.0.1,<3",
         "scikit-learn>=1.7.0,<2",
