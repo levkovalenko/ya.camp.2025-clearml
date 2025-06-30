@@ -1,15 +1,19 @@
 from clearml import PipelineController
+from mlops_example.preprocessing import (
+    dataframe_preprocessing,
+    lemmatize,
+    text_preprocessing,
+)
+from mlops_example.visualisation import class_distribution
 
 pipe = PipelineController(
     name="DataPrepare",
     project="Amazon reviews",
     version="0.0.1",
-    packages=[
-        "./mlops-example",
-    ],
+    packages=["./mlops-example"],
     docker="python:3.12.0-slim-bookworm",
     enable_local_imports=True,
-    working_dir="./mlops-example",
+    # working_dir="./mlops-example",
 )
 pipe.add_parameter(
     name="dataset_name",
@@ -35,22 +39,19 @@ pipe.add_parameter(
 
 
 def dataset_train_test_split(
-    dataset_name, dataset_project, dataset_version, test_size, random_state
+    dataset_name,
+    dataset_project,
+    dataset_version,
+    test_size,
+    random_state,
+    version_postfix,
 ):
-    import os
-    import sys
-
-    sys.path.append(os.path.join(sys.path[0], "mlops-example"))
-    sys.path.append(os.path.join(sys.path[0], "mlops-example/mlops_example"))
-    sys.path.append(os.path.join(sys.path[0], "mlops_example"))
-
     from pathlib import Path
 
     import pandas as pd
     import polars as pl
     import pyarrow
     from clearml import Dataset, Logger
-    from mlops_example.visualisation import class_distribution
     from sklearn.model_selection import train_test_split
 
     print(pyarrow.__version__)
@@ -72,12 +73,12 @@ def dataset_train_test_split(
     test_distrib = class_distribution(test, "Polarity")
     result_path = Path("data/prepared/split")
     result_path.mkdir(exist_ok=True, parents=True)
-    train.to_csv(result_path / "train.csv")
-    test.to_csv(result_path / "test.csv")
+    train.to_csv(result_path / "raw_train.csv", index=False)
+    test.to_csv(result_path / "raw_test.csv", index=False)
     prepared_dataset = Dataset.create(
         dataset_name=dataset_name,
         dataset_project=dataset_project,
-        dataset_version=f"{dataset_version}.1",
+        dataset_version=f"{dataset_version}.{version_postfix}",
     )
     prepared_dataset.add_files(result_path)
     prepared_dataset.upload()
@@ -92,7 +93,48 @@ def dataset_train_test_split(
     pipe_logger = Logger.current_logger()
     pipe_logger.report_plotly("Class distribution", "Train", train_distrib)
     pipe_logger.report_plotly("Class distribution", "Test", test_distrib)
-    return train, test
+    return (
+        pl.from_pandas(train, include_index=False),
+        pl.from_pandas(test, include_index=False),
+    )
+
+
+def dataset_preprocessing(
+    dataframe,
+    dataset_name,
+    dataset_project,
+    dataset_version,
+    version_postfix,
+    frame_name,
+):
+    from pathlib import Path
+
+    import nltk
+    import polars as pl
+    import pyarrow
+    from clearml import Dataset
+
+    print(pyarrow.__version__)
+
+    nltk.download("stopwords")
+    nltk.download("wordnet")
+
+    prepared_dataset = Dataset.create(
+        dataset_name=dataset_name,
+        dataset_project=dataset_project,
+        dataset_version=f"{dataset_version}.{version_postfix}",
+    )
+    dataframe: pl.DataFrame
+    processed_dataframe = dataframe_preprocessing(dataframe, "Review")
+
+    result_path = Path("data/prepared/processed")
+    result_path.mkdir(exist_ok=True, parents=True)
+    processed_dataframe.write_csv(result_path / f"processed_{frame_name}.csv")
+
+    prepared_dataset.add_files(result_path)
+    prepared_dataset.upload()
+    prepared_dataset.finalize()
+    return processed_dataframe
 
 
 pipe.add_function_step(
@@ -104,10 +146,49 @@ pipe.add_function_step(
         dataset_version="${pipeline.dataset_version}",
         test_size="${pipeline.test_size}",
         random_state="${pipeline.random_state}",
+        version_postfix="1",
     ),
-    function_return=["train_dataframe", "test_dataframe"],
+    function_return=["raw_train_dataframe", "raw_test_dataframe"],
     cache_executed_step=True,
     execution_queue="default",
+    helper_functions=[class_distribution],
 )
 
-pipe.start("default")
+pipe.add_function_step(
+    name="train_processing",
+    function=dataset_preprocessing,
+    function_kwargs=dict(
+        dataframe="${train_test_split.raw_train_dataframe}",
+        dataset_name="${pipeline.dataset_name}",
+        dataset_project="${pipeline.dataset_project}",
+        dataset_version="${pipeline.dataset_version}",
+        version_postfix="2",
+        frame_name="train",
+    ),
+    function_return=["processed_train_dataframe"],
+    cache_executed_step=True,
+    execution_queue="default",
+    helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
+    parents=["train_test_split"],
+)
+
+pipe.add_function_step(
+    name="test_processing",
+    function=dataset_preprocessing,
+    function_kwargs=dict(
+        dataframe="${train_test_split.raw_test_dataframe}",
+        dataset_name="${pipeline.dataset_name}",
+        dataset_project="${pipeline.dataset_project}",
+        dataset_version="${pipeline.dataset_version}",
+        version_postfix="3",
+        frame_name="test",
+    ),
+    function_return=["processed_test_dataframe"],
+    cache_executed_step=True,
+    execution_queue="default",
+    helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
+    parents=["train_test_split"],
+)
+
+
+pipe.start_locally()
