@@ -1,2 +1,3 @@
 clearml*.tgz
 __pycache__
+*.pkl
