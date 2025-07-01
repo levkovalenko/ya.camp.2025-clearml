@@ -230,4 +230,4 @@ pipe.add_function_step(
 )
 
 
-pipe.start_locally()
+pipe.start()
