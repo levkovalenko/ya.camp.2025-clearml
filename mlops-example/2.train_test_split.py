@@ -10,7 +10,7 @@ pipe = PipelineController(
     name="DataPrepare",
     project="Amazon reviews",
     version="0.0.1",
-    packages=["./mlops-example", "numpy==1.26.4"],
+    packages=["./mlops-example"],
     docker="python:3.11.13-slim-bookworm",
     enable_local_imports=True,
     # working_dir="./mlops-example",
@@ -156,7 +156,17 @@ pipe.add_function_step(
     cache_executed_step=True,
     execution_queue="default",
     helper_functions=[class_distribution],
-    packages=["numpy==1.26.4"],
+    packages=[
+        "plotly>=6.2.0,<7",
+        "plotly-express>=0.4.1,<0.5",
+        "clearml-serving>=1.3.5,<2",
+        "scikit-learn==1.2.2",
+        "numpy==1.26.4",
+        "pandas>=2.3.0,<3",
+        "polars>=1.31.0,<2",
+        "nltk>=3.9.1,<4",
+        "pyarrow>=20.0.0,<21",
+    ],
 )
 
 pipe.add_function_step(
@@ -176,7 +186,17 @@ pipe.add_function_step(
     execution_queue="default",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
     parents=["train_test_split"],
-    packages=["numpy==1.26.4"],
+    packages=[
+        "plotly>=6.2.0,<7",
+        "plotly-express>=0.4.1,<0.5",
+        "clearml-serving>=1.3.5,<2",
+        "scikit-learn==1.2.2",
+        "numpy==1.26.4",
+        "pandas>=2.3.0,<3",
+        "polars>=1.31.0,<2",
+        "nltk>=3.9.1,<4",
+        "pyarrow>=20.0.0,<21",
+    ],
 )
 
 pipe.add_function_step(
@@ -196,7 +216,17 @@ pipe.add_function_step(
     execution_queue="default",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
     parents=["train_test_split"],
-    packages=["numpy==1.26.4"],
+    packages=[
+        "plotly>=6.2.0,<7",
+        "plotly-express>=0.4.1,<0.5",
+        "clearml-serving>=1.3.5,<2",
+        "scikit-learn==1.2.2",
+        "numpy==1.26.4",
+        "pandas>=2.3.0,<3",
+        "polars>=1.31.0,<2",
+        "nltk>=3.9.1,<4",
+        "pyarrow>=20.0.0,<21",
+    ],
 )
 
 
