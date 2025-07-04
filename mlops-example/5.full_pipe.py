@@ -44,49 +44,24 @@ pipe.add_parameter(
     param_type="str",
 )
 
+
 pipe.add_step(
-    name="train_test_split",
-    base_task_id="035490e0afab42028ceb60d47103207b",
+    name="data_prepare",
+    base_task_id="1ecd1cacb1db4f40a362a67d629fe14f",
     parameter_override={
         "kwargs/dataset_name": "${pipeline.dataset_name}",
         "kwargs/dataset_project": "${pipeline.dataset_project}",
         "kwargs/dataset_version": "${pipeline.dataset_version}",
-        "kwargs/test_size": "${pipeline.test_size}",
         "kwargs/random_state": "${pipeline.random_state}",
+        "kwargs/test_size": "${pipeline.test_size}",
     },
     cache_executed_step=True,
-    execution_queue="default",
-)
-
-pipe.add_step(
-    name="train_processing",
-    base_task_id="0063964a8b8e446bad62d0f29b22b616",
-    parameter_override={
-        "kwargs/dataset_name": "${pipeline.dataset_name}",
-        "kwargs/dataset_project": "${pipeline.dataset_project}",
-        "kwargs/dataset_version": "${pipeline.dataset_version}",
-    },
-    cache_executed_step=True,
-    parents=["train_test_split"],
-    execution_queue="default",
-)
-
-pipe.add_step(
-    name="test_processing",
-    base_task_id="4af4992d59e148339440efa0bf696b6e",
-    parameter_override={
-        "kwargs/dataset_name": "${pipeline.dataset_name}",
-        "kwargs/dataset_project": "${pipeline.dataset_project}",
-        "kwargs/dataset_version": "${pipeline.dataset_version}",
-    },
-    cache_executed_step=True,
-    parents=["train_test_split"],
     execution_queue="default",
 )
 
 pipe.add_step(
     name="fit_model",
-    base_task_id="fa99d8e3c804494e9d0ff2259f49ab77",
+    base_task_id="56920c92accb477fb1880a758749c90f",
     parameter_override={
         "General/dataset_name": "${pipeline.dataset_name}",
         "General/dataset_project": "${pipeline.dataset_project}",
@@ -97,7 +72,7 @@ pipe.add_step(
         "General/max_features": "${pipeline.max_features}",
         "General/analyzer": "${pipeline.analyzer}",
     },
-    parents=["test_processing", "train_processing"],
+    parents=["data_prepare"],
     cache_executed_step=True,
     execution_queue="default",
 )
