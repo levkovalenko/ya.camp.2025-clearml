@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.14">
 
   <meta name="author" content="Лев Коваленко">
-  <title>MLOPS/DATAOPS YA.Camp 2025 – INTRO</title>
+  <title>MLOPS/DATAOPS YA.Camp 2025 – MLOPS TOOLS</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -127,7 +127,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">INTRO</h1>
+  <h1 class="title">MLOPS TOOLS</h1>
   <p class="subtitle">MLOPS YA.Camp 2025</p>
 
 <div class="quarto-title-authors">
@@ -139,101 +139,101 @@
 </div>
 
 </section>
-<section id="чуть-чуть-интерактива" class="slide level2">
-<h2>Чуть-чуть интерактива</h2>
-<p><a href="vk.cc/cNpPry">vk.cc/cNpPry</a></p>
-
-<img data-src="./images/qr_cNpPry.png" class="r-stretch"></section>
-<section id="план-занятий" class="slide level2">
-<h2>План занятий</h2>
-<ul>
-<li>Определимся: Что такое MLOPS?</li>
-<li>Поговорим о проблемах ML</li>
-<li>Посмотрим подходы к их решению</li>
-<li>Посвятим много времени ClearML</li>
-</ul>
-</section>
-<section id="что-такое-mlops" class="slide level2">
-<h2>Что такое MLOPS?</h2>
-
-<img data-src="./images/mlops_meme_1.png" class="r-stretch"></section>
-<section>
-<section id="какие-бывают-проблемы-в-ml" class="title-slide slide level1 center">
-<h1>Какие бывают проблемы в ML</h1>
-
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
-
-<img data-src="images/all_problesm.png" class="r-stretch"></section>
-<section id="данные" class="slide level2">
-<h2>Данные</h2>
+<section id="tools-types" class="slide level2">
+<h2>Tools types</h2>
 <div class="columns">
-<div class="column" style="width:65%;">
+<div class="column" style="width:50%;">
 <ul>
-<li>Лежат локально</li>
-<li>Меняются произвольно</li>
-<li>Нет настроенных потоков данных</li>
-<li>Нет версий датасетов</li>
+<li>Data Management</li>
+<li>Data Validation</li>
+<li>Workflow Managment</li>
+<li>Model Lifecycle</li>
 </ul>
-</div><div class="column" style="width:35%;">
-<p><img data-src="images/data_problem.png"></p>
-</div></div>
-</section>
-<section id="исследования" class="slide level2">
-<h2>Исследования</h2>
-<div class="columns">
-<div class="column" style="width:65%;">
+</div><div class="column" style="width:50%;">
 <ul>
-<li>Нет культуры исследований</li>
-<li>Результаты теряются</li>
-<li>Часто не воспроизводимы</li>
-<li>Сложно разобраться <em>“а что сделано-то?”</em></li>
+<li>Knowledge Sharing</li>
+<li>Model Serving</li>
+<li>Monitoring &amp; Dashboards</li>
+<li>MLOPS Platforms</li>
 </ul>
-</div><div class="column" style="width:35%;">
-<p><img data-src="images/research_problem.png" style="height:130.0%"></p>
 </div></div>
-</section>
-<section id="модели" class="slide level2">
-<h2>Модели</h2>
-<div class="columns">
-<div class="column" style="width:65%;">
+<p>И это еще не всё…<sup>1</sup></p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Смотрите в <a href="https://github.com/kelvins/awesome-mlops">awesome-mlops</a> и <a href="https://github.com/visenger/awesome-mlops">mlops-references</a></p></li></ol></aside></section>
+<section id="data-management" class="slide level2">
+<h2>Data Management</h2>
 <ul>
-<li><em>“А где модель то?”</em></li>
-<li><em>“Как ее запустить?”</em></li>
-<li><em>“А она еще работает?”</em></li>
-<li>“<em>Что-то не так, дай новую модельку</em>”</li>
+<li><a href="https://git-lfs.github.com">Git LFS</a> – расширение git для больших файлов</li>
+<li><a href="https://dvc.org/">DVC</a> – система версионирования данных и моделей в ml проектах</li>
+<li><a href="https://huggingface.co/">Hugging Face</a> – платформа для публикации открытых моделей и датасетов</li>
+<li><a href="https://github.com/treeverse/lakeFS">LakeFS</a> – git like система версионирования данных в объектных хранилищах</li>
 </ul>
-</div><div class="column" style="width:35%;">
-<p><img data-src="images/model_problem.png" style="height:130.0%"></p>
-</div></div>
 </section>
-<section id="командное-взаимодействие" class="slide level2">
-<h2>Командное взаимодействие</h2>
-<div class="columns">
-<div class="column" style="width:65%;">
+<section id="data-validation" class="slide level2">
+<h2>Data Validation</h2>
 <ul>
-<li>Каждый кодит как он хочет</li>
-<li>Исследования независимы</li>
-<li>Нет обмена знаниями</li>
-<li><em>“А что мы вообще делаем?”</em></li>
+<li><a href="https://greatexpectations.io">Great Expectations</a> – фреймворк для валидации данных</li>
+<li><a href="https://github.com/unionai-oss/pandera">Pandera</a> – задание модели данных pandas и polars</li>
+<li><a href="https://datacontract.com/">Data contract</a> – валидация как хранилищ данных, так и отдельных файлов</li>
 </ul>
-</div><div class="column" style="width:35%;">
-<p><img data-src="images/team_problem.png" style="height:130.0%"></p>
-</div></div>
 </section>
-<section id="как-же-все-это-решать" class="slide level2">
-<h2>Как же все это решать?</h2>
-<p><a href="https://miro.com/app/board/uXjVLGblH8M=/?share_link_id=945900646516">матрица зрелости инженерных практик</a></p>
+<section id="workflow-managment" class="slide level2">
+<h2>Workflow Managment</h2>
 <ul>
-<li>Постепенно менять процессы работы</li>
-<li>Внедрять инструменты автоматизации</li>
-<li>Повышать культуру и компетенции команды</li>
-<li>Делать сразу как надо</li>
+<li><a href="https://github.com/mirror/make">GNU Make</a> – олдовый workflow manager на основе файлов</li>
+<li><a href="https://github.com/snakemake/snakemake">SnakeMake</a> – аналог для управления workflow в DS проектах</li>
+<li><a href="https://github.com/spotify/luigi">Luigi</a> – python оркестратор workflow</li>
+<li><a href="https://metaflow.org/">Metaflow</a> – оркестратор для ML workflow</li>
+<li><a href="https://github.com/mage-ai/mage-ai">Mage AI</a> – фреймворк для управления ml workflow</li>
+<li><a href="https://github.com/apache/airflow">AirFlow</a> –мощный и популярный оркестратор workflow</li>
+</ul>
+</section>
+<section id="model-lifecycle" class="slide level2">
+<h2>Model Lifecycle</h2>
+<ul>
+<li><a href="https://mlflow.org/">MLflow</a> – платформа для трекинга артефактов экспериментов</li>
+<li><a href="https://neptune.ai/">Neptune AI</a> – колобаративный инструмент трекинга артефактов и датасетов</li>
+<li><a href="https://github.com/wandb/client">Weights and Biases</a> – инструмент визуализации и отслеживания обучения ваших моделей</li>
+<li><a href="https://github.com/tensorflow/tensorboard">TensorBoard</a> – инструмент визуализации обучения ваших нейронных сетей</li>
+</ul>
+</section>
+<section id="knowledge-sharing" class="slide level2">
+<h2>Knowledge Sharing</h2>
+<ul>
+<li><a href="https://github.com/airbnb/knowledge-repo">Knowledge Repo</a> – платформа обмена знаниями для исследователей</li>
+<li><a href="https://kyso.io/">Kyso</a> – инструмент публикации и ревью отчетов</li>
+</ul>
+</section>
+<section id="model-serving" class="slide level2">
+<h2>Model Serving</h2>
+<ul>
+<li><a href="https://github.com/triton-inference-server/server">Triton Inference Server</a> – python сервис для деплоя различных моделей и оптимизацией их исполнения</li>
+<li><a href="https://www.tensorflow.org/tfx/guide/serving">TensorFlow Serving</a> – гибкий, мощный инструмент деплоя tensorflow в продакшен</li>
+<li><a href="https://github.com/pytorch/serve">TorchServe</a> – аналог для моделей pytorch</li>
+<li><a href="https://github.com/ml-tooling/opyrator">Opyrator</a> – простой способ получить API/интерфейс модели</li>
+<li><a href="https://github.com/gradio-app/gradio">Gradio</a> – инструмент построения простых ML web-приложений</li>
+</ul>
+</section>
+<section id="monitoring-dashboards" class="slide level2">
+<h2>Monitoring &amp; Dashboards</h2>
+<ul>
+<li><a href="https://github.com/streamlit/streamlit">Streamlit</a> – простой инструмент построения dashboards чего либо на питоне</li>
+<li><a href="https://github.com/plotly/dash">Dash</a> – аналог от команды plotly</li>
+<li><a href="https://github.com/grafana/grafana">Grafana</a> – простой сервис для построения dashboards</li>
+<li><a href="https://github.com/prometheus/prometheus">Prometheus</a> – инструмент сбора метрик и ошибок</li>
+<li><a href="https://github.com/Graylog2/graylog2-server">GrayLog</a> – сборщик и анализатор логов</li>
+</ul>
+</section>
+<section id="mlops-platforms" class="slide level2">
+<h2>MLOPS Platforms</h2>
+<ul>
+<li><a href="https://github.com/clearml/clearml">ClearML</a> – платформа все в одном</li>
+<li><a href="https://github.com/kubeflow/kubeflow">Kubeflow</a> – платформа для ML на основе kubernetes</li>
+<li>И много много других</li>
 </ul>
 
 
-</section></section>
+</section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

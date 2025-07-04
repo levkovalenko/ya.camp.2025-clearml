@@ -159,6 +159,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">INTRO</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/2.tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MLOPS TOOLS</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -238,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#clearml-servering" id="toc-clearml-servering" class="nav-link active" data-scroll-target="#clearml-servering">ClearML Servering</a>
   <ul class="collapse">
-  <li><a href="#базовая-настрйока" id="toc-базовая-настрйока" class="nav-link" data-scroll-target="#базовая-настрйока">Базовая настрйока</a></li>
+  <li><a href="#базовая-настройка" id="toc-базовая-настройка" class="nav-link" data-scroll-target="#базовая-настройка">Базовая настройка</a></li>
   <li><a href="#добвавлние-моделей" id="toc-добвавлние-моделей" class="nav-link" data-scroll-target="#добвавлние-моделей">Добвавлние моделей</a></li>
   <li><a href="#тестирвоание-модели" id="toc-тестирвоание-модели" class="nav-link" data-scroll-target="#тестирвоание-модели">Тестирвоание модели</a></li>
   </ul></li>
@@ -253,8 +259,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="clearml-servering" class="level1">
 <h1>ClearML Servering</h1>
-<section id="базовая-настрйока" class="level2">
-<h2 class="anchored" data-anchor-id="базовая-настрйока">Базовая настрйока</h2>
+<section id="базовая-настройка" class="level2">
+<h2 class="anchored" data-anchor-id="базовая-настройка">Базовая настройка</h2>
 <ol type="1">
 <li>Установите clearml-serving</li>
 </ol>
@@ -281,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="добвавлние-моделей" class="level2">
 <h2 class="anchored" data-anchor-id="добвавлние-моделей">Добвавлние моделей</h2>
 <ol type="1">
-<li><p>Стоит опубликовать вашу модель, которую вы хотите использовать, выберете в атефактах вашу модель и нажмите publish в ее меню. <img src="images/experiment.model.publish.png" class="img-fluid"></p></li>
+<li><p>Стоит опубликовать вашу модель, которую вы хотите использовать, выберете в артефактах вашу модель и нажмите publish в ее меню. <img src="images/experiment.model.publish.png" class="img-fluid"></p></li>
 <li><p>Далее нужно подготовить prepreprocessing для данных на вход модели, варианты можно найти в <a href="https://github.com/clearml/clearml-serving/tree/main/examples">примерах</a>. Вам нужно по сути написать класс <code>Preprocessing</code> в виде класса в фалйле, вот пример для подготовки данных в tf-idf</p></li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Preprocess(<span class="bu">object</span>):</span>
@@ -347,13 +353,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="тестирвоание-модели" class="level2">
 <h2 class="anchored" data-anchor-id="тестирвоание-модели">Тестирвоание модели</h2>
-<p>Попробуем потестировать модель, сразу оговорюсь нужно делать тесты мз сети yc, так как для моделей не проброшены внешние порты, для этого можно развернуть виртуалку. Попробуем первый запрос, мы будем обращатсья к модели с <code>ID=27c2c1bb0af74984a3a22e702f65fdf9</code>, поэтому в url укзываем версию 2.</p>
+<p>Попробуем потестировать модель, сразу оговорюсь нужно делать тесты мз сети yc, так как для моделей не проброшены внешние порты, для этого можно развернуть виртуалку. Попробуем первый запрос, мы будем обращаться к модели с <code>ID=27c2c1bb0af74984a3a22e702f65fdf9</code>, поэтому в url указываем версию 2.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"http://10.112.135.102:8080/serve/sentiment_analyze/2"</span> <span class="at">-H</span> <span class="st">"accept: application/json"</span> <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">"{</span><span class="dt">\"</span><span class="st">text</span><span class="dt">\"</span><span class="st">: </span><span class="dt">\"</span><span class="st">Taking this out of my daughter's library, I found this book and thought the illustrtions were absolutey beautiful -- a true work of artistry. However, I didn't read it through before I bought it. I was reading it to my daughter when I discovered how disturbing the story turns with the spanking scenes. I stopped reading the book and I will take it out of my house.</span><span class="dt">\"</span><span class="st">}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ответ модели: <code>{"y":[2]}</code></p>
 <p>Теперь второй запрос:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"http://10.112.135.102:8080/serve/sentiment_analyze/2"</span> <span class="at">-H</span> <span class="st">"accept: application/json"</span> <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">"{</span><span class="dt">\"</span><span class="st">text</span><span class="dt">\"</span><span class="st">: </span><span class="dt">\"</span><span class="st">Scratched the lens with a kleenex,I used these once then used a Kleenex to wipe one lens that was a little smudged. I have microscopic vision and I noticed it was scratched AFTER I used the Kleenex, so to be sure, I used it again and sure enough, it scratched the lens some more. I compared the 2 lenses and the other lens looked pristine, whereas the one I used the kleenex on was scratched all over Very low quality lenses! Unusable after one use</span><span class="dt">\"</span><span class="st">}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ответ модели: <code>{"y":[1]}</code></p>
-<p>Видим что модель работает и названачет соотвествующие лейблы. Отлично у вас есть развернутая модель которую можно использовать и отправлять ей разные запросы.</p>
+<p>Видим что модель работает и назначает соответствующие лейблы. Отлично у вас есть развернутая модель которую можно использовать и отправлять ей разные запросы.</p>
 
 
 </section>

@@ -158,6 +158,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">INTRO</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./slides/2.tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MLOPS TOOLS</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -247,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="расширение-clearml-pipelines" class="level1">
 <h1>Расширение ClearML pipelines</h1>
-<p>Еще немного вернемся к пайплайнам, кроме пайплайнов из кодакак это было показано в <a href="./5. clearml_pipeline.html">5. clearml_pipeline.md</a>, можно создавать пайплайны из задач. Давайте разбремся, что для этого надо и рассмотрим файл <a href="./mlops-example/5.full_pipe.py">mlops-example/5.full_pipe.py</a>.</p>
+<p>Еще немного вернемся к пайплайнам, кроме пайплайнов из кода, как это было показано в <a href="./5. clearml_pipeline.html">5. clearml_pipeline.md</a>, можно создавать пайплайны из задач. Давайте разберемся, что для этого надо и рассмотрим файл <a href="./mlops-example/5.full_pipe.py">mlops-example/5.full_pipe.py</a>.</p>
 <ol type="1">
 <li>Точно также инициализируем пайплайн, как делали ранее и задаем ему все необходимые параметры:</li>
 </ol>
@@ -297,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    param_type<span class="op">=</span><span class="st">"str"</span>,</span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
-<li>Зададим первый шаг и включим в него весь пайплайн подгтовки данных из <a href="./mlops-example/5.full_pipe.py">mlops-example/5.full_pipe.py</a>. В нем указываем <code>base_task_id="1ecd1cacb1db4f40a362a67d629fe14f"</code>, которая определит задачу которая должна выполняться на этом шаге, переопределим ее параметрыи донастроим. По паараметрам, их нужно писать так: <code>Section/Param name</code>, что бы корректно переопределеить.</li>
+<li>Зададим первый шаг и включим в него весь пайплайн подготовки данных из <a href="./mlops-example/5.full_pipe.py">mlops-example/5.full_pipe.py</a>. В нем указываем <code>base_task_id="1ecd1cacb1db4f40a362a67d629fe14f"</code>, которая определит задачу которая должна выполняться на этом шаге, переопределим ее параметры и донастроим. По параметрам, их нужно писать так: <code>Section/Param name</code>, что бы корректно переопределить.</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pipe.add_step(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"data_prepare"</span>,</span>
@@ -314,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>В результате при выполнении у нас будет запускаться дополнительно этот пайплайн <img src="./images/ext.pipe.sub.png" class="img-fluid"></p>
 <ol start="3" type="1">
-<li>Задаим шаг на основе <a href="./mlops-example/3.tf_idf.py">mlops-example/3.tf_idf.py</a>, работа с ним описана в <a href="./6. clearml_research.html">6. clearml_research.md</a>. Точно также указываем <code>base_task_id="b5217b5ef85e4e4aa630c672f8177973"</code> из clearml и переопределяем параметры, а также указываем что следует она после выполнения подпайплайна <code>data_prepare</code>.</li>
+<li>Зададим шаг на основе <a href="./mlops-example/3.tf_idf.py">mlops-example/3.tf_idf.py</a>, работа с ним описана в <a href="./6. clearml_research.html">6. clearml_research.md</a>. Точно также указываем <code>base_task_id="b5217b5ef85e4e4aa630c672f8177973"</code> из clearml и переопределяем параметры, а также указываем что следует она после выполнения подпайплайна <code>data_prepare</code>.</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pipe.add_step(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"fit_model"</span>,</span>
