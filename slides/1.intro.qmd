@@ -1,5 +1,5 @@
 ---
-title: INTRO
+title: Intro
 subtitle: MLOps YA.Camp 2025
 author:
     Лев Коваленко

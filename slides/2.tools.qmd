@@ -1,5 +1,5 @@
 ---
-title: MLOps TOOLS
+title: MLOps Tools
 subtitle: MLOps YA.Camp 2025
 author:
     Лев Коваленко
