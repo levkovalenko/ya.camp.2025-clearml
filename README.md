@@ -1,7 +1,16 @@
-# MLOPS/DATAOPS YA.CAMP 2025
-В репозитории представлены материалы для занятий MLOPS/DATAOPS YA.CAMP 2025.
+# MLOps/DataOps YA.CAMP 2025
+В репозитории представлены материалы для занятий MLOps/DataOps YA.CAMP 2025.
+
+## Источники
+Источники для подготовленных материалов:
+- [Документация ClearML](https://clear.ml/docs/latest/docs/)
+- Курс [MLOps и production в DS исследованиях 3.0](https://ods.ai/tracks/mlops3-course-spring-2024)
+- Курс [Инженерные практики в ML](https://levkovalenko.github.io/Engineering-Practices-ML/)
 
 ## Теория
+- [Введение](./slides/1.intro.qmd) в MLOps, что это и зачем нужно?
+- [Инструменты](./slides/2.tools.qmd) MLOps (краткий перечень)
+- [ClearML](./slides/3.clearml.qmd) как единая платформа для ML исследований
 
 ## Практика
 - [clearml-helm-charts](./clearml-helm-charts) -- подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.

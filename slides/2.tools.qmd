@@ -1,6 +1,6 @@
 ---
-title: MLOPS TOOLS
-subtitle: MLOPS YA.Camp 2025
+title: MLOps TOOLS
+subtitle: MLOps YA.Camp 2025
 author:
     Лев Коваленко
 format: revealjs
@@ -24,7 +24,7 @@ format: revealjs
 - Knowledge Sharing
 - Model Serving
 - Monitoring & Dashboards
-- MLOPS Platforms
+- MLOps Platforms
  
 :::
 ::::
@@ -81,7 +81,7 @@ format: revealjs
 * [Prometheus](https://github.com/prometheus/prometheus) -- инструмент сбора метрик и ошибок
 * [GrayLog](https://github.com/Graylog2/graylog2-server) -- сборщик и анализатор логов
 
-## MLOPS Platforms
+## MLOps Platforms
 * [ClearML](https://github.com/clearml/clearml) -- платформа все в одном
 * [Kubeflow](https://github.com/kubeflow/kubeflow) -- платформа для ML на основе kubernetes
 * И много много других

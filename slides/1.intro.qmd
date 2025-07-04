@@ -1,6 +1,6 @@
 ---
 title: INTRO
-subtitle: MLOPS YA.Camp 2025
+subtitle: MLOps YA.Camp 2025
 author:
     Лев Коваленко
 format: revealjs
@@ -13,12 +13,12 @@ format: revealjs
 ![](./images/qr_cNpPry.png)
 
 ## План занятий
-- Определимся: Что такое MLOPS?
+- Определимся: Что такое MLOps?
 - Поговорим о проблемах ML
 - Посмотрим подходы к их решению
 - Посвятим много времени ClearML
 
-## Что такое MLOPS?
+## Что такое MLOps?
 ![](./images/mlops_meme_1.png)
 
 # Какие бывают проблемы в ML
