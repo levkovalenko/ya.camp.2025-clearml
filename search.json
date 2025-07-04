@@ -215,6 +215,94 @@
     "text": "Footnotes\n\n\nЕсли не получается то локлаьно через docker-compose↩︎\nЕсли неполчается, то реализовать приложение fastpai, которое при запуске забирает определенную версию модели из clearml↩︎"
   },
   {
+    "objectID": "slides/1.intro.html#чуть-чуть-интерактива",
+    "href": "slides/1.intro.html#чуть-чуть-интерактива",
+    "title": "INTRO",
+    "section": "Чуть-чуть интерактива",
+    "text": "Чуть-чуть интерактива\nvk.cc/cNpPry",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#план-занятий",
+    "href": "slides/1.intro.html#план-занятий",
+    "title": "INTRO",
+    "section": "План занятий",
+    "text": "План занятий\n\nОпределимся: Что такое MLOPS?\nПоговорим о проблемах ML\nПосмотрим подходы к их решению\nПосявтим много времени ClearML",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#что-такое-mlops",
+    "href": "slides/1.intro.html#что-такое-mlops",
+    "title": "INTRO",
+    "section": "Что такое MLOPS?",
+    "text": "Что такое MLOPS?",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#данные",
+    "href": "slides/1.intro.html#данные",
+    "title": "INTRO",
+    "section": "Данные",
+    "text": "Данные\n\n\n\nЛежат локально\nМеняются произвольно\nНет настроенных потоков данных\nНет версий датасетов",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#исследования",
+    "href": "slides/1.intro.html#исследования",
+    "title": "INTRO",
+    "section": "Исследования",
+    "text": "Исследования\n\n\n\nНет культуры исследований\nРезультаты теряются\nЧасто не воспроизводимы\nСложно разобраться “а что сделано-то?”",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#модели",
+    "href": "slides/1.intro.html#модели",
+    "title": "INTRO",
+    "section": "Модели",
+    "text": "Модели\n\n\n\n“А где модель то?”\n“Как ее запустить?”\n“А она еще работает?”\n“Что-то не так, дай новую модельку”",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#командное-взаимодействие",
+    "href": "slides/1.intro.html#командное-взаимодействие",
+    "title": "INTRO",
+    "section": "Командное взаимодействие",
+    "text": "Командное взаимодействие\n\n\n\nКаждый кодит как он хочет\nИсследования независимы\nНет обмена знаниями\n“А что мы вообще делаем?”",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#как-же-все-это-решать",
+    "href": "slides/1.intro.html#как-же-все-это-решать",
+    "title": "INTRO",
+    "section": "Как же все это решать?",
+    "text": "Как же все это решать?\nматрица зрелости инженерных практик\n\nПостепенно менять процессы работы\nВнедрять инструменты автоматизации\nПовышать культуру и компетенции команды\nделать сразу как надо",
+    "crumbs": [
+      "Лекции",
+      "INTRO"
+    ]
+  },
+  {
     "objectID": "2. clearml_yandex_kube.html",
     "href": "2. clearml_yandex_kube.html",
     "title": "Настройка ClearML Yandex",
