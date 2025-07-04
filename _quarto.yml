@@ -5,6 +5,7 @@ project:
     port: 8080
   render:
     - README.md
+    - "slides/*"
     - "1. yandex_kube.md"
     - "2. clearml_yandex_kube.md"
     - "3. clearml_work.md"
@@ -22,6 +23,8 @@ website:
     style: "docked"
     search: true
     contents:
+    - section: Лекции
+      contents: slides/*
     - section: Практика
       contents:
       - 1. yandex_kube.md
