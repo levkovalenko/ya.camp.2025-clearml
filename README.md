@@ -3,6 +3,7 @@
 
 ## Источники
 Источники для подготовленных материалов:
+
 - [Документация ClearML](https://clear.ml/docs/latest/docs/)
 - Курс [MLOps и production в DS исследованиях 3.0](https://ods.ai/tracks/mlops3-course-spring-2024)
 - Курс [Инженерные практики в ML](https://levkovalenko.github.io/Engineering-Practices-ML/)
