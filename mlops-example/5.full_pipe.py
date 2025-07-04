@@ -61,7 +61,7 @@ pipe.add_step(
 
 pipe.add_step(
     name="fit_model",
-    base_task_id="056b164b81ed48f2a3aec0fb679b2924",
+    base_task_id="b5217b5ef85e4e4aa630c672f8177973",
     parameter_override={
         "General/dataset_name": "${pipeline.dataset_name}",
         "General/dataset_project": "${pipeline.dataset_project}",

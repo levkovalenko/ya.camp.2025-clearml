@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import joblib
-import numpy as np
 import pandas as pd
 import polars as pl
 from clearml import Dataset, Logger, OutputModel, Task
@@ -10,13 +9,13 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.pipeline import Pipeline
 
-print(np.__version__)
-
 task = Task.init(
     project_name="Amazon reviews",
     task_name="TF-IDF Vectorize BernoulliNB",
     output_uri=True,
 )
+task.add_requirements("numpy", "1.26.4")
+task.add_requirements("pyarrow", "20.0.0")
 logger: Logger = task.get_logger()
 output_model = OutputModel(task=task, framework="scikit-learn")
 args = {
