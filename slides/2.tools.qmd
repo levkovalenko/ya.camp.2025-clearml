@@ -1,0 +1,87 @@
+---
+title: MLOPS TOOLS
+subtitle: MLOPS YA.Camp 2025
+author:
+    Лев Коваленко
+format: revealjs
+---
+
+## Tools types
+
+:::: {.columns}
+ 
+::: {.column width="50%"}
+
+- Data Management
+- Data Validation
+- Workflow Managment
+- Model Lifecycle
+ 
+:::
+ 
+::: {.column width="50%"}
+
+- Knowledge Sharing
+- Model Serving
+- Monitoring & Dashboards
+- MLOPS Platforms
+ 
+:::
+::::
+
+
+
+И это еще не всё...[^1]
+
+[^1]: Смотрите в [awesome-mlops](https://github.com/kelvins/awesome-mlops) и [mlops-references](https://github.com/visenger/awesome-mlops)
+
+
+## Data Management
+* [Git LFS](https://git-lfs.github.com) -- расширение git для больших файлов
+* [DVC](https://dvc.org/) -- система версионирования данных и моделей в ml проектах
+* [Hugging Face](https://huggingface.co/) -- платформа для публикации открытых моделей и датасетов
+* [LakeFS](https://github.com/treeverse/lakeFS) -- git like система версионирования данных в объектных хранилищах
+
+## Data Validation
+* [Great Expectations](https://greatexpectations.io) -- фреймворк для валидации данных
+* [Pandera](https://github.com/unionai-oss/pandera) -- задание модели данных pandas и polars
+* [Data contract](https://datacontract.com/) -- валидация как хранилищ данных, так и отдельных файлов
+
+## Workflow Managment
+* [GNU Make](https://github.com/mirror/make) -- олдовый workflow manager на основе файлов
+* [SnakeMake](https://github.com/snakemake/snakemake) -- аналог для управления workflow в DS проектах
+* [Luigi](https://github.com/spotify/luigi) -- python оркестратор workflow
+* [Metaflow](https://metaflow.org/) -- оркестратор для ML workflow
+* [Mage AI](https://github.com/mage-ai/mage-ai) -- фреймворк для управления ml workflow
+* [AirFlow](https://github.com/apache/airflow) --мощный и популярный оркестратор workflow 
+
+## Model Lifecycle
+* [MLflow](https://mlflow.org/) -- платформа для трекинга артефактов экспериментов
+* [Neptune AI](https://neptune.ai/) -- колобаративный инструмент трекинга артефактов и датасетов
+* [Weights and Biases](https://github.com/wandb/client) -- инструмент визуализации и отслеживания обучения ваших моделей
+* [TensorBoard](https://github.com/tensorflow/tensorboard) -- инструмент визуализации обучения ваших нейронных сетей
+
+
+## Knowledge Sharing
+* [Knowledge Repo](https://github.com/airbnb/knowledge-repo) -- платформа обмена знаниями для исследователей
+* [Kyso](https://kyso.io/) -- инструмент публикации и ревью отчетов
+
+## Model Serving
+* [Triton Inference Server](https://github.com/triton-inference-server/server) -- python сервис для деплоя различных моделей и оптимизацией их исполнения
+* [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) -- гибкий, мощный инструмент деплоя tensorflow в продакшен
+* [TorchServe](https://github.com/pytorch/serve) -- аналог для моделей pytorch
+* [Opyrator](https://github.com/ml-tooling/opyrator) -- простой способ получить API/интерфейс модели
+* [Gradio](https://github.com/gradio-app/gradio) -- инструмент построения простых ML web-приложений
+
+## Monitoring & Dashboards
+
+* [Streamlit](https://github.com/streamlit/streamlit) -- простой инструмент построения dashboards чего либо на питоне
+* [Dash](https://github.com/plotly/dash) -- аналог от команды plotly
+* [Grafana](https://github.com/grafana/grafana) -- простой сервис для построения dashboards
+* [Prometheus](https://github.com/prometheus/prometheus) -- инструмент сбора метрик и ошибок
+* [GrayLog](https://github.com/Graylog2/graylog2-server) -- сборщик и анализатор логов
+
+## MLOPS Platforms
+* [ClearML](https://github.com/clearml/clearml) -- платформа все в одном
+* [Kubeflow](https://github.com/kubeflow/kubeflow) -- платформа для ML на основе kubernetes
+* И много много других
