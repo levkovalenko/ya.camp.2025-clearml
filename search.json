@@ -202,7 +202,7 @@
     "href": "slides/1.intro.html#план-занятий",
     "title": "INTRO",
     "section": "План занятий",
-    "text": "План занятий\n\nОпределимся: Что такое MLOPS?\nПоговорим о проблемах ML\nПосмотрим подходы к их решению\nПосвятим много времени ClearML",
+    "text": "План занятий\n\nОпределимся: Что такое MLOps?\nПоговорим о проблемах ML\nПосмотрим подходы к их решению\nПосвятим много времени ClearML",
     "crumbs": [
       "Лекции",
       "INTRO"
@@ -212,8 +212,8 @@
     "objectID": "slides/1.intro.html#что-такое-mlops",
     "href": "slides/1.intro.html#что-такое-mlops",
     "title": "INTRO",
-    "section": "Что такое MLOPS?",
-    "text": "Что такое MLOPS?",
+    "section": "Что такое MLOps?",
+    "text": "Что такое MLOps?",
     "crumbs": [
       "Лекции",
       "INTRO"
@@ -277,128 +277,142 @@
   {
     "objectID": "README.html",
     "href": "README.html",
-    "title": "MLOPS/DATAOPS YA.CAMP 2025",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
-    "text": "В репозитории представлены материалы для занятий MLOPS/DATAOPS YA.CAMP 2025.\n\n\n\n\n\n\nclearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2. clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить\n\n\n\n\nНа практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
+    "text": "В репозитории представлены материалы для занятий MLOps/DataOps YA.CAMP 2025.\n\n\nИсточники для подготовленных материалов: - Документация ClearML - Курс MLOps и production в DS исследованиях 3.0 - Курс Инженерные практики в ML\n\n\n\n\nВведение в MLOps, что это и зачем нужно?\nИнструменты MLOps (краткий перечень)\nClearML как единая платформа для ML исследований\n\n\n\n\n\nclearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2. clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить\n\n\n\n\nНа практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
+  },
+  {
+    "objectID": "README.html#источники",
+    "href": "README.html#источники",
+    "title": "MLOps/DataOps YA.CAMP 2025",
+    "section": "",
+    "text": "Источники для подготовленных материалов: - Документация ClearML - Курс MLOps и production в DS исследованиях 3.0 - Курс Инженерные практики в ML"
+  },
+  {
+    "objectID": "README.html#теория",
+    "href": "README.html#теория",
+    "title": "MLOps/DataOps YA.CAMP 2025",
+    "section": "",
+    "text": "Введение в MLOps, что это и зачем нужно?\nИнструменты MLOps (краткий перечень)\nClearML как единая платформа для ML исследований"
   },
   {
     "objectID": "README.html#практика",
     "href": "README.html#практика",
-    "title": "MLOPS/DATAOPS YA.CAMP 2025",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
     "text": "clearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2. clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить"
   },
   {
     "objectID": "README.html#задание",
     "href": "README.html#задание",
-    "title": "MLOPS/DATAOPS YA.CAMP 2025",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
     "text": "На практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
   },
   {
     "objectID": "README.html#footnotes",
     "href": "README.html#footnotes",
-    "title": "MLOPS/DATAOPS YA.CAMP 2025",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nЕсли не получается то локлаьно через docker-compose↩︎\nЕсли неполчается, то реализовать приложение fastpai, которое при запуске забирает определенную версию модели из clearml↩︎"
   },
   {
     "objectID": "slides/2.tools.html#tools-types",
     "href": "slides/2.tools.html#tools-types",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Tools types",
-    "text": "Tools types\n\n\n\nData Management\nData Validation\nWorkflow Managment\nModel Lifecycle\n\n\n\nKnowledge Sharing\nModel Serving\nMonitoring & Dashboards\nMLOPS Platforms\n\n\nИ это еще не всё…1\nСмотрите в awesome-mlops и mlops-references",
+    "text": "Tools types\n\n\n\nData Management\nData Validation\nWorkflow Managment\nModel Lifecycle\n\n\n\nKnowledge Sharing\nModel Serving\nMonitoring & Dashboards\nMLOps Platforms\n\n\nИ это еще не всё…1\nСмотрите в awesome-mlops и mlops-references",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#data-management",
     "href": "slides/2.tools.html#data-management",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Data Management",
     "text": "Data Management\n\nGit LFS – расширение git для больших файлов\nDVC – система версионирования данных и моделей в ml проектах\nHugging Face – платформа для публикации открытых моделей и датасетов\nLakeFS – git like система версионирования данных в объектных хранилищах",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#data-validation",
     "href": "slides/2.tools.html#data-validation",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Data Validation",
     "text": "Data Validation\n\nGreat Expectations – фреймворк для валидации данных\nPandera – задание модели данных pandas и polars\nData contract – валидация как хранилищ данных, так и отдельных файлов",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#workflow-managment",
     "href": "slides/2.tools.html#workflow-managment",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Workflow Managment",
     "text": "Workflow Managment\n\nGNU Make – олдовый workflow manager на основе файлов\nSnakeMake – аналог для управления workflow в DS проектах\nLuigi – python оркестратор workflow\nMetaflow – оркестратор для ML workflow\nMage AI – фреймворк для управления ml workflow\nAirFlow –мощный и популярный оркестратор workflow",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#model-lifecycle",
     "href": "slides/2.tools.html#model-lifecycle",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Model Lifecycle",
     "text": "Model Lifecycle\n\nMLflow – платформа для трекинга артефактов экспериментов\nNeptune AI – колобаративный инструмент трекинга артефактов и датасетов\nWeights and Biases – инструмент визуализации и отслеживания обучения ваших моделей\nTensorBoard – инструмент визуализации обучения ваших нейронных сетей",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#knowledge-sharing",
     "href": "slides/2.tools.html#knowledge-sharing",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Knowledge Sharing",
     "text": "Knowledge Sharing\n\nKnowledge Repo – платформа обмена знаниями для исследователей\nKyso – инструмент публикации и ревью отчетов",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#model-serving",
     "href": "slides/2.tools.html#model-serving",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Model Serving",
     "text": "Model Serving\n\nTriton Inference Server – python сервис для деплоя различных моделей и оптимизацией их исполнения\nTensorFlow Serving – гибкий, мощный инструмент деплоя tensorflow в продакшен\nTorchServe – аналог для моделей pytorch\nOpyrator – простой способ получить API/интерфейс модели\nGradio – инструмент построения простых ML web-приложений",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#monitoring-dashboards",
     "href": "slides/2.tools.html#monitoring-dashboards",
-    "title": "MLOPS TOOLS",
+    "title": "MLOps TOOLS",
     "section": "Monitoring & Dashboards",
     "text": "Monitoring & Dashboards\n\nStreamlit – простой инструмент построения dashboards чего либо на питоне\nDash – аналог от команды plotly\nGrafana – простой сервис для построения dashboards\nPrometheus – инструмент сбора метрик и ошибок\nGrayLog – сборщик и анализатор логов",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
     "objectID": "slides/2.tools.html#mlops-platforms",
     "href": "slides/2.tools.html#mlops-platforms",
-    "title": "MLOPS TOOLS",
-    "section": "MLOPS Platforms",
-    "text": "MLOPS Platforms\n\nClearML – платформа все в одном\nKubeflow – платформа для ML на основе kubernetes\nИ много много других",
+    "title": "MLOps TOOLS",
+    "section": "MLOps Platforms",
+    "text": "MLOps Platforms\n\nClearML – платформа все в одном\nKubeflow – платформа для ML на основе kubernetes\nИ много много других",
     "crumbs": [
       "Лекции",
-      "MLOPS TOOLS"
+      "MLOps TOOLS"
     ]
   },
   {
