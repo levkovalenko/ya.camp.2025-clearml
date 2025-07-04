@@ -1,3 +1,5 @@
 clearml*.tgz
 __pycache__
 *.pkl
+/.quarto/
+docs

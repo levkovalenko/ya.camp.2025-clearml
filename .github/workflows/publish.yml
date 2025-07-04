@@ -1,0 +1,39 @@
+on:
+  workflow_dispatch:
+  push:
+    branches: master
+
+name: Quarto Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      # - name: Install Python and Dependencies
+      #   run: pip install poetry==1.2.2
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10.5'
+      #     cache: 'poetry'
+      # - run: poetry install
+      #   env:
+      #     PYTHON_KEYRING_BACKEND: keyring.backends.null.Keyring
+      # - run: poetry run python -m ipykernel install --user --name epml
+
+      - name: Render and Publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "quarto-github-actions-publish@example.com"
+          git config --global user.name "Quarto GHA Workflow Runner"
+          poetry run quarto publish gh-pages

@@ -1,0 +1,74 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    port: 8080
+  render:
+    - README.md
+    - "1. yandex_kube.md"
+    - "2. clearml_yandex_kube.md"
+    - "3. clearml_work.md"
+    - "4. clearml_data.md"
+    - "5. clearml_pipeline.md"
+    - "6. clearml_research.md"
+    - "7. clearml_reports.md"
+    - "8. clearml_serving.md"
+    - "9. clearml_extend_pipes.md"
+
+website:
+  title: "MLOPS/DATAOPS YA.Camp 2025"
+  page-navigation: true
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+    - section: Практика
+      contents:
+      - 1. yandex_kube.md
+      - 2. clearml_yandex_kube.md
+      - 3. clearml_work.md
+      - 4. clearml_data.md
+      - 5. clearml_pipeline.md
+      - 6. clearml_research.md
+      - 7. clearml_reports.md
+      - 8. clearml_serving.md
+      - 9. clearml_extend_pipes.md
+      # - section: "Course problems"
+      #   contents:
+      #     - 1.entry.qmd
+      #     - 2.replication_crisis.qmd
+      # - section: "Team work"
+      #   contents:
+      #     - 3.team_work.qmd
+      #     - 4.git_workflow.qmd
+      # - section: "Software development"
+      #   contents:
+      #     - 5.dependencies.qmd
+      #     - 6.docker.qmd
+      #     - 7.code_styles.qmd
+      #     - 8.testing.qmd
+      # - section: "Data versioning"
+      #   contents:
+      #     - 9.data_version.qmd
+      #     - 10.git_lfs.qmd
+      #     - 11.neptune.qmd
+      #     - 12.dvc.qmd
+      #     - 13.dvc_problems.qmd
+      # - section: "Pipelines"
+      #   contents:
+      #     - 14.templates.qmd
+      #     - 15.workflow_manager.qmd
+      #     - 16.make.qmd
+      #     - 17.snakemake.qmd
+      #     - 18.dvc.qmd
+      #     - 19.airflow.qmd
+      # - section: "Documentation"
+      #   contents:
+      #     - 20.docs.qmd
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
