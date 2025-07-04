@@ -49,11 +49,11 @@ pipe.add_step(
     name="data_prepare",
     base_task_id="1ecd1cacb1db4f40a362a67d629fe14f",
     parameter_override={
-        "kwargs/dataset_name": "${pipeline.dataset_name}",
-        "kwargs/dataset_project": "${pipeline.dataset_project}",
-        "kwargs/dataset_version": "${pipeline.dataset_version}",
-        "kwargs/random_state": "${pipeline.random_state}",
-        "kwargs/test_size": "${pipeline.test_size}",
+        "Args/dataset_name": "${pipeline.dataset_name}",
+        "Args/dataset_project": "${pipeline.dataset_project}",
+        "Args/dataset_version": "${pipeline.dataset_version}",
+        "Args/random_state": "${pipeline.random_state}",
+        "Args/test_size": "${pipeline.test_size}",
     },
     cache_executed_step=True,
     execution_queue="default",
@@ -61,7 +61,7 @@ pipe.add_step(
 
 pipe.add_step(
     name="fit_model",
-    base_task_id="56920c92accb477fb1880a758749c90f",
+    base_task_id="056b164b81ed48f2a3aec0fb679b2924",
     parameter_override={
         "General/dataset_name": "${pipeline.dataset_name}",
         "General/dataset_project": "${pipeline.dataset_project}",

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import joblib
+import numpy as np
 import pandas as pd
 import polars as pl
 from clearml import Dataset, Logger, OutputModel, Task
@@ -8,6 +9,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.pipeline import Pipeline
+
+print(np.__version__)
 
 task = Task.init(
     project_name="Amazon reviews",
@@ -64,7 +67,7 @@ pipe = Pipeline(
         (
             "tfidf",
             TfidfVectorizer(
-                max_features=args["max_features"],
+                max_features=int(args["max_features"]),
                 analyzer=args["analyzer"],
             ),
         ),
