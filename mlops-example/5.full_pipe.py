@@ -48,11 +48,11 @@ pipe.add_step(
     name="train_test_split",
     base_task_id="035490e0afab42028ceb60d47103207b",
     parameter_override={
-        "KWARGS/dataset_name": "${pipeline.dataset_name}",
-        "KWARGS/dataset_project": "${pipeline.dataset_project}",
-        "KWARGS/dataset_version": "${pipeline.dataset_version}",
-        "KWARGS/test_size": "${pipeline.test_size}",
-        "KWARGS/random_state": "${pipeline.random_state}",
+        "kwargs/dataset_name": "${pipeline.dataset_name}",
+        "kwargs/dataset_project": "${pipeline.dataset_project}",
+        "kwargs/dataset_version": "${pipeline.dataset_version}",
+        "kwargs/test_size": "${pipeline.test_size}",
+        "kwargs/random_state": "${pipeline.random_state}",
     },
     cache_executed_step=True,
     execution_queue="default",
@@ -62,9 +62,9 @@ pipe.add_step(
     name="train_processing",
     base_task_id="0063964a8b8e446bad62d0f29b22b616",
     parameter_override={
-        "KWARGS/dataset_name": "${pipeline.dataset_name}",
-        "KWARGS/dataset_project": "${pipeline.dataset_project}",
-        "KWARGS/dataset_version": "${pipeline.dataset_version}",
+        "kwargs/dataset_name": "${pipeline.dataset_name}",
+        "kwargs/dataset_project": "${pipeline.dataset_project}",
+        "kwargs/dataset_version": "${pipeline.dataset_version}",
     },
     cache_executed_step=True,
     parents=["train_test_split"],
@@ -75,9 +75,9 @@ pipe.add_step(
     name="test_processing",
     base_task_id="4af4992d59e148339440efa0bf696b6e",
     parameter_override={
-        "KWARGS/dataset_name": "${pipeline.dataset_name}",
-        "KWARGS/dataset_project": "${pipeline.dataset_project}",
-        "KWARGS/dataset_version": "${pipeline.dataset_version}",
+        "kwargs/dataset_name": "${pipeline.dataset_name}",
+        "kwargs/dataset_project": "${pipeline.dataset_project}",
+        "kwargs/dataset_version": "${pipeline.dataset_version}",
     },
     cache_executed_step=True,
     parents=["train_test_split"],
@@ -103,4 +103,4 @@ pipe.add_step(
 )
 
 
-pipe.start("default")
+pipe.start_locally()
