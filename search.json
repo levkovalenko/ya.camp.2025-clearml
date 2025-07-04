@@ -189,89 +189,89 @@
   {
     "objectID": "slides/1.intro.html#чуть-чуть-интерактива",
     "href": "slides/1.intro.html#чуть-чуть-интерактива",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Чуть-чуть интерактива",
     "text": "Чуть-чуть интерактива\nvk.cc/cNpPry",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#план-занятий",
     "href": "slides/1.intro.html#план-занятий",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "План занятий",
     "text": "План занятий\n\nОпределимся: Что такое MLOps?\nПоговорим о проблемах ML\nПосмотрим подходы к их решению\nПосвятим много времени ClearML",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#что-такое-mlops",
     "href": "slides/1.intro.html#что-такое-mlops",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Что такое MLOps?",
     "text": "Что такое MLOps?",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#данные",
     "href": "slides/1.intro.html#данные",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Данные",
     "text": "Данные\n\n\n\nЛежат локально\nМеняются произвольно\nНет настроенных потоков данных\nНет версий датасетов",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#исследования",
     "href": "slides/1.intro.html#исследования",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Исследования",
     "text": "Исследования\n\n\n\nНет культуры исследований\nРезультаты теряются\nЧасто не воспроизводимы\nСложно разобраться “а что сделано-то?”",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#модели",
     "href": "slides/1.intro.html#модели",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Модели",
     "text": "Модели\n\n\n\n“А где модель то?”\n“Как ее запустить?”\n“А она еще работает?”\n“Что-то не так, дай новую модельку”",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#командное-взаимодействие",
     "href": "slides/1.intro.html#командное-взаимодействие",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Командное взаимодействие",
     "text": "Командное взаимодействие\n\n\n\nКаждый кодит как он хочет\nИсследования независимы\nНет обмена знаниями\n“А что мы вообще делаем?”",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
     "objectID": "slides/1.intro.html#как-же-все-это-решать",
     "href": "slides/1.intro.html#как-же-все-это-решать",
-    "title": "INTRO",
+    "title": "Intro",
     "section": "Как же все это решать?",
     "text": "Как же все это решать?\nматрица зрелости инженерных практик\n\nПостепенно менять процессы работы\nВнедрять инструменты автоматизации\nПовышать культуру и компетенции команды\nДелать сразу как надо",
     "crumbs": [
       "Лекции",
-      "INTRO"
+      "Intro"
     ]
   },
   {
@@ -319,100 +319,100 @@
   {
     "objectID": "slides/2.tools.html#tools-types",
     "href": "slides/2.tools.html#tools-types",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Tools types",
     "text": "Tools types\n\n\n\nData Management\nData Validation\nWorkflow Managment\nModel Lifecycle\n\n\n\nKnowledge Sharing\nModel Serving\nMonitoring & Dashboards\nMLOps Platforms\n\n\nИ это еще не всё…1\nСмотрите в awesome-mlops и mlops-references",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#data-management",
     "href": "slides/2.tools.html#data-management",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Data Management",
     "text": "Data Management\n\nGit LFS – расширение git для больших файлов\nDVC – система версионирования данных и моделей в ml проектах\nHugging Face – платформа для публикации открытых моделей и датасетов\nLakeFS – git like система версионирования данных в объектных хранилищах",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#data-validation",
     "href": "slides/2.tools.html#data-validation",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Data Validation",
     "text": "Data Validation\n\nGreat Expectations – фреймворк для валидации данных\nPandera – задание модели данных pandas и polars\nData contract – валидация как хранилищ данных, так и отдельных файлов",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#workflow-managment",
     "href": "slides/2.tools.html#workflow-managment",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Workflow Managment",
     "text": "Workflow Managment\n\nGNU Make – олдовый workflow manager на основе файлов\nSnakeMake – аналог для управления workflow в DS проектах\nLuigi – python оркестратор workflow\nMetaflow – оркестратор для ML workflow\nMage AI – фреймворк для управления ml workflow\nAirFlow –мощный и популярный оркестратор workflow",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#model-lifecycle",
     "href": "slides/2.tools.html#model-lifecycle",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Model Lifecycle",
     "text": "Model Lifecycle\n\nMLflow – платформа для трекинга артефактов экспериментов\nNeptune AI – колобаративный инструмент трекинга артефактов и датасетов\nWeights and Biases – инструмент визуализации и отслеживания обучения ваших моделей\nTensorBoard – инструмент визуализации обучения ваших нейронных сетей",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#knowledge-sharing",
     "href": "slides/2.tools.html#knowledge-sharing",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Knowledge Sharing",
     "text": "Knowledge Sharing\n\nKnowledge Repo – платформа обмена знаниями для исследователей\nKyso – инструмент публикации и ревью отчетов",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#model-serving",
     "href": "slides/2.tools.html#model-serving",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Model Serving",
     "text": "Model Serving\n\nTriton Inference Server – python сервис для деплоя различных моделей и оптимизацией их исполнения\nTensorFlow Serving – гибкий, мощный инструмент деплоя tensorflow в продакшен\nTorchServe – аналог для моделей pytorch\nOpyrator – простой способ получить API/интерфейс модели\nGradio – инструмент построения простых ML web-приложений",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#monitoring-dashboards",
     "href": "slides/2.tools.html#monitoring-dashboards",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "Monitoring & Dashboards",
     "text": "Monitoring & Dashboards\n\nStreamlit – простой инструмент построения dashboards чего либо на питоне\nDash – аналог от команды plotly\nGrafana – простой сервис для построения dashboards\nPrometheus – инструмент сбора метрик и ошибок\nGrayLog – сборщик и анализатор логов",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
     "objectID": "slides/2.tools.html#mlops-platforms",
     "href": "slides/2.tools.html#mlops-platforms",
-    "title": "MLOps TOOLS",
+    "title": "MLOps Tools",
     "section": "MLOps Platforms",
     "text": "MLOps Platforms\n\nClearML – платформа все в одном\nKubeflow – платформа для ML на основе kubernetes\nИ много много других",
     "crumbs": [
       "Лекции",
-      "MLOps TOOLS"
+      "MLOps Tools"
     ]
   },
   {
