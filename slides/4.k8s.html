@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8f1af79587c2686b78fe4e1fbadd71ab.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.14">
+
+  <meta name="author" content="Лев Коваленко">
+  <title>MLOps/DataOps YA.Camp 2025 – Kubernetes</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ff18afce816b5ef2b7dbb5f63367f47a.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Kubernetes</h1>
+  <p class="subtitle">MLOps YA.Camp 2025</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Лев Коваленко 
+</div>
+</div>
+</div>
+
+</section>
+<section id="предыстория" class="slide level2">
+<h2>Предыстория</h2>
+<ul>
+<li>VM, кластера виртуальных машин<br>
+Изоляция приложений в различные виртуальных машины</li>
+<li>namespaces, cgroups<br>
+Механизмы изоляции процессов ядра Linux</li>
+<li>LXC, Docker<br>
+Средства контейнеризации на основе Linux</li>
+<li>Kubernetes<br>
+Кластерное решение по управлению контейнерами</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>VM, кластера виртуальных машин<br>
+Изначально для решения предыдущих проблем популярность набрали различные решения для виртуализации. И, действительно, VM отлично изолированы друг от друга, образа VM можно относительно легко копировать и переносить, а появление решений для облачных вычислений, таких как VMware vSphere или OpenNebula, позволяло достаточно легко управлять целыми кластерами серверов и распределять нагрузки между ними. Но, увы, виртуализация привносит огромные накладные расходы, а высокая степень изоляции нередко избыточна.</li>
+<li>namespaces, cgroups<br>
+Параллельно с этим в ядре Linux появлялись и совершенствовались механизмы изоляции процессов друг от друга. Основных средств изоляции процессов два: namespaces, который позволяет скрывать от процессов ненужные им сетевые и дисковые ресурсы, а также другие процессы; и cgroups, который позволяет разграничивать вычислительные ресурсы между процессами.</li>
+<li>LXC, Docker<br>
+Развитие механизмов изоляции породило идею, что, возможно, для решения проблем изоляции и переносимости приложений можно использовать не дорогие VM, а средства ядра Linux. Так появились инструменты контейнеризации: первым стал LXC, который доказал что приложения можно упаковать в изолированные, переносимые и при этом легковесные контейнера, а затем уже знакомый вам Docker, который из простой надстройки для LXC развился в самостоятельный стандарт индустрии.</li>
+<li>Kubernetes<br>
+Но этого было мало: нужно было решение, которое не просто позволит легко поднять приложение, но которое бы позволило управлять множеством серверов, распределять нагрузку между ними и легко дублировать и делать параллельным выполнение приложений на множестве машин одновременно. Появился целый ряд решений позволяющих именно это, таких как Google Borg и Apache Mesos, но наиболее распространённым из всех стал Kubernetes.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="основные-спецификации" class="slide level2 smaller scrollable">
+<h2>Основные спецификации</h2>
+<ul>
+<li>OCI — Open Container Initiative
+<ul>
+<li>runtime-spec: стандарт конфигурации, жизненного цикла и выполнения контейнеров</li>
+<li>image-spec: стандарт образов контейнеров</li>
+<li>distribution-spec: стандарт распространения образов контейнеров</li>
+</ul></li>
+<li>CRI — Container Runtime Interface: стандарт инструментария управления контейнерами</li>
+<li>CNI — Container Network Interface: стандарт управления сетью и обеспечения сетевой связности контейнеров</li>
+<li>CSI — Container Storage Interface: стандарт доступа к системам хранения данных</li>
+</ul>
+</section>
+<section id="устройство-и-архитектура" class="slide level2">
+<h2>Устройство и архитектура</h2>
+
+<img data-src="images/components-of-kubernetes.svg" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>Компоненты кластера Kubernetes подразделяются на два слоя: control plane (выделен на изображении) и data plane. Слоями они именуются, так как в кластере не существует отдельных “управляющих” и “управляемых” физических или виртуальных машин — компоненты могут быть распределены по узлам произвольным образом.</p>
+<p>Control plane состоит из четырёх основных компонент:</p>
+<ul>
+<li>apiserver: отвечает за API Kubernetes</li>
+<li>scheduler: планировщик, отслеживает созданные поды и распределяет их по узлам в зависимости от требований и доступных ресурсов</li>
+<li>controller-manager: отслеживает состояние кластера и приводит его к желаемому (объявленному в конфигурации)</li>
+<li>etcd: хранилище данных, хранит состояние кластера</li>
+</ul>
+<p>Также существует опциональный компонент cloud-controller-manager, который может использоваться в облачных окружениях для отслеживания и обновления состояния кластера через API, предоставляемый облачным провайдером.</p>
+<p>Data plane состоит всего из двух компонент:</p>
+<ul>
+<li>kubelet: создаёт и отслеживает контейнера; сам функционала контейнеризации не имеет, поэтому для работы требует отдельного ПО, реализующего CRI</li>
+<li>proxy: отвечает за сетевую связность между подами, а также за связь подов с внешним миром</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="варианты-kubernetes" class="slide level2 smaller scrollable">
+<h2>Варианты Kubernetes</h2>
+<p>Кроме основной поставки, существует также множество различных вариаций Kubernetes:</p>
+<p>Коммерческие дистрибутивы:</p>
+<ul>
+<li>Red Hat OpenShift: дистрибутив со своей встроенной системой сборки и повышенным фокусом на безопасность</li>
+<li>VMWare Tanzu Kubernetes Grid: дистрибутив с интеграцией с продуктами виртуализации VMWare</li>
+<li>Rancher: дистрибутив с фокусом на работу в гибридных облаках</li>
+<li>и т.д.</li>
+</ul>
+<p>Managed Kubernetes от облачных провайдеров:</p>
+<ul>
+<li>GKE (Google Cloud)</li>
+<li>EKS (Amazon Web Services)</li>
+<li>AKS (Microsoft Azure)</li>
+<li>и т.д., свой вариант встречается у многих крупных облачных провайдеров</li>
+</ul>
+<p>Минималистичные дистрибутивы:</p>
+<ul>
+<li>Minikube: полноценная, кроссплатформенная, простая в установке поставка от разработчиков Kubernetes, выполняется на VM</li>
+<li>k3s: облегчённый вариант с урезанным функционалом для IoT-устройств, выполняется на VM</li>
+<li>MicroK8s: облегчённая поставка для IoT-устройств, поставляется в Snap</li>
+<li>и т.д.</li>
+</ul>
+</section>
+<section id="объекты-kubernetes" class="slide level2 smaller scrollable">
+<h2>Объекты Kubernetes</h2>
+<p>Ожидаемое состояние кластера Kubernetes полностью описано множеством объектов, существующих на нём. Абсолютно всему в кластере, будь то ваше приложение, балансировщик нагрузки, файл конфигурации или узел самого кластера, соответствует некий объект.</p>
+<p>Любой объект Kubernetes имеет описание в формате YAML. Для создания нового объекта необходимо передать кластеру его описание, и любой объект может быть запрошен у кластера — тогда вы аналогично получите его YAML-описание. Ниже приведён простейший объект типа <code>Namespace</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb1-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Namespace</span></span>
+<span id="cb1-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb1-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> newnamespace</span></span>
+<span id="cb1-5"><a></a><span class="fu">spec</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span>
+<span id="cb1-6"><a></a><span class="fu">status</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>В описании объекта существует четыре обязательных поля:</p>
+<ul>
+<li><code>apiVersion</code>: версия API Kubernetes, которой соответствует описание объекта.</li>
+<li><code>kind</code>: тип объекта.</li>
+<li><code>metadata</code>: словарь метаинформации объекта.</li>
+<li><code>spec</code>: словарь спецификации — ожидаемого состояния объекта.</li>
+</ul>
+<p>При запросе объекта с кластера также будет добавлено пятое поле <code>status</code>, в котором содержится текущее состояние объекта. При создании объекта данное поле не нужно, и даже если оно присутствует, его содержимое будет просто проигнорировано.</p>
+</section>
+<section id="workload" class="slide level2 smaller scrollable">
+<h2>Workload</h2>
+<p>Объекты рабочей нагрузки (Workload) являются наиболее полезными и часто используемыми объектами Kubernetes. Именно они используются для запуска практически любого приложения, которое вы можете захотеть запустить на вашем кластере.</p>
+<p>В основе всех объектов рабочей нагрузки лежит под (<code>Pod</code>). Под — это некоторое множество контейнеров, управляемых Kubernetes и объединённых общей изолированной средой. Все контейнера одного пода всегда запускаются на одном узле, имеют общий жизненный цикл, используют общий сетевой интерфейс и могут использовать общие дисковые ресурсы. Любые другие объекты рабочей нагрузки создают управляемые ими поды и определяют их поведение.</p>
+<p>Поды, как и лёгшие в их основу Docker-контейнеры, по определению stateless. С точки зрения кластера поды сами по себе не имеют никакой ценности, и могут быть в любой момент удалены, перезапущены, перенесены на другой узел (без переноса каких-либо хранившихся внутри данных), и т.д. Поэтому никогда нельзя полагаться на хранимое в поде состояние, на любые изменения, сделанные внутри пода в процессе его работы. Для обеспечения персистентности в Kubernetes существуют отдельные специальные типы объектов.</p>
+<p>Минимальный под выглядит так:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb2-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
+<span id="cb2-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb2-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span></span>
+<span id="cb2-5"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb2-6"><a></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb2-7"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-container</span></span>
+<span id="cb2-8"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pod" class="slide level2 smaller">
+<h2>Pod</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span><span class="co"> # версия API</span></span>
+<span id="cb3-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span><span class="co"> # тип объекта</span></span>
+<span id="cb3-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb3-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span><span class="co"> # имя пода</span></span>
+<span id="cb3-5"><a></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> newnamespace</span><span class="co"> # пространство имён</span></span>
+<span id="cb3-6"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span><span class="co"> # метки</span></span>
+<span id="cb3-7"><a></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb3-8"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb3-9"><a></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span><span class="co"> # список контейнеров</span></span>
+<span id="cb3-10"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-container</span><span class="co"> # имя контейнера</span></span>
+<span id="cb3-11"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span><span class="co"> # образ</span></span>
+<span id="cb3-12"><a></a><span class="at">      </span><span class="fu">imagePullPolicy</span><span class="kw">:</span><span class="at"> Always</span><span class="co"> # когда скачивать образ</span></span>
+<span id="cb3-13"><a></a><span class="at">      </span><span class="fu">envFrom</span><span class="kw">:</span><span class="co"> # объявление переменных</span></span>
+<span id="cb3-14"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">configMapRef</span><span class="kw">:</span></span>
+<span id="cb3-15"><a></a><span class="at">            </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-config</span></span>
+<span id="cb3-16"><a></a><span class="at">      </span><span class="fu">readinessProbe</span><span class="kw">:</span><span class="co"> # проверка готовности пода</span></span>
+<span id="cb3-17"><a></a><span class="at">        </span><span class="fu">exec</span><span class="kw">:</span></span>
+<span id="cb3-18"><a></a><span class="at">          </span><span class="fu">command</span><span class="kw">:</span></span>
+<span id="cb3-19"><a></a><span class="at">            </span><span class="kw">-</span><span class="at"> cat</span></span>
+<span id="cb3-20"><a></a><span class="at">            </span><span class="kw">-</span><span class="at"> /data/file.txt</span></span>
+<span id="cb3-21"><a></a><span class="at">      </span><span class="fu">livenessProbe</span><span class="kw">:</span><span class="co"> # проверка работоспособности пода</span></span>
+<span id="cb3-22"><a></a><span class="at">        </span><span class="fu">httpGet</span><span class="kw">:</span></span>
+<span id="cb3-23"><a></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /</span></span>
+<span id="cb3-24"><a></a><span class="at">          </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb3-25"><a></a><span class="at">      </span><span class="fu">ports</span><span class="kw">:</span><span class="co"> # открытые порты</span></span>
+<span id="cb3-26"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb3-27"><a></a><span class="at">      </span><span class="fu">resources</span><span class="kw">:</span><span class="co"> # доступные ресурсы</span></span>
+<span id="cb3-28"><a></a><span class="at">        </span><span class="fu">requests</span><span class="kw">:</span></span>
+<span id="cb3-29"><a></a><span class="at">          </span><span class="fu">cpu</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.5"</span></span>
+<span id="cb3-30"><a></a><span class="at">          </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> </span><span class="st">"100Mi"</span></span>
+<span id="cb3-31"><a></a><span class="at">        </span><span class="fu">limits</span><span class="kw">:</span></span>
+<span id="cb3-32"><a></a><span class="at">          </span><span class="fu">cpu</span><span class="kw">:</span><span class="at"> </span><span class="st">"1"</span></span>
+<span id="cb3-33"><a></a><span class="at">          </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> </span><span class="st">"200Mi"</span></span>
+<span id="cb3-34"><a></a><span class="at">      </span><span class="fu">volumeMounts</span><span class="kw">:</span><span class="co"> # монтирование томов в контейнер</span></span>
+<span id="cb3-35"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> data</span></span>
+<span id="cb3-36"><a></a><span class="at">          </span><span class="fu">mountPath</span><span class="kw">:</span><span class="at"> /data</span></span>
+<span id="cb3-37"><a></a><span class="at">  </span><span class="fu">initContainers</span><span class="kw">:</span><span class="co"> # список контейнеров инициализации</span></span>
+<span id="cb3-38"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> init-container</span></span>
+<span id="cb3-39"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> busybox</span></span>
+<span id="cb3-40"><a></a><span class="at">      </span><span class="fu">imagePullPolicy</span><span class="kw">:</span><span class="at"> IfNotPresent</span></span>
+<span id="cb3-41"><a></a><span class="at">      </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb3-42"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> STRING</span></span>
+<span id="cb3-43"><a></a><span class="at">          </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"ready ready"</span></span>
+<span id="cb3-44"><a></a><span class="at">      </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"sh"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-c"</span><span class="kw">,</span><span class="at"> </span><span class="st">"echo $(STRING) &gt; /data/file.txt"</span><span class="kw">]</span></span>
+<span id="cb3-45"><a></a><span class="at">      </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span>
+<span id="cb3-46"><a></a><span class="at">      </span><span class="fu">volumeMounts</span><span class="kw">:</span></span>
+<span id="cb3-47"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> data</span></span>
+<span id="cb3-48"><a></a><span class="at">          </span><span class="fu">mountPath</span><span class="kw">:</span><span class="at"> /data</span></span>
+<span id="cb3-49"><a></a><span class="at">  </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Always</span><span class="co"> # когда перезапускать под</span></span>
+<span id="cb3-50"><a></a><span class="at">  </span><span class="fu">volumes</span><span class="kw">:</span><span class="co"> # тома</span></span>
+<span id="cb3-51"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> data</span></span>
+<span id="cb3-52"><a></a><span class="at">      </span><span class="fu">emptyDir</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Так выглядит описание пода с большим количеством параметров. Здесь приведена только часть наиболее используемых параметров.</p>
+<p>Рассмотрим присутствующие здесь параметры (в порядке, в котором они видны в файле):</p>
+<ul>
+<li><code>metadata</code>
+<ul>
+<li><code>name</code>: имя объекта, должно быть уникально среди всех объектов данного типа (здесь это под) в пространстве имён</li>
+<li><code>namespace</code>: пространство имён, кластер для удобства может быть поделён на произвольное количество пространств имён</li>
+<li><code>labels</code>: метки, используются для разметки и группировки объектов, многие операции могут быть применены с выбором объектов по меткам</li>
+</ul></li>
+<li><code>spec</code>
+<ul>
+<li><code>containers</code>: массив контейнеров внутри пода. Минимальное определение контейнера состоит из его названия и образа
+<ul>
+<li><code>name</code>: имя контейнера</li>
+<li><code>image</code>: образ, из которого разворачивается контейнер</li>
+<li><code>imagePullPolicy</code>: политика получения образа, может быть <code>Always</code> (всегда пытаться получить последнюю версию образа), <code>IfNotPresent</code> (не пытаться обновить образ, если уже есть на узле), <code>Never</code> (никогда не пытаться получить образ, запуск пода завершается ошибкой если подходящего образа нет на узле)</li>
+<li><code>env</code>,<code>envFrom</code>: объявление переменных окружения в контейнере. <code>envFrom</code> позволяет получить сразу все переменные в файле конфигурации</li>
+<li><code>livenessProbe</code>, <code>readinessProbe</code>: probes — механизм отслеживания состояния приложения в контейнере. Каждый probe указывает на некоторую проверку, которую необходимо периодически проводить для получения достаточной информации о состоянии. Бывает трёх типов:
+<ul>
+<li><code>readinessProbe</code>: используется для проверки, что приложение готово принимать трафик, если не пройдено, то трафик на контейнер временно не отправляется</li>
+<li><code>livenessProbe</code>: используется для проверки, что приложение работает, если не пройдено, контейнер перезапускается</li>
+<li><code>startupProbe</code>: используется для проверки, что приложение запустилось, пока не пройдено, трафик не отправляется и другие probe не выполняются, проверяется до первой успешной проверки</li>
+</ul></li>
+<li><code>ports</code>: определение портов, которые слушает контейнер</li>
+<li><code>resources</code>: ограничения вычислительных ресурсов. Бывает двух видов: <code>requests</code> — минимально доступные контейнеру ресурсы, которые должны быть доступны гарантированно — и <code>limits</code> — максимально доступные ресурсы, не может быть превышено</li>
+<li><code>volumeMounts</code>: тома, которые будут подключены к данному контейнеру. Сами тома определяются ниже в блоке <code>volumes</code></li>
+<li><code>command</code>: произвольная команда, передаваемая контейнеру на запуск вместо определённого в образе entrypoint. Представляет собой массив, аналогичный массиву <code>ENTRYPOINT</code> в Dockerfile</li>
+</ul></li>
+<li><code>initContainers</code>: контейнеры инициализации, запускаются для каких-либо подготовительных операций до запуска основных контейнеров. Основные контейнера не запускаются, пока выполнение всех контейнеров здесь не будет успешно выполнено. Определение контейнеров здесь совпадает с определениями в блоке <code>containers</code>, но не все параметры могут быть использованы</li>
+<li><code>restartPolicy</code>: политика перезапуска пода при завершении работы любого из контейнеров, может быть <code>Always</code> (под всегда будет перезапущен), <code>OnFailure</code> (под будет перезапущен, только если выполнение любого контейнера завершилось неудачей), <code>Never</code> (под никогда не будет перезапущен)</li>
+<li><code>volumes</code>: определение томов, которые могут быть подключены к контейнерам. Может использовать множество различных вариантов определения тома, здесь используется <code>emptyDir</code>, пустая временная директория, содержимое которой будет удалено при удалении самого пода</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="replicaset" class="slide level2">
+<h2>ReplicaSet</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb4-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ReplicaSet</span></span>
+<span id="cb4-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb4-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb4-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb4-6"><a></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb4-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb4-8"><a></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # количество реплик пода</span></span>
+<span id="cb4-9"><a></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span><span class="co"> # селектор, определяющий управляемые поды</span></span>
+<span id="cb4-10"><a></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb4-11"><a></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb4-12"><a></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span><span class="co"> # шаблон пода</span></span>
+<span id="cb4-13"><a></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb4-14"><a></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb4-15"><a></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb4-16"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb4-17"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb4-18"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb4-19"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p><code>ReplicaSet</code> — следующий уровень управления рабочей нагрузкой после подов. Легко можно заметить, что блок <code>template</code> в описании <code>ReplicaSet</code> очень похож на описание самого пода.</p>
+<p>Основная задача <code>ReplicaSet</code> — автоматически создавать копии подов. <code>ReplicaSet</code> создаёт одинаковые поды, соответствующие описанию в блоке <code>template</code>, в количестве указанном в блоке <code>replicas</code>. Названия в метаданных для этого пода можно не указывать, так как они всегда генерируются автоматически самим <code>ReplicaSet</code>.</p>
+<p><code>ReplicaSet</code> рассчитан на приложения, которые должны работать постоянно. Существование <code>ReplicaSet</code> указывает, что всегда должен работать один или более под с вашим приложением, поэтому в случае каких-либо проблем поды будут перезапущены или пересозданы.</p>
+<p>Важно обратить внимание на блок <code>selector</code>: здесь указан селектор — объект, позволяющий Kubernetes выбирать некоторое множество подов, в данном случае по их меткам (<code>matchLabels</code>). Только этот селектор определяет, какие поды будут учитываться <code>ReplicaSet</code>. <code>ReplicaSet</code>, селектор которого не соответствует описанному поду в <code>template</code>, не является корректным. При этом поды, созданные до <code>ReplicaSet</code> и соответствующие селектору, попадут под управление <code>ReplicaSet</code> и могут быть уничтожены, даже если их описание не соответствует написанному в <code>ReplicaSet</code> шаблону. Поэтому с <code>ReplicaSet</code> нужно работать аккуратно.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="deployment" class="slide level2">
+<h2>Deployment</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb5-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
+<span id="cb5-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb5-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb5-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb5-6"><a></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb5-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb5-8"><a></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # количество реплик</span></span>
+<span id="cb5-9"><a></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb5-10"><a></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb5-11"><a></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb5-12"><a></a><span class="at">  </span><span class="fu">strategy</span><span class="kw">:</span><span class="co"> # стратегия обновления</span></span>
+<span id="cb5-13"><a></a><span class="at">    </span><span class="fu">rollingUpdate</span><span class="kw">:</span></span>
+<span id="cb5-14"><a></a><span class="at">      </span><span class="fu">maxSurge</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb5-15"><a></a><span class="at">      </span><span class="fu">maxUnavailable</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb5-16"><a></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> RollingUpdate</span></span>
+<span id="cb5-17"><a></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb5-18"><a></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb5-19"><a></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb5-20"><a></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb5-21"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb5-22"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb5-23"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb5-24"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Хотя ничего не мешает использовать <code>ReplicaSet</code> напрямую, это обычно не рекомендуется. Как правило, они используются опосредованно через объекты вида <code>Deployment</code>.</p>
+<p><code>Deployment</code> — объект, создающий объекты типа <code>ReplicaSet</code>. Как видно, определение <code>Deployment</code> похоже на определение <code>ReplicaSet</code>.</p>
+<p>Главная особенность <code>Deployment</code> состоит в том, что он хранит историю изменений своей конфигурации. В любой момент, если что-то пойдёт не так, можно откатить <code>Deployment</code> на предыдущую версию. Кроме того, <code>Deployment</code> поддерживает разные стратегии обновления, которые настраиваются в блоке <code>strategy</code>. Поддерживается две стратегии обновления: <code>Recreate</code> указывает, что нужно просто удалить все поды предыдущей версии и создать поды новой; <code>RollingUpdate</code> же позволяет заменять поды по частям и направлять трафик как на старые, так и на новые поды одновременно, что позволяет поддерживать непрерывную доступность приложения во время обновления.</p>
+<p>В отличие от обычного <code>ReplicaSet</code>, <code>Deployment</code> (и созданные им <code>ReplicaSet</code>) никогда не захватывают уже существующие поды — для всех <code>ReplicaSet</code> автоматически генерируется дополнительная метка — хэш конфигурации пода. Несмотря на это, селектор <code>Deployment</code> всё ещё должен соответствовать шаблону пода. Благодаря тому, что в качестве метки используется хэш, при изменении конфигурации <code>Deployment</code> не затрагивающей шаблон пода кластер может сохранить существовавшие до изменения поды и передать их под управление новой версии <code>ReplicaSet</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statefulset" class="slide level2">
+<h2>StatefulSet</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb6-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> StatefulSet</span></span>
+<span id="cb6-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb6-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb6-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb6-6"><a></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb6-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-8"><a></a><span class="at">  </span><span class="fu">serviceName</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb6-9"><a></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb6-10"><a></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb6-11"><a></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb6-12"><a></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb6-13"><a></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb6-14"><a></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb6-15"><a></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb6-16"><a></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb6-17"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-18"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb6-19"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb6-20"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p><code>StatefulSet</code> — специальный вид рабочей нагрузки, во многом похожий на <code>Deployment</code>, но имеющий одну важную особенность: в отличие от любых других видов рабочей нагрузки, <code>StatefulSet</code>, как понятно из названия, хранит состояние для каждой реплики. Это означает, что у каждого пода, управляемого <code>StatefulSet</code>, есть собственный номер, который известен внутри пода и может быть использован приложением, постоянное хранилище, уникальное внутреннее доменное имя, по которому можно подключиться к поду с конкретным номером. Также у <code>StatefulSet</code> чётко определён порядок, в котором поды запускаются и завершают работу: по возрастанию номера при запуске и по убыванию при завершении работы.</p>
+<p>Такой вид рабочей нагрузки редко нужен и его использование не рекомендуется, если это явно не необходимо. Но некоторые приложения, например многие из тех, у которых взаимодействие между репликами устроено по принципу “ведущий-ведомый”, могут быть корректно запущены только с таким видом рабочей нагрузки.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="job" class="slide level2">
+<h2>Job</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
+<span id="cb7-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Job</span></span>
+<span id="cb7-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb7-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> pi</span></span>
+<span id="cb7-5"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb7-6"><a></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb7-7"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb7-8"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb7-9"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> pi</span></span>
+<span id="cb7-10"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> perl:5.34.0</span></span>
+<span id="cb7-11"><a></a><span class="at">          </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"perl"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-Mbignum=bpi"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-wle"</span><span class="kw">,</span><span class="at"> </span><span class="st">"print bpi(2000)"</span><span class="kw">]</span></span>
+<span id="cb7-12"><a></a><span class="at">      </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Never</span></span>
+<span id="cb7-13"><a></a><span class="at">  </span><span class="fu">completions</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span><span class="co"> # количество успешных выполнений</span></span>
+<span id="cb7-14"><a></a><span class="at">  </span><span class="fu">parallelism</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span><span class="co"> # количество одновременных запусков</span></span>
+<span id="cb7-15"><a></a><span class="at">  </span><span class="fu">backoffLimit</span><span class="kw">:</span><span class="at"> </span><span class="dv">6</span><span class="co"> # допустимое количество провалов</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p><code>Job</code> — вид рабочей нагрузки, существующий для разовых задач. В отличие от <code>Deployment</code> или <code>StatefulSet</code>, он рассчитан на приложения, выполнение которых когда-либо должно завершиться. <code>Job</code>, как и другие виды рабочей нагрузки, создаёт поды, но эти поды не будут перезапущены после успешного завершения выполнения приложения.</p>
+<p>За поведение <code>Job</code> отвечает несколько специальных параметров:</p>
+<ul>
+<li><code>completions</code> указывает на то, сколько раз задача должна быть выполнена. Поды будут создаваться, пока не достигнуто указанное здесь количество успешных запусков</li>
+<li><code>parallelism</code> указывает на то, сколько подов могут выполнять задачу одновременно. Реальное количество созданных подов никогда не превышает количество оставшихся выполнений</li>
+<li><code>backoffLimit</code> указывает, после какого количества подов, выполнение которых завершилось ошибкой, выполнение задачи будет остановлено</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cronjob" class="slide level2">
+<h2>CronJob</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
+<span id="cb8-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> CronJob</span></span>
+<span id="cb8-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> date</span></span>
+<span id="cb8-5"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-6"><a></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span><span class="at"> </span><span class="st">"* * * * *"</span><span class="co"> # расписание выполнения</span></span>
+<span id="cb8-7"><a></a><span class="at">  </span><span class="fu">jobTemplate</span><span class="kw">:</span><span class="co"> # шаблон Job</span></span>
+<span id="cb8-8"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-9"><a></a><span class="at">      </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb8-10"><a></a><span class="at">        </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-11"><a></a><span class="at">          </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb8-12"><a></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> date</span></span>
+<span id="cb8-13"><a></a><span class="at">              </span><span class="fu">image</span><span class="kw">:</span><span class="at"> busybox</span></span>
+<span id="cb8-14"><a></a><span class="at">              </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"/bin/sh"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-c"</span><span class="kw">,</span><span class="at"> </span><span class="st">"date"</span><span class="kw">]</span></span>
+<span id="cb8-15"><a></a><span class="at">          </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Never</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p><code>CronJob</code> — надстройка над <code>Job</code>, которая позволяет запускать какие-то задачи по расписанию. В параметре <code>jobTemplate</code> указывается конфигурация <code>Job</code>, который должен создаваться с некоторой периодичностью, а в параметре <code>schedule</code> — расписание выполнения в формате Cron.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="networking" class="slide level2">
+<h2>Networking</h2>
+
+<img data-src="images/kubernetes-cluster-network.svg" class="quarto-figure quarto-figure-center r-stretch"><p>Каждый под — отдельный виртуальный узел со своим сетевым интерфейсом.</p>
+<p>Внутри кластера существует единая сеть, и каждый под имеет собственный IP-адрес внутри этой сети.</p>
+<aside class="notes">
+<p>Каждый под внутри кластера считается отдельной и независимой единицей. Вдобавок, каждый под имеет свои требования к использованию сети. Поэтому чтобы не было конфликтов между разными подами, каждый отдельный под получает свой собственный виртуальный сетевой интерфейс, и может использовать его так, как пожелает. По сути, работу с подами внутри сети кластера можно воспринимать аналогичной работе с физическими узлами в некой реальной сети.</p>
+<p>Внутри кластера существует единое пространство IP-адресов, которые выдаются сетевым интерфейсам подов (Pod CIDR). У каждого узла в кластере есть своё подпространство адресов, в котором выдаются адреса подам, запущенным на данном узле, но все поды кластера всегда находятся в единой сети. Благодаря этому любой под может подключаться напрямую к любому другому поду.</p>
+<p>Но важно заметить, что эти IP-адреса не статичны — в любой момент под может быть пересоздан, и в этот момент он может получить новый IP-адрес. Вдобавок часто у вас в кластере поднято более одного экземпляра приложения, и вы скорее всего хотите подключаться именно к приложению где бы оно ни было доступно, вместо того чтобы привязываться к конкретному поду который может упасть или исчезнуть. Для решения этой проблемы существуют <code>Service</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="service" class="slide level2">
+<h2>Service</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb9-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Service</span></span>
+<span id="cb9-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb9-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb9-5"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb9-6"><a></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> ClusterIP</span><span class="co"> # тип Service</span></span>
+<span id="cb9-7"><a></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span><span class="co"> # селектор, определяющий целевые поды для трафика</span></span>
+<span id="cb9-8"><a></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb9-9"><a></a><span class="at">  </span><span class="fu">ports</span><span class="kw">:</span><span class="co"> # открытые порты</span></span>
+<span id="cb9-10"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"http"</span><span class="co"> # название</span></span>
+<span id="cb9-11"><a></a><span class="at">      </span><span class="fu">protocol</span><span class="kw">:</span><span class="at"> TCP</span><span class="co"> # протокол TCP/UDP/SCTP</span></span>
+<span id="cb9-12"><a></a><span class="at">      </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span><span class="co"> # открытый порт сервиса</span></span>
+<span id="cb9-13"><a></a><span class="at">      </span><span class="fu">targetPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span><span class="co"> # целевой порт пода</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p><code>Service</code> — объект Kubernetes, существующий для получения трафика и перенаправления его к подам. Каждый <code>Service</code>, аналогично подам, имеет свой IP-адрес. Для всех <code>Service</code> кластера существует пространство IP-адресов (Service CIDR), который находится в одной внутренней сети с пространством адресов подов, Благодаря чему любой под также может подключаться напрямую к любому <code>Service</code> и наоборот. Кроме того, каждый <code>Service</code> получает своё собственное постоянное внутреннее доменное имя вида <code>[servicename].[namespacename].svc.[clusterdomain.name]</code>, которое известно всем подам кластера. Подключиться к конкретному поду за <code>Service</code> можно по адресу <code>[pod-ip-address].[service-name].[namespace-name].svc.[cluster-domain.name]</code>, в случае подов управляемых <code>StatefulSet</code> также есть нумерованные доменные имена <code>[statefulset-name]-[pod-index].[service-name].[namespace-name].svc.[cluster-domain.name]</code>.</p>
+<p>Основная задача <code>Service</code> состоит в перенаправлении трафика. Весь трафик, приходящий на <code>Service</code>, автоматически перенаправляется на определённые конфигурацией <code>Service</code> поды. Выбор подов осуществляется через селектор (параметр <code>selector</code>), который аналогичен тем селекторам, которые можно было увидеть ранее в конфигурации <code>ReplicaSet</code> или <code>Deployment</code>. Если селектор соответствует более чем одному поду, трафик распределяется равномерно между всеми подами. Трафик направляется только на те поды, которые могут его принимать — если под по каким-то причинам не запущен, либо проверка его <code>readinessProbe</code> не была успешной, то трафик на этот под не направляется.</p>
+<p>В блоке <code>ports</code> задаются порты, которые будет слушать <code>Service</code>. Портов может быть произвольное количество. Основные параметры:</p>
+<ul>
+<li><code>name</code>: произвольное имя, задаётся в основном для удобства использования</li>
+<li><code>protocol</code>: TCP / UDP / SCTP</li>
+<li><code>port</code>: порт, который будет слушать <code>Service</code>, единственный обязательный параметр</li>
+<li><code>targetPort</code>: порт пода, на который будет перенаправляться трафик. Если не определён, то используется тот же порт, что и в <code>port</code></li>
+</ul>
+<p>Тип <code>Service</code> задаётся в параметре <code>type</code>. Cуществуют <code>Service</code> четырёх типов:</p>
+<ul>
+<li><code>ClusterIP</code>: тип по умолчанию, не имеет особых свойств</li>
+<li><code>NodePort</code>: для каждого порта сервиса также выбирается порт в каком-то диапазоне (по умолчанию 30000-32767), который открывается непосредственно на узлах кластера. Любой трафик, попадающий на этот порт любого узла кластера, попадает внутрь кластера и перенаправляется подам в соответствии с конфигурацией <code>Service</code>. Открытый порт выбирается случайным образом из свободных, либо может быть определён вручную через дополнительный параметр <code>nodePort</code> в конфигурации порта.</li>
+<li><code>LoadBalancer</code>: надстройка над <code>NodePort</code>, позволяющая использовать для распределения трафика внешний управляемый балансировщик нагрузки. Для использования на кластере должна быть настроена интеграция с этим самым балансировщиком.</li>
+<li><code>ExternalName</code>: специальный вид <code>Service</code>, который позволяет направлять трафик не на поды, а на какие-то внешние ресурсы. Для этого типа <code>Service</code> селектор игнорируется, вместо этого задаётся доменное имя внешнего ресурса (IP-адреса не поддерживаются) через дополнительный параметр <code>externalName</code>.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ingress" class="slide level2">
+<h2>Ingress</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> networking.k8s.io/v1</span></span>
+<span id="cb10-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Ingress</span></span>
+<span id="cb10-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb10-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb10-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb10-6"><a></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb10-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb10-8"><a></a><span class="at">  </span><span class="fu">rules</span><span class="kw">:</span></span>
+<span id="cb10-9"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">host</span><span class="kw">:</span><span class="at"> webserver.lan</span></span>
+<span id="cb10-10"><a></a><span class="at">      </span><span class="fu">http</span><span class="kw">:</span></span>
+<span id="cb10-11"><a></a><span class="at">        </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb10-12"><a></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">pathType</span><span class="kw">:</span><span class="at"> Prefix</span></span>
+<span id="cb10-13"><a></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/"</span></span>
+<span id="cb10-14"><a></a><span class="at">            </span><span class="fu">backend</span><span class="kw">:</span></span>
+<span id="cb10-15"><a></a><span class="at">              </span><span class="fu">service</span><span class="kw">:</span></span>
+<span id="cb10-16"><a></a><span class="at">                </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb10-17"><a></a><span class="at">                </span><span class="fu">port</span><span class="kw">:</span></span>
+<span id="cb10-18"><a></a><span class="at">                  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Объекты <code>Service</code> используются для настройки трафика внутри кластера. Хотя получить трафик снаружи кластера можно при помощи <code>NodePort</code>, это обычно не применимо для продуктивного использования, и <code>NodePort</code> используются чаще всего только для задач отладки и тестирования. Исторически существовало множество (часть из них всё ещё развиваются и используются) различных надстроек над Kubernetes, позволявших настраивать получение трафика кластером, требовавших различных подходов к использованию и настройке. Сейчас в Kubernetes для таких задач есть общий механизм <code>Ingress</code>.</p>
+<p><code>Ingress</code> — унифицированное решение для управления попадающим в кластер снаружи трафиком независимо от того, как настроен кластер и как трафик доходит непосредственно до его узлов. Объекты типа <code>Ingress</code> позволяют управлять надстройкой <code>IngressController</code>, которых существует огромное множество под разные виды инфраструктуры, разные нужды и разные личные предпочтения. При наличии в кластере <code>IngressController</code> объект типа <code>Ingress</code> позволяет весьма просто получить трафик снаружи и направить его на <code>Service</code> внутри.</p>
+<p><code>Ingress</code> рассчитаны исключительно на стандартный HTTP/HTTPS. Хотя некоторые <code>IngressController</code> могут позволять какие-то более сложные конфигурации, стандартный <code>Ingress</code> позволяет исключительно получать соединения на стандартные порты 80/443 и распределять трафик на основании доменных имён или путей, аналогично тому, как это может делать классический reverse proxy.</p>
+<p>Поведение <code>Ingress</code> определяется набором правил, который описан в блоке <code>rules</code>. В типичном правиле для <code>Ingress</code> указано, на какой <code>backend</code> (как правило, это <code>Service</code>) отправлять запросы, пришедшие на определённые доменное имя и путь.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="configmap" class="slide level2">
+<h2>ConfigMap</h2>
+<div class="columns">
+<div class="column">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb11-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ConfigMap</span></span>
+<span id="cb11-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb11-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-config</span></span>
+<span id="cb11-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb11-6"><a></a><span class="at">    </span><span class="fu">app</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb11-7"><a></a><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb11-8"><a></a><span class="at">  </span><span class="fu">nginx_entrypoint_quiet_logs</span><span class="kw">:</span><span class="at"> </span><span class="st">"0"</span></span>
+<span id="cb11-9"><a></a><span class="fu">  nginx_conf</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb11-10"><a></a>    server {</span>
+<span id="cb11-11"><a></a>        listen 80;</span>
+<span id="cb11-12"><a></a>        server_name localhost;</span>
+<span id="cb11-13"><a></a></span>
+<span id="cb11-14"><a></a>        location / {</span>
+<span id="cb11-15"><a></a>            root /usr/share/nginx/html;</span>
+<span id="cb11-16"><a></a>            index index.html;</span>
+<span id="cb11-17"><a></a>        }</span>
+<span id="cb11-18"><a></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb12-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
+<span id="cb12-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb12-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span></span>
+<span id="cb12-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb12-6"><a></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb12-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb12-8"><a></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb12-9"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-container</span></span>
+<span id="cb12-10"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb12-11"><a></a><span class="at">      </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb12-12"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> NGINX_ENTRYPOINT_QUIET_LOGS</span></span>
+<span id="cb12-13"><a></a><span class="at">          </span><span class="fu">valueFrom</span><span class="kw">:</span></span>
+<span id="cb12-14"><a></a><span class="at">            </span><span class="fu">configMapKeyRef</span><span class="kw">:</span></span>
+<span id="cb12-15"><a></a><span class="at">              </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-config</span></span>
+<span id="cb12-16"><a></a><span class="at">              </span><span class="fu">key</span><span class="kw">:</span><span class="at"> nginx_entrypoint_quiet_logs</span></span>
+<span id="cb12-17"><a></a><span class="at">      </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb12-18"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb12-19"><a></a><span class="at">      </span><span class="fu">volumeMounts</span><span class="kw">:</span></span>
+<span id="cb12-20"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> config</span></span>
+<span id="cb12-21"><a></a><span class="at">          </span><span class="fu">mountPath</span><span class="kw">:</span><span class="at"> </span><span class="st">"/etc/nginx/conf.d"</span></span>
+<span id="cb12-22"><a></a><span class="at">          </span><span class="fu">readOnly</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-23"><a></a><span class="at">  </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb12-24"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> config</span></span>
+<span id="cb12-25"><a></a><span class="at">      </span><span class="fu">configMap</span><span class="kw">:</span></span>
+<span id="cb12-26"><a></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-config</span></span>
+<span id="cb12-27"><a></a><span class="at">        </span><span class="fu">items</span><span class="kw">:</span></span>
+<span id="cb12-28"><a></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">key</span><span class="kw">:</span><span class="at"> </span><span class="st">"nginx_conf"</span></span>
+<span id="cb12-29"><a></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"default.conf"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<aside class="notes">
+<p>Как уже упоминалось, поды в Kubernetes stateless. Они не хранят состояние, поэтому привычный сценарий “запустить приложение и настроить его” обычно малоприменим. Конечно, можно было бы собирать образа контейнеров с уже настроенным приложением внутри, но это было бы довольно неудобно — малейшее изменение конфигурации потребовало бы пересборки и последующей доставки образов. Поэтому в Kubernetes существуют специальные объекты, которые отвечают за хранение конфигурации для подов.</p>
+<p><code>ConfigMap</code> отвечает за хранение конфигурации внутри кластера. Все данные, необходимые для конфигурации приложения, будь то переменные окружения или файлы конфигурации, задаются непосредственно внутри <code>ConfigMap</code>.</p>
+<p><code>ConfigMap</code> крайне прост: блок <code>data</code> (здесь стоит обратить внимание, что описание <code>ConfigMap</code> не содержит типичного блока <code>spec</code>) содержит в себе данные в формате ключ-значение. Эти данные затем могут быть переданы в контейнера как переменные окружения через параметры <code>env</code> и <code>envFrom</code>, либо как файлы через <code>volumes</code> и <code>volumeMounts</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="secret" class="slide level2">
+<h2>Secret</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb13-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Secret</span></span>
+<span id="cb13-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb13-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> certs</span></span>
+<span id="cb13-5"><a></a><span class="fu">type</span><span class="kw">:</span><span class="at"> Opaque</span></span>
+<span id="cb13-6"><a></a><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb13-7"><a></a><span class="fu">  ca</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
+<span id="cb13-8"><a></a>    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkakNDQVJ5Z0F3SUJBZ0lSQU5aWXNXb3JrTXFjNzNpQ3phWVZKcEl3Q2dZSUtvWkl6ajBFQXdJ</span>
+<span id="cb13-9"><a></a>    d0R6RU4KTUFzR0ExVUVDaE1FYm1sc01UQWdGdzB5TXpFeU1qZ3dOakUxTVRGYUdBOHlNVEl6TVRJd05EQTJNVFV4TVZvdwpEekVOTUFzR0ExVUVDaE1F</span>
+<span id="cb13-10"><a></a>    Ym1sc01UQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJHaXNUSThGCnNZMExuWGFTOFFKSEh0SUlvRkE2VzVUZmg2ckdvc1A1d1k2bHhx</span>
+<span id="cb13-11"><a></a>    STNJQjNESTE4b0xWZ2h2cnVLVCtIaDFBK1AKeVVNYmFMLzRmSnFpbVk2alZ6QlZNQTRHQTFVZER3RUIvd1FFQXdJQ0JEQVRCZ05WSFNVRUREQUtCZ2dy</span>
+<span id="cb13-12"><a></a>    QmdFRgpCUWNEQVRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRdTJyMWFNbkw3UFl4cU1ybmtSZXdkCmZ0a0hLREFLQmdncWhrak9Q</span>
+<span id="cb13-13"><a></a>    UVFEQWdOSUFEQkZBaUJFRnlpRUFaY2FKVW96SzZzdFpzYVdOa2N2dVBSRFNXR3QKU2M1TTJ3NXFoUUloQU90NEJxb09uc2JSaWhjQ1FLOE5VNnJRWW80</span>
+<span id="cb13-14"><a></a>    VmRYRUJQVEgzMTBLZ0s1cXcKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=</span>
+<span id="cb13-15"><a></a><span class="fu">  cert</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
+<span id="cb13-16"><a></a>    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ1akNDQVdDZ0F3SUJBZ0lRVEZKL3ZtRStuNjlvSy9HQ0xDVGRwekFLQmdncWhrak9QUVFEQWpB</span>
+<span id="cb13-17"><a></a>    UE1RMHcKQ3dZRFZRUUtFd1J1YVd3eE1DQVhEVEl6TVRJeU9EQTJNVFV4TVZvWUR6SXhNak14TWpBME1EWXhOVEV4V2pBUApNUTB3Q3dZRFZRUUtFd1J1</span>
+<span id="cb13-18"><a></a>    YVd3eU1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEUWdBRVZHcjE4aXVBCkJBUDE4Wnd4M1NuZURZNEhBZ1NSK3VjQ3lXRGR1dHBFYVI5TURH</span>
+<span id="cb13-19"><a></a>    bmNjNWwzckZ6WW9CM2FYcWFnclp4aC9BSDYKdERrQzc0Ung3Y3d0VnFPQm16Q0JtREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJ</span>
+<span id="cb13-20"><a></a>    S3dZQgpCUVVIQXdFd0RBWURWUjBUQVFIL0JBSXdBREJqQmdOVkhSRUVYREJhZ2lKcGJtZHlaWE56TFc1bmFXNTRMV052CmJuUnliMnhzWlhJdFlXUnRh</span>
+<span id="cb13-21"><a></a>    WE56YVc5dWdqUnBibWR5WlhOekxXNW5hVzU0TFdOdmJuUnliMnhzWlhJdFlXUnQKYVhOemFXOXVMbWx1WjNKbGMzTXRibWRwYm5ndWMzWmpNQW9HQ0Nx</span>
+<span id="cb13-22"><a></a>    R1NNNDlCQU1DQTBnQU1FVUNJUUN4Nk5NYQp6TDJ5SXVTZnZLekZRMThqMWdRd0FzaEVnYmdSZ1Myd2ZZc0MrUUlnTFZ0bHJ6NjBIbGhISGt4eERYbFVV</span>
+<span id="cb13-23"><a></a>    N1RyClU2NkdBcWZMRXUxakl0dVN0c009Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K</span>
+<span id="cb13-24"><a></a><span class="fu">  key</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
+<span id="cb13-25"><a></a>    LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUJhWVVQNGZLRExxaFYxUU44aElNNWthMCt2QVVQRTVYRXA6VzgvMGJKUUdvQW9H</span>
+<span id="cb13-26"><a></a>    Q0NxR2NNNDkKQXdFSG9VUURRZ1FFVkdyMThpdUFCQVAxOFp3eDNTbmVEWTRIQWdTUit1Y0N5V0RkdXRwRWFSOU1EO25jYzVsMwpyRnpZb0IzYVhxYWdy</span>
+<span id="cb13-27"><a></a>    WnhoL0FINnREa0M3NFJ4N2N3dFZnPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Объект типа <code>Secret</code> является полным аналогом <code>ConfigMap</code> и используется аналогично, но имеет несколько отличий. В отличие от <code>ConfigMap</code>, <code>Secret</code>, как понятно из названия, существует для хранения секретных данных. Самым заметным отличием является то, что в конфигурации <code>Secret</code> данные закодированы base64, что конечно не даёт особой безопасности, но позволяет защитить данные от “подглядывания из-за спины”. Кроме того, кластер Kubernetes ограничивает доступ к ним для подов, избегает записи данных в них на диск всегда, когда возможно, и поддерживает опциональное шифрование данных <code>Secret</code> в хранилище etcd.</p>
+<p>Существует несколько разных типов <code>Secret</code> (определяются в блоке <code>type</code>). В большинстве случаев используется тип <code>Opaque</code>, не имеющий никаких специфических свойств, то также существует ряд специальных типов, используемых для авторизации SSH, Docker или даже в сам кластер Kubernetes.</p>
+<p>При создании <code>Secret</code> можно заменить блок <code>data</code> блоком <code>stringData</code>, и в нем указать все хранимые в <code>Secret</code> в явном виде, без base64. При сохранении они будут закодированы автоматически.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="persistentvolume" class="slide level2 smaller scrollable">
+<h2>PersistentVolume</h2>
+<div class="columns">
+<div class="column">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb14-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> PersistentVolumeClaim</span></span>
+<span id="cb14-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb14-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-stored-data</span></span>
+<span id="cb14-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb14-6"><a></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb14-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb14-8"><a></a><span class="at">  </span><span class="fu">storageClassName</span><span class="kw">:</span><span class="at"> manual</span></span>
+<span id="cb14-9"><a></a><span class="at">  </span><span class="fu">accessModes</span><span class="kw">:</span></span>
+<span id="cb14-10"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> ReadWriteOnce</span></span>
+<span id="cb14-11"><a></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb14-12"><a></a><span class="at">    </span><span class="fu">requests</span><span class="kw">:</span></span>
+<span id="cb14-13"><a></a><span class="at">      </span><span class="fu">storage</span><span class="kw">:</span><span class="at"> 3Gi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb15-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> PersistentVolume</span></span>
+<span id="cb15-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb15-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> volume001</span></span>
+<span id="cb15-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb15-6"><a></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> local</span></span>
+<span id="cb15-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb15-8"><a></a><span class="at">  </span><span class="fu">storageClassName</span><span class="kw">:</span><span class="at"> manual</span></span>
+<span id="cb15-9"><a></a><span class="at">  </span><span class="fu">capacity</span><span class="kw">:</span></span>
+<span id="cb15-10"><a></a><span class="at">    </span><span class="fu">storage</span><span class="kw">:</span><span class="at"> 10Gi</span></span>
+<span id="cb15-11"><a></a><span class="at">  </span><span class="fu">accessModes</span><span class="kw">:</span></span>
+<span id="cb15-12"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> ReadWriteOnce</span></span>
+<span id="cb15-13"><a></a><span class="at">  </span><span class="fu">hostPath</span><span class="kw">:</span></span>
+<span id="cb15-14"><a></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/mnt/data"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb16-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
+<span id="cb16-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb16-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span></span>
+<span id="cb16-5"><a></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb16-6"><a></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> webserver</span></span>
+<span id="cb16-7"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb16-8"><a></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb16-9"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-container</span></span>
+<span id="cb16-10"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb16-11"><a></a><span class="at">      </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb16-12"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb16-13"><a></a><span class="at">      </span><span class="fu">volumeMounts</span><span class="kw">:</span></span>
+<span id="cb16-14"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> uploads</span></span>
+<span id="cb16-15"><a></a><span class="at">          </span><span class="fu">mountPath</span><span class="kw">:</span><span class="at"> </span><span class="st">"/var/www/upload"</span></span>
+<span id="cb16-16"><a></a><span class="at">  </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb16-17"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> uploads</span></span>
+<span id="cb16-18"><a></a><span class="at">      </span><span class="fu">persistentVolumeClaim</span><span class="kw">:</span></span>
+<span id="cb16-19"><a></a><span class="at">        </span><span class="fu">claimName</span><span class="kw">:</span><span class="at"> stored-data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<aside class="notes">
+<p>Кроме конфигурации часто нужно хранить и какие-то данные, появившиеся непосредственно во время работы приложения. Для этого существуют <code>PersistentVolume</code>, во многом схожие с томами Docker.</p>
+<p>Объект <code>PersistentVolume</code> описывает том — некое постоянное хранилище определённого объёма, доступное кластеру. Сам по себе Kubernetes управлять хранилищами не может, вместо него за это отвечают плагины. <code>PersistentVolume</code> бывают множества разных типов, соответствующих разным видам подлежащих хранилищ, поддержка разных типов зависит от установленных на кластере плагинов. В актуальных версиях Kubernetes доступ к различным видам подлежащих хранилищ предоставляется через общий интерфейс CSI, и потому большинство других плагинов и типов <code>PersistentVolume</code> объявлены устаревшими и не рекомендуются к использованию без явной необходимости. Как правило, <code>PersistentVolume</code> в современных кластерах создаются автоматически посредством динамического провизионирования, и создавать их вручную мало где требуется.</p>
+<p><code>PersistentVolume</code> существуют для объявления некоего хранилища, доступного кластеру — поэтому <code>PersistentVolume</code> никогда не относятся к никакому пространству имён и любой свободный <code>PersistentVolume</code> может быть использован кем угодно. Для того, чтобы объявить что <code>PersistentVolume</code> занят и будет использован приложением, необходимо создать объект <code>PersistentVolumeClaim</code>.</p>
+<p><code>PersistentVolumeClaim</code> описывает запрос на постоянное хранилище с определёнными параметрами. При наличии свободных подходящих <code>PersistentVolume</code> (либо возможности создать такой автоматически) он будет привязан к <code>PersistentVolumeClaim</code> и может быть немедленно использован приложением, в противном случае <code>PersistentVolumeClaim</code> будет ожидать появления подходящего хранилища.</p>
+<p><code>PersistentVolumeClaim</code> занимает ближайший подходящий требованиям <code>PersistentVolume</code>. Это означает, что если в кластере существуют тома только размером, например, 10GB, то <code>PersistentVolumeClaim</code> запрашивающий 100MB займёт 10GB, а <code>PersistentVolumeClaim</code> запрашивающий 10.1GB зависнет в ожидании нужного ему тома.</p>
+<p>Основные параметры <code>PersistentVolumeClaim</code>: - <code>storageClassName</code>: класс хранилища. В кластере могут быть определены любые произвольные классы. <code>storageClassName</code> <code>PersistentVolumeClaim</code> всегда строго соответствует аналогичному параметру <code>PersistentVolume</code>. Данный параметр может быть опущен — тогда будет выбран класс по умолчанию. При использовании динамического провизионирования класс обязательно должен быть такой, какие выделяются доступным провизионером. - <code>accessModes</code>: режимы доступа, бывают четырёх типов: - ReadWriteOnce (RWO): доступен для чтения и записи только с одного узла кластера; - ReadOnlyMany (ROX): доступен только для чтения со всех узлов кластера; - ReadWriteMany (RWX): доступен для чтения и записи со всех узлов кластера; - ReadWriteOncePod (RWOP): доступен для чтения и записи только для одного пода, поддерживается только при использовании CSI. - <code>resources</code>: запрашиваемые объёмы хранилища. Аналогичен параметру <code>resources</code> в конфигурации пода, но может запрашивать только ресурсы <code>storage</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="minikube" class="slide level2 smaller scrollable">
+<h2>Minikube</h2>
+<p>Простейшей для установки и запуска в целях обучения поставкой Kubernetes является Minikube.</p>
+<p>Minikube поставляется в виде одного исполняемого файла, работает на Linux, Windows и macOS, для работы требует только наличия среды виртуализации (KVM, Hyper-V, HyperKit и др.)</p>
+<p>Для установки достаточно <a href="https://minikube.sigs.k8s.io/docs/start/">скачать</a> исполняемый файл.</p>
+<p>Часто используемые команды:</p>
+<ul>
+<li><code>minikube start</code> — запускает Kubernetes
+<ul>
+<li><code>minikube start --driver=virtualbox --cpus=4 --memory=16gb --disk-size=32gb</code> — + параметры запуска (VM VirtualBox, 4 vCPU, 16GB RAM, 32GB storage)</li>
+</ul></li>
+<li><code>minikube stop</code> — останавливает Kubernetes</li>
+<li><code>minikube pause</code> — приостанавливает Kubernetes</li>
+<li><code>minikube unpause</code> — продолжает работу после приостановки</li>
+<li><code>minikube kubectl -- &lt;command&gt;</code> — встроенный клиент kubectl</li>
+<li><code>minikube dashboard</code> — запускает и даёт доступ к плагину dashboard, позволяющему просматривать состояние кластера через браузер</li>
+<li><code>minikube addons</code> — управление аддонами Minikube
+<ul>
+<li><code>minikube addons list</code> — выводит список доступных аддонов</li>
+<li><code>minikube addons enable &lt;name&gt;</code> — включает аддон</li>
+<li><code>minikube addons disable &lt;name&gt;</code> — выключает аддон</li>
+<li>рекомендуется установить хотя бы следующие аддоны: <code>dashboard</code>, <code>ingress</code>, <code>storage-provisioner</code></li>
+</ul></li>
+<li><code>minikube config</code> — управление настройками
+<ul>
+<li><code>minikube config get &lt;name&gt;</code> — выводит значение параметра настройки</li>
+<li><code>minikube config set &lt;name&gt; &lt;value&gt;</code> — устанавливает значение параметра настройки</li>
+<li><code>minikube config view</code> — выводит все установленные нестандартные настройки</li>
+</ul></li>
+<li><code>minikube ip</code> — выводит IP-адрес VM Minikube</li>
+<li><code>minikube delete</code> — удаляет VM Minikube</li>
+</ul>
+</section>
+<section id="kubectl" class="slide level2 smaller scrollable">
+<h2>kubectl</h2>
+<p>kubectl — CLI-клиент Kubernetes, базовый инструмент для взаимодействия с кластером.</p>
+<p>Часто используемые команды:</p>
+<ul>
+<li><code>kubectl --help</code> — вывод встроенной справки, флаг <code>--help</code> может быть использован с любой командой kubectl для получения справки о ней</li>
+<li><code>kubectl create -f &lt;filename&gt;</code> — создаёт объект из его YAML-конфигурации в файле</li>
+<li><code>kubectl create &lt;type&gt; &lt;name&gt;</code> — создаёт объект с определённым типом и названием (поддерживается только небольшое количество объектов, параметры определяются через флаги, свои для каждого типа объектов)</li>
+<li><code>kubectl run &lt;name&gt; --image=&lt;image&gt;</code> — запускает приложение из докер-образа в простейшем поде с одним контейнером</li>
+<li><code>kubectl expose &lt;type&gt; &lt;name&gt; --port=&lt;port&gt;</code> — создаёт простейший <code>Service</code>, открывающий порт для указанного объекта</li>
+<li><code>kubectl rollout</code> — управление версиями <code>Deployment</code> и <code>StatefulSet</code></li>
+<li><code>kubectl scale &lt;type&gt; &lt;name&gt; --replicas=&lt;count&gt;</code> — изменяет количество реплик для <code>ReplicaSet</code>, <code>Deployment</code> и <code>StatefulSet</code></li>
+<li><code>kubectl get &lt;type&gt;</code> — выводит все объекты указанного типа
+<ul>
+<li>флаг <code>-o</code> / <code>--output</code> позволяет установить формат вывода, некоторые форматы: <code>name</code> позволяет получить только имя, <code>wide</code> выдаёт больше информации, <code>yaml</code>/<code>json</code> позволяет получить описание объекта целиком в формате YAML/JSON, <code>jsonpath</code> позволяет запрашивать форматированные и отфильтрованные данные с использованием шаблонов JSONPath</li>
+<li>флаг <code>-l</code> / <code>--selector</code> позволяет фильтровать выводимые объекты по меткам, например <code>kubectl get pods -l app=webserver</code> выведет все поды с меткой <code>app: webserver</code></li>
+</ul></li>
+<li><code>kubectl get &lt;type&gt; &lt;name&gt;</code> — выводит указанный объект</li>
+<li><code>kubectl explain &lt;type&gt;</code> — выводит документацию по типу объектов</li>
+<li><code>kubectl describe &lt;type&gt; &lt;name&gt;</code> — выводит подробную информацию по объекту</li>
+<li><code>kubectl edit &lt;type&gt; &lt;name&gt;</code> — интерактивное редактирование объекта при помощи текстового редактора
+<ul>
+<li>редактор можно выбрать, указав его исполняемый файл в переменной окружения <code>KUBE_EDITOR</code></li>
+</ul></li>
+<li><code>kubectl delete &lt;type&gt; &lt;name&gt;</code> — удаляет объект</li>
+<li><code>kubectl exec &lt;pod&gt; -c &lt;container&gt; -- &lt;command&gt;</code> — запускает произвольную команду в контейнере</li>
+<li><code>kubectl logs &lt;pod&gt; -c &lt;container&gt;</code> — выводит лог контейнера</li>
+</ul>
+</section>
+<section id="helm" class="slide level2 smaller scrollable">
+<h2>helm</h2>
+<p>helm — это это менеджер пакетов для Kubernetes. Helm поможет управлять приложениями Kubernetes — Helm Charts помогут вам определить, установить и обновить даже самое сложное приложение Kubernetes.</p>
+<p>Часто используемые команды:</p>
+<ul>
+<li><code>helm --help</code> — вывод встроенной справки, флаг <code>--help</code> можно использовать с любой командой Helm для получения справки<br>
+</li>
+<li><code>helm version</code> — показывает версию Helm (клиента и сервера, если подключён к кластеру)<br>
+</li>
+<li><code>helm repo add &lt;name&gt; &lt;url&gt;</code> — добавляет репозиторий чартов<br>
+</li>
+<li><code>helm repo update</code> — обновляет список доступных чартов из всех добавленных репозиториев<br>
+</li>
+<li><code>helm repo list</code> — выводит список добавленных репозиториев<br>
+</li>
+<li><code>helm search repo &lt;keyword&gt;</code> — ищет чарты в добавленных репозиториях<br>
+</li>
+<li><code>helm install &lt;release-name&gt; &lt;chart&gt;</code> — устанавливает чарт в кластер
+<ul>
+<li><code>-f &lt;values.yaml&gt;</code> — переопределяет значения из файла конфигурации<br>
+</li>
+<li><code>--set key=value</code> — переопределяет конкретные параметры<br>
+</li>
+<li><code>--dry-run</code> — тестовый запуск без реального деплоя<br>
+</li>
+<li><code>--atomic</code> — автоматически откатывает изменения при ошибке<br>
+</li>
+</ul></li>
+<li><code>helm list</code> — выводит список установленных релизов
+<ul>
+<li><code>-a</code> / <code>--all</code> — показывает все релизы, включая удалённые<br>
+</li>
+<li><code>-n</code> / <code>--namespace</code> — фильтрует по неймспейсу<br>
+</li>
+</ul></li>
+<li><code>helm status &lt;release-name&gt;</code> — показывает состояние релиза<br>
+</li>
+<li><code>helm upgrade &lt;release-name&gt; &lt;chart&gt;</code> — обновляет релиз до новой версии чарта<br>
+</li>
+<li><code>helm rollback &lt;release-name&gt; &lt;revision&gt;</code> — откатывает релиз до предыдущей версии<br>
+</li>
+<li><code>helm uninstall &lt;release-name&gt;</code> — удаляет релиз из кластера<br>
+</li>
+<li><code>helm history &lt;release-name&gt;</code> — показывает историю изменений релиза<br>
+</li>
+<li><code>helm get values &lt;release-name&gt;</code> — выводит установленные значения конфигурации релиза<br>
+</li>
+<li><code>helm lint &lt;chart-path&gt;</code> — проверяет чарт на ошибки<br>
+</li>
+<li><code>helm template &lt;release-name&gt; &lt;chart&gt;</code> — рендерит манифесты чарта без установки (полезно для отладки)<br>
+</li>
+<li><code>helm pull &lt;chart&gt;</code> — скачивает чарт в локальную директорию<br>
+</li>
+<li><code>helm create &lt;name&gt;</code> — создаёт шаблон нового чарта<br>
+</li>
+<li><code>helm env</code> — выводит переменные окружения Helm<br>
+</li>
+<li><code>helm plugin list</code> — показывает установленные плагины</li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/levkovalenko\.github\.io\/ya\.camp\.2025-clearml\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
