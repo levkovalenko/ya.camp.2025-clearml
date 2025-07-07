@@ -19,7 +19,8 @@
 - [mlops-example](./mlops-example)  -- подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.
 - Инстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:
   - [1. yandex_kube.md](./1.%20yandex_kube.md) -- настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.
-  - [2. clearml_yandex_kube.md](./2.%20clearml_yandex_kube.md) -- как развернуть на yc kuber нужные для практики сервисы clearml.
+  - [2.1 clearml_yandex_kube.md](./2.%20clearml_yandex_kube.md) -- как развернуть на yc kuber нужные для практики сервисы clearml.
+  - [2.2 clearml docker.md](./2.2%20clearml%20docker.md) -- как развернуть clearml через docker compose
   - [3. clearml_work.md](./3.%20clearml_work.md) -- как настроить окружение демо примера у себя и настроить работу с clearml
   - [4. clearml_data.md](./4.%20clearml_data.md) -- информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.
   - [5. clearml_pipeline.md](./5.%20clearml_pipeline.md) -- базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных
