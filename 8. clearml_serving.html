@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.15">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-8f1af79587c2686b78fe4e1fbadd71ab.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-cc68601a05ab6ae055d8fbc512858b1e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aeca9c65daf63bed663c089445a3e906.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-07ee6638e08fdc3a64acc6d50e892ea0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -133,9 +133,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">MLOps/DataOps YA.Camp 2025</a> 
-    </div>
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -198,6 +197,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./2. clearml_yandex_kube.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Настройка ClearML Yandex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.2 clearml docker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ClearML docker compose run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -276,22 +281,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Установите clearml-serving</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add <span class="at">--pypi</span> clearml-serving</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> install <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add <span class="at">--pypi</span> clearml-serving</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> install <span class="at">-a</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li>Создайте clearml serving controller:</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run clearml-serving create <span class="at">--name</span>  <span class="st">"Amazon Reviews"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run clearml-serving create <span class="at">--name</span>  <span class="st">"Amazon Reviews"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Получите его <code>ID</code> для развертки clearml-serving в kubernetess</p>
 <pre><code>New Serving Service created: id=3e0e2ce884444da694fb774ef94ecc5f</code></pre>
 <ol start="3" type="1">
 <li>Перейдите к инструкции из <a href="./2. clearml_yandex_kube.html">2. clearml_yandex_kube.md</a>. Используйте полученный <code>ID</code> как <code>SERVERINGID</code>. Обратите внимание, что в serving нужно добавить зависимости в <code>values.yaml</code></li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clearml_serving_inference</span><span class="kw">:</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clearml_serving_inference</span><span class="kw">:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">extraPythonPackages</span><span class="kw">:</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> nltk==3.9.1</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> polars&gt;=1.31.0,&lt;2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> polars&gt;=1.31.0,&lt;2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="4" type="1">
 <li>Далее работаем с clearml-serving, (Вот тут <a href="https://clear.ml/docs/latest/docs/clearml_serving/clearml_serving_cli">документация</a>)</li>
 </ol>
@@ -302,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Стоит опубликовать вашу модель, которую вы хотите использовать, выберете в артефактах вашу модель и нажмите publish в ее меню. <img src="images/experiment.model.publish.png" class="img-fluid"></p></li>
 <li><p>Далее нужно подготовить prepreprocessing для данных на вход модели, варианты можно найти в <a href="https://github.com/clearml/clearml-serving/tree/main/examples">примерах</a>. Вам нужно по сути написать класс <code>Preprocessing</code> в виде класса в фалйле, вот пример для подготовки данных в tf-idf</p></li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Preprocess(<span class="bu">object</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Preprocess(<span class="bu">object</span>):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># set internal state, this will be called only once. (i.e. not per request)</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
@@ -324,18 +329,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># post process the data returned from the model inference engine</span></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># data is the return value from model.predict we will put is inside a return value as Y</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">dict</span>(y<span class="op">=</span>data.tolist() <span class="cf">if</span> <span class="bu">isinstance</span>(data, np.ndarray) <span class="cf">else</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">dict</span>(y<span class="op">=</span>data.tolist() <span class="cf">if</span> <span class="bu">isinstance</span>(data, np.ndarray) <span class="cf">else</span> data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Добавьте модель в serving:</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run clearml-serving <span class="at">--id</span> 3e0e2ce884444da694fb774ef94ecc5f model auto-update <span class="at">--engine</span> sklearn <span class="at">--endpoint</span> <span class="st">"sentiment_analyze"</span> <span class="at">--published</span> <span class="at">--project</span> <span class="st">"Amazon reviews"</span> <span class="at">--name</span> <span class="st">"TF-IDF Vectorize BernoulliNB"</span> <span class="at">--max-versions</span> 5 <span class="at">--preprocess</span> <span class="st">"mlops-example/mlops_example/preprocessing.py"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run clearml-serving <span class="at">--id</span> 3e0e2ce884444da694fb774ef94ecc5f model auto-update <span class="at">--engine</span> sklearn <span class="at">--endpoint</span> <span class="st">"sentiment_analyze"</span> <span class="at">--published</span> <span class="at">--project</span> <span class="st">"Amazon reviews"</span> <span class="at">--name</span> <span class="st">"TF-IDF Vectorize BernoulliNB"</span> <span class="at">--max-versions</span> 5 <span class="at">--preprocess</span> <span class="st">"mlops-example/mlops_example/preprocessing.py"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Вот разбор команды: - Указываем <code>--id   3e0e2ce884444da694fb774ef94ecc5f</code> созданного контроллера - Выбираем режим модели <code>model auto-update</code> для автообновления при публикации новых моделей - Указываем фреймворк модели <code>--engine sklearn</code> (см <a href="https://clear.ml/docs/latest/docs/clearml_serving/clearml_serving_cli#auto-update">документацию</a>) - Определяем ендпоинт для доступа к модели <code>--endpoint "sentiment_analyze"</code> - Указываем параметры модели: опубликованные модели <code>--published</code> определенного проекта <code>--project "Amazon reviews"</code> под названием <code>--name "TF-IDF Vectorize BernoulliNB"</code> - Максимальное количество версий модели которые могут быть запущены <code>--max-versions 5</code> - Указываем скрипт препроцессинга <code>--preprocess "mlops-example/mlops_example/preprocessing.py"</code></p>
 <ol start="4" type="1">
 <li>Теперь перейдите в проект DevOps, там в задаче <code>Amazon Reviews - serve instance</code> будут логи добавления модели. <img src="images/serving.logs.png" class="img-fluid"> Так же можете выполнить команду:</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run clearml-serving <span class="at">--id</span> 3e0e2ce884444da694fb774ef94ecc5f model list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run clearml-serving <span class="at">--id</span> 3e0e2ce884444da694fb774ef94ecc5f model list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>И увидеть что модели загружены:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="er">clearml-serving</span> <span class="er">-</span> <span class="er">CLI</span> <span class="er">for</span> <span class="er">launching</span> <span class="er">ClearML</span> <span class="er">serving</span> <span class="er">engine</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="er">clearml-serving</span> <span class="er">-</span> <span class="er">CLI</span> <span class="er">for</span> <span class="er">launching</span> <span class="er">ClearML</span> <span class="er">serving</span> <span class="er">engine</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="er">List</span> <span class="er">model</span> <span class="er">serving</span> <span class="er">and</span> <span class="er">endpoints,</span> <span class="er">control</span> <span class="er">task</span> <span class="er">id=3e0e2ce884444da694fb774ef94ecc5f</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="er">Info:</span> <span class="er">syncing</span> <span class="er">model</span> <span class="er">endpoint</span> <span class="er">configuration,</span> <span class="er">state</span> <span class="er">hash=378b860f5e9c7c07f37320fe4033bdad</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="er">Endpoints:</span></span>
@@ -361,15 +366,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="er">Canary:</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">{}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="тестирвоание-модели" class="level2">
 <h2 class="anchored" data-anchor-id="тестирвоание-модели">Тестирвоание модели</h2>
 <p>Попробуем потестировать модель, сразу оговорюсь нужно делать тесты мз сети yc, так как для моделей не проброшены внешние порты, для этого можно развернуть виртуалку. Попробуем первый запрос, мы будем обращаться к модели с <code>ID=27c2c1bb0af74984a3a22e702f65fdf9</code>, поэтому в url указываем версию 2.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"http://10.112.135.102:8080/serve/sentiment_analyze/2"</span> <span class="at">-H</span> <span class="st">"accept: application/json"</span> <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">"{</span><span class="dt">\"</span><span class="st">text</span><span class="dt">\"</span><span class="st">: </span><span class="dt">\"</span><span class="st">Taking this out of my daughter's library, I found this book and thought the illustrtions were absolutey beautiful -- a true work of artistry. However, I didn't read it through before I bought it. I was reading it to my daughter when I discovered how disturbing the story turns with the spanking scenes. I stopped reading the book and I will take it out of my house.</span><span class="dt">\"</span><span class="st">}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"http://10.112.135.102:8080/serve/sentiment_analyze/2"</span> <span class="at">-H</span> <span class="st">"accept: application/json"</span> <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">"{</span><span class="dt">\"</span><span class="st">text</span><span class="dt">\"</span><span class="st">: </span><span class="dt">\"</span><span class="st">Taking this out of my daughter's library, I found this book and thought the illustrtions were absolutey beautiful -- a true work of artistry. However, I didn't read it through before I bought it. I was reading it to my daughter when I discovered how disturbing the story turns with the spanking scenes. I stopped reading the book and I will take it out of my house.</span><span class="dt">\"</span><span class="st">}"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ответ модели: <code>{"y":[2]}</code></p>
 <p>Теперь второй запрос:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"http://10.112.135.102:8080/serve/sentiment_analyze/2"</span> <span class="at">-H</span> <span class="st">"accept: application/json"</span> <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">"{</span><span class="dt">\"</span><span class="st">text</span><span class="dt">\"</span><span class="st">: </span><span class="dt">\"</span><span class="st">Scratched the lens with a kleenex,I used these once then used a Kleenex to wipe one lens that was a little smudged. I have microscopic vision and I noticed it was scratched AFTER I used the Kleenex, so to be sure, I used it again and sure enough, it scratched the lens some more. I compared the 2 lenses and the other lens looked pristine, whereas the one I used the kleenex on was scratched all over Very low quality lenses! Unusable after one use</span><span class="dt">\"</span><span class="st">}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"http://10.112.135.102:8080/serve/sentiment_analyze/2"</span> <span class="at">-H</span> <span class="st">"accept: application/json"</span> <span class="at">-H</span> <span class="st">"Content-Type: application/json"</span> <span class="at">-d</span> <span class="st">"{</span><span class="dt">\"</span><span class="st">text</span><span class="dt">\"</span><span class="st">: </span><span class="dt">\"</span><span class="st">Scratched the lens with a kleenex,I used these once then used a Kleenex to wipe one lens that was a little smudged. I have microscopic vision and I noticed it was scratched AFTER I used the Kleenex, so to be sure, I used it again and sure enough, it scratched the lens some more. I compared the 2 lenses and the other lens looked pristine, whereas the one I used the kleenex on was scratched all over Very low quality lenses! Unusable after one use</span><span class="dt">\"</span><span class="st">}"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ответ модели: <code>{"y":[1]}</code></p>
 <p>Видим что модель работает и назначает соответствующие лейблы. Отлично у вас есть развернутая модель которую можно использовать и отправлять ей разные запросы.</p>
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.14">
+<meta name="generator" content="quarto-1.8.15">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-8f1af79587c2686b78fe4e1fbadd71ab.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-cc68601a05ab6ae055d8fbc512858b1e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aeca9c65daf63bed663c089445a3e906.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-07ee6638e08fdc3a64acc6d50e892ea0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -133,9 +133,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">MLOps/DataOps YA.Camp 2025</a> 
-    </div>
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -198,6 +197,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./2. clearml_yandex_kube.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Настройка ClearML Yandex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.2 clearml docker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ClearML docker compose run</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -278,17 +283,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Стоит уделить внимание версии самого ClearML-agent, на момент подготовки курса доступна версия 1.9.3, но она не корректно работает с задачами в очереди (см. <a href="https://github.com/clearml/clearml-agent/issues/223">issue</a>). Поэту ставим специально понижаем версию до последней рабочей.</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">agentk8sglue</span><span class="kw">:</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">agentk8sglue</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">extraEnvs</span><span class="kw">:</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> CLEARML_AGENT_UPDATE_VERSION</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"==1.9.2"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"==1.9.2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li>Также стоит изменить образ который будет использоваться для запуска задач на нужный вам (возможно кастомный). Опять же советую использовать python не выше <code>3.11</code>, что бы не возникало проблем с использованием более старых версий библиотек на следующих этапах.</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">agentk8sglue</span><span class="kw">:</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">agentk8sglue</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  ...</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">defaultContainerImage</span><span class="kw">:</span><span class="at"> python:3.11.13-slim-bookworm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">defaultContainerImage</span><span class="kw">:</span><span class="at"> python:3.11.13-slim-bookworm</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Внеся такие изменения вы в целом можете разворачивать его на kubernetes и использовать для выполнения пайплайнов и экспериментов.</li>
 </ol>
@@ -296,23 +301,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="clearml-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="clearml-pipeline">ClearML pipeline</h2>
 <p>ClearML позволяет составлять пайплайны, формируя их из существующих задач или прописывая специализированный код используя <a href="https://clear.ml/docs/latest/docs/references/sdk/automation_controller_pipelinecontroller/">pipeline SDK</a>. Сейчас мы разберем пример pipeline реализованного с помощью <code>PipelineController</code>, для этого надо посмотреть в файл <a href="./mlops-example/2.train_test_split.py">2.train_test_split.py</a>, давайте его запустим:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run python mlops-example/2.train_test_split.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> run python mlops-example/2.train_test_split.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>А пока он исполняется, разберем код пайплайна:</p>
 <ol type="1">
 <li>Создается основной объект пайплайна, ему указывается имя, проект, версия, специальные зависимости, докер образ для исполнения и возможность локального импорта модулей. Далее мы будем работать с этим объектом и его донастраивать.</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> PipelineController(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> PipelineController(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"DataPrepare"</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    project<span class="op">=</span><span class="st">"Amazon reviews"</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    version<span class="op">=</span><span class="st">"0.0.1"</span>,</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    packages<span class="op">=</span>[<span class="st">"./mlops-example"</span>, <span class="st">"numpy==1.26.4"</span>],</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    docker<span class="op">=</span><span class="st">"python:3.11.13-slim-bookworm"</span>,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    enable_local_imports<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li>Пайплайну задаются основные параметры, которые в дальнейшем мы сможем задавать в интерфейсе clearml.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pipe.add_parameter(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pipe.add_parameter(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"dataset_name"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    description<span class="op">=</span><span class="st">"ClearML dataset name"</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    default<span class="op">=</span><span class="st">"Amazon reviews dataset"</span>,</span>
@@ -332,12 +337,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>pipe.add_parameter(</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"random_state"</span>, description<span class="op">=</span><span class="st">"Random state"</span>, default<span class="op">=</span><span class="dv">42</span>, param_type<span class="op">=</span><span class="st">"int"</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="images/pipeline parametrs.png" class="img-fluid"></p>
 <ol start="3" type="1">
 <li>Далее описываются функции, которые будут исполняться. Обратит внимание Что основные импорты находятся внутри функции, это позволяет clearml автоматически считать зависимости которые необходимы для работы этого кода, но на практике лучше вручную задавать зависимости для каждого шага, что бы установить корректные версии библиотек. Здесь пример функции которая занимается разделение данные на train и test, и складывает их в новую версию датасета: <code>X.X.1</code>.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dataset_train_test_split(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dataset_train_test_split(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    dataset_name,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    dataset_project,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    dataset_version,</span>
@@ -397,11 +402,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>        pl.from_pandas(train, include_index<span class="op">=</span><span class="va">False</span>),</span>
 <span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>        pl.from_pandas(test, include_index<span class="op">=</span><span class="va">False</span>),</span>
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>        prepared_dataset.<span class="bu">id</span>,</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="4" type="1">
 <li>Добавляем первый функциональный шаг, указываем его имя, функцию которая его исполняет, ее аргументы, используя параметры pipeline, так же указываем какие артефакты сохранить на этом шаге в качестве возвращаемых значений функции, указываем что этот шаг может быть закеширован, указываем очередь для передачи ее ClearML agent, если вы ее не настраивали, то это default, Так же у нас идут helper fucntions, они нужны что бы код шага корректно сгенерировался, и наконец специфичные зависимости для шага.</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pipe.add_function_step(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pipe.add_function_step(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"train_test_split"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    function<span class="op">=</span>dataset_train_test_split,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    function_kwargs<span class="op">=</span><span class="bu">dict</span>(</span>
@@ -427,9 +432,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nltk&gt;=3.9.1,&lt;4"</span>,</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pyarrow&gt;=20.0.0,&lt;21"</span>,</span>
 <span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Еще стоит сказать про особенность <code>function_step</code>, в нем ваш код будет преобразован в отдельный скрипт который будет исполняться, поэтому есть такие проблемы с import разных библиотек и тд. Вот пример кода для этого шага, который переработал ClearML:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clearml <span class="im">import</span> Task</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clearml <span class="im">import</span> Task</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clearml <span class="im">import</span> TaskTypes</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clearml.automation.controller <span class="im">import</span> PipelineDecorator</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> inspect</span>
@@ -565,11 +570,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>                    serialization_function<span class="op">=</span><span class="va">None</span></span>
 <span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>                )</span>
 <span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> parameters:</span>
-<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>            task._set_parameters(parameters, __parameters_types<span class="op">=</span>parameters_types, __update<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>            task._set_parameters(parameters, __parameters_types<span class="op">=</span>parameters_types, __update<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="5" type="1">
 <li>Прописываем все функцию для препроцессинга данных с помощью nltk.</li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dataset_preprocessing(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dataset_preprocessing(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    dataframe,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    parent_dataset,</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    dataset_name,</span>
@@ -606,11 +611,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    prepared_dataset.add_files(result_path)</span>
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    prepared_dataset.upload()</span>
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    prepared_dataset.finalize()</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> processed_dataframe, prepared_dataset.<span class="bu">id</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> processed_dataframe, prepared_dataset.<span class="bu">id</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="6" type="1">
 <li>И задаем для нее два шага, для обработки обучающей и тестовой выборок. Можно заметить что в параметризации функции у нас также используются и сохраненные артефакты шага<code>train_test_split</code>, а также появился параметр parents, позволяющий строить пайплайн. Кстати, эти шаги будут выполняться паралельно.</li>
 </ol>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pipe.add_function_step(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pipe.add_function_step(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"train_processing"</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    function<span class="op">=</span>dataset_preprocessing,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    function_kwargs<span class="op">=</span><span class="bu">dict</span>(</span>
@@ -668,11 +673,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nltk&gt;=3.9.1,&lt;4"</span>,</span>
 <span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pyarrow&gt;=20.0.0,&lt;21"</span>,</span>
 <span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="6" type="1">
 <li>Теперь непосредственно команда запуска. Есть два варианта запуска <code>start</code> и <code>start_locally</code>.Первая (<code>start</code>) запускает сборку и исполнение pipeline на стороне агента, то есть агент установит окружение пайплайна и начнемт подготовку кода для каждого из шагов, затем непосредсвенно начнет выполнение шагов. По сути это не блокирующая команда которая направляет задачу агенту и он ее выполняет. Второй вариант <code>start_locally</code> позволяет сконфигурировать пайплайн локлаьно и только шаги исполнить удаленно, но если указать <code>start_locally(run_pipeline_steps_locally=True)</code>, то и шаги пайплайна будут исполнены локально, что может быть удобно для дебага.</li>
 </ol>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pipe.start()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pipe.start()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Вы можете перейти в clearml и увидеть что ваш pipeline выполняется: <img src="images/pipeline run.png" class="img-fluid"> Посмотреть его логи можно в поде <code>clearml-id-xxxxxxx</code>: <img src="images/pipeline monitoring.png" class="img-fluid"> Или в консоле пайплайна.</p>
 <ol start="7" type="1">
 <li><p>Когда пайплайн завершился, можно посотреть всю инфомрацию о нем: настройки, изменения, заисимости, артефакты и тд. <img src="images/pipeline.info.1.png" class="img-fluid"> <img src="images/pipeline.info.2.png" class="img-fluid"> <img src="images/pipeline.info.3.png" class="img-fluid"> <img src="images/pipeline.info.4.png" class="img-fluid"> <img src="images/pipeline.info.5.png" class="img-fluid"></p></li>

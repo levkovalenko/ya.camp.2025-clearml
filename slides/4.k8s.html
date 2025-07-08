@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8f1af79587c2686b78fe4e1fbadd71ab.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.14">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-cc68601a05ab6ae055d8fbc512858b1e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.15">
 
   <meta name="author" content="Лев Коваленко">
   <title>MLOps/DataOps YA.Camp 2025 – Kubernetes</title>
@@ -95,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ff18afce816b5ef2b7dbb5f63367f47a.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -313,12 +313,12 @@
 <h2>Объекты Kubernetes</h2>
 <p>Ожидаемое состояние кластера Kubernetes полностью описано множеством объектов, существующих на нём. Абсолютно всему в кластере, будь то ваше приложение, балансировщик нагрузки, файл конфигурации или узел самого кластера, соответствует некий объект.</p>
 <p>Любой объект Kubernetes имеет описание в формате YAML. Для создания нового объекта необходимо передать кластеру его описание, и любой объект может быть запрошен у кластера — тогда вы аналогично получите его YAML-описание. Ниже приведён простейший объект типа <code>Namespace</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb1-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Namespace</span></span>
 <span id="cb1-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb1-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> newnamespace</span></span>
 <span id="cb1-5"><a></a><span class="fu">spec</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span>
-<span id="cb1-6"><a></a><span class="fu">status</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a></a><span class="fu">status</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>В описании объекта существует четыре обязательных поля:</p>
 <ul>
 <li><code>apiVersion</code>: версия API Kubernetes, которой соответствует описание объекта.</li>
@@ -334,18 +334,18 @@
 <p>В основе всех объектов рабочей нагрузки лежит под (<code>Pod</code>). Под — это некоторое множество контейнеров, управляемых Kubernetes и объединённых общей изолированной средой. Все контейнера одного пода всегда запускаются на одном узле, имеют общий жизненный цикл, используют общий сетевой интерфейс и могут использовать общие дисковые ресурсы. Любые другие объекты рабочей нагрузки создают управляемые ими поды и определяют их поведение.</p>
 <p>Поды, как и лёгшие в их основу Docker-контейнеры, по определению stateless. С точки зрения кластера поды сами по себе не имеют никакой ценности, и могут быть в любой момент удалены, перезапущены, перенесены на другой узел (без переноса каких-либо хранившихся внутри данных), и т.д. Поэтому никогда нельзя полагаться на хранимое в поде состояние, на любые изменения, сделанные внутри пода в процессе его работы. Для обеспечения персистентности в Kubernetes существуют отдельные специальные типы объектов.</p>
 <p>Минимальный под выглядит так:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb2-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
 <span id="cb2-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb2-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span></span>
 <span id="cb2-5"><a></a><span class="fu">spec</span><span class="kw">:</span></span>
 <span id="cb2-6"><a></a><span class="at">  </span><span class="fu">containers</span><span class="kw">:</span></span>
 <span id="cb2-7"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-container</span></span>
-<span id="cb2-8"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a></a><span class="at">      </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="pod" class="slide level2 smaller">
 <h2>Pod</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span><span class="co"> # версия API</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span><span class="co"> # версия API</span></span>
 <span id="cb3-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span><span class="co"> # тип объекта</span></span>
 <span id="cb3-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb3-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span><span class="co"> # имя пода</span></span>
@@ -396,7 +396,7 @@
 <span id="cb3-49"><a></a><span class="at">  </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Always</span><span class="co"> # когда перезапускать под</span></span>
 <span id="cb3-50"><a></a><span class="at">  </span><span class="fu">volumes</span><span class="kw">:</span><span class="co"> # тома</span></span>
 <span id="cb3-51"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> data</span></span>
-<span id="cb3-52"><a></a><span class="at">      </span><span class="fu">emptyDir</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-52"><a></a><span class="at">      </span><span class="fu">emptyDir</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Так выглядит описание пода с большим количеством параметров. Здесь приведена только часть наиболее используемых параметров.</p>
 <p>Рассмотрим присутствующие здесь параметры (в порядке, в котором они видны в файле):</p>
@@ -445,7 +445,7 @@
 </section>
 <section id="replicaset" class="slide level2">
 <h2>ReplicaSet</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
 <span id="cb4-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ReplicaSet</span></span>
 <span id="cb4-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb4-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
@@ -463,7 +463,7 @@
 <span id="cb4-16"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
 <span id="cb4-17"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
 <span id="cb4-18"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
-<span id="cb4-19"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-19"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><code>ReplicaSet</code> — следующий уровень управления рабочей нагрузкой после подов. Легко можно заметить, что блок <code>template</code> в описании <code>ReplicaSet</code> очень похож на описание самого пода.</p>
 <p>Основная задача <code>ReplicaSet</code> — автоматически создавать копии подов. <code>ReplicaSet</code> создаёт одинаковые поды, соответствующие описанию в блоке <code>template</code>, в количестве указанном в блоке <code>replicas</code>. Названия в метаданных для этого пода можно не указывать, так как они всегда генерируются автоматически самим <code>ReplicaSet</code>.</p>
@@ -483,7 +483,7 @@
 </section>
 <section id="deployment" class="slide level2">
 <h2>Deployment</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
 <span id="cb5-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
 <span id="cb5-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb5-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
@@ -506,7 +506,7 @@
 <span id="cb5-21"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
 <span id="cb5-22"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
 <span id="cb5-23"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
-<span id="cb5-24"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-24"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Хотя ничего не мешает использовать <code>ReplicaSet</code> напрямую, это обычно не рекомендуется. Как правило, они используются опосредованно через объекты вида <code>Deployment</code>.</p>
 <p><code>Deployment</code> — объект, создающий объекты типа <code>ReplicaSet</code>. Как видно, определение <code>Deployment</code> похоже на определение <code>ReplicaSet</code>.</p>
@@ -526,7 +526,7 @@
 </section>
 <section id="statefulset" class="slide level2">
 <h2>StatefulSet</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
 <span id="cb6-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> StatefulSet</span></span>
 <span id="cb6-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb6-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
@@ -545,7 +545,7 @@
 <span id="cb6-17"><a></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
 <span id="cb6-18"><a></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
 <span id="cb6-19"><a></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
-<span id="cb6-20"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-20"><a></a><span class="at">          </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><code>StatefulSet</code> — специальный вид рабочей нагрузки, во многом похожий на <code>Deployment</code>, но имеющий одну важную особенность: в отличие от любых других видов рабочей нагрузки, <code>StatefulSet</code>, как понятно из названия, хранит состояние для каждой реплики. Это означает, что у каждого пода, управляемого <code>StatefulSet</code>, есть собственный номер, который известен внутри пода и может быть использован приложением, постоянное хранилище, уникальное внутреннее доменное имя, по которому можно подключиться к поду с конкретным номером. Также у <code>StatefulSet</code> чётко определён порядок, в котором поды запускаются и завершают работу: по возрастанию номера при запуске и по убыванию при завершении работы.</p>
 <p>Такой вид рабочей нагрузки редко нужен и его использование не рекомендуется, если это явно не необходимо. Но некоторые приложения, например многие из тех, у которых взаимодействие между репликами устроено по принципу “ведущий-ведомый”, могут быть корректно запущены только с таким видом рабочей нагрузки.</p>
@@ -563,7 +563,7 @@
 </section>
 <section id="job" class="slide level2">
 <h2>Job</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
 <span id="cb7-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Job</span></span>
 <span id="cb7-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb7-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> pi</span></span>
@@ -577,7 +577,7 @@
 <span id="cb7-12"><a></a><span class="at">      </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Never</span></span>
 <span id="cb7-13"><a></a><span class="at">  </span><span class="fu">completions</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span><span class="co"> # количество успешных выполнений</span></span>
 <span id="cb7-14"><a></a><span class="at">  </span><span class="fu">parallelism</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span><span class="co"> # количество одновременных запусков</span></span>
-<span id="cb7-15"><a></a><span class="at">  </span><span class="fu">backoffLimit</span><span class="kw">:</span><span class="at"> </span><span class="dv">6</span><span class="co"> # допустимое количество провалов</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-15"><a></a><span class="at">  </span><span class="fu">backoffLimit</span><span class="kw">:</span><span class="at"> </span><span class="dv">6</span><span class="co"> # допустимое количество провалов</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><code>Job</code> — вид рабочей нагрузки, существующий для разовых задач. В отличие от <code>Deployment</code> или <code>StatefulSet</code>, он рассчитан на приложения, выполнение которых когда-либо должно завершиться. <code>Job</code>, как и другие виды рабочей нагрузки, создаёт поды, но эти поды не будут перезапущены после успешного завершения выполнения приложения.</p>
 <p>За поведение <code>Job</code> отвечает несколько специальных параметров:</p>
@@ -600,7 +600,7 @@
 </section>
 <section id="cronjob" class="slide level2">
 <h2>CronJob</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> batch/v1</span></span>
 <span id="cb8-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> CronJob</span></span>
 <span id="cb8-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb8-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> date</span></span>
@@ -614,7 +614,7 @@
 <span id="cb8-12"><a></a><span class="at">            </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> date</span></span>
 <span id="cb8-13"><a></a><span class="at">              </span><span class="fu">image</span><span class="kw">:</span><span class="at"> busybox</span></span>
 <span id="cb8-14"><a></a><span class="at">              </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"/bin/sh"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-c"</span><span class="kw">,</span><span class="at"> </span><span class="st">"date"</span><span class="kw">]</span></span>
-<span id="cb8-15"><a></a><span class="at">          </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Never</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-15"><a></a><span class="at">          </span><span class="fu">restartPolicy</span><span class="kw">:</span><span class="at"> Never</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><code>CronJob</code> — надстройка над <code>Job</code>, которая позволяет запускать какие-то задачи по расписанию. В параметре <code>jobTemplate</code> указывается конфигурация <code>Job</code>, который должен создаваться с некоторой периодичностью, а в параметре <code>schedule</code> — расписание выполнения в формате Cron.</p>
 <style type="text/css">
@@ -652,7 +652,7 @@
 </section>
 <section id="service" class="slide level2">
 <h2>Service</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb9-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Service</span></span>
 <span id="cb9-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb9-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
@@ -664,7 +664,7 @@
 <span id="cb9-10"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"http"</span><span class="co"> # название</span></span>
 <span id="cb9-11"><a></a><span class="at">      </span><span class="fu">protocol</span><span class="kw">:</span><span class="at"> TCP</span><span class="co"> # протокол TCP/UDP/SCTP</span></span>
 <span id="cb9-12"><a></a><span class="at">      </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span><span class="co"> # открытый порт сервиса</span></span>
-<span id="cb9-13"><a></a><span class="at">      </span><span class="fu">targetPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span><span class="co"> # целевой порт пода</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-13"><a></a><span class="at">      </span><span class="fu">targetPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span><span class="co"> # целевой порт пода</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p><code>Service</code> — объект Kubernetes, существующий для получения трафика и перенаправления его к подам. Каждый <code>Service</code>, аналогично подам, имеет свой IP-адрес. Для всех <code>Service</code> кластера существует пространство IP-адресов (Service CIDR), который находится в одной внутренней сети с пространством адресов подов, Благодаря чему любой под также может подключаться напрямую к любому <code>Service</code> и наоборот. Кроме того, каждый <code>Service</code> получает своё собственное постоянное внутреннее доменное имя вида <code>[servicename].[namespacename].svc.[clusterdomain.name]</code>, которое известно всем подам кластера. Подключиться к конкретному поду за <code>Service</code> можно по адресу <code>[pod-ip-address].[service-name].[namespace-name].svc.[cluster-domain.name]</code>, в случае подов управляемых <code>StatefulSet</code> также есть нумерованные доменные имена <code>[statefulset-name]-[pod-index].[service-name].[namespace-name].svc.[cluster-domain.name]</code>.</p>
 <p>Основная задача <code>Service</code> состоит в перенаправлении трафика. Весь трафик, приходящий на <code>Service</code>, автоматически перенаправляется на определённые конфигурацией <code>Service</code> поды. Выбор подов осуществляется через селектор (параметр <code>selector</code>), который аналогичен тем селекторам, которые можно было увидеть ранее в конфигурации <code>ReplicaSet</code> или <code>Deployment</code>. Если селектор соответствует более чем одному поду, трафик распределяется равномерно между всеми подами. Трафик направляется только на те поды, которые могут его принимать — если под по каким-то причинам не запущен, либо проверка его <code>readinessProbe</code> не была успешной, то трафик на этот под не направляется.</p>
@@ -696,7 +696,7 @@
 </section>
 <section id="ingress" class="slide level2">
 <h2>Ingress</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> networking.k8s.io/v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> networking.k8s.io/v1</span></span>
 <span id="cb10-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Ingress</span></span>
 <span id="cb10-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb10-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
@@ -713,7 +713,7 @@
 <span id="cb10-15"><a></a><span class="at">              </span><span class="fu">service</span><span class="kw">:</span></span>
 <span id="cb10-16"><a></a><span class="at">                </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
 <span id="cb10-17"><a></a><span class="at">                </span><span class="fu">port</span><span class="kw">:</span></span>
-<span id="cb10-18"><a></a><span class="at">                  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-18"><a></a><span class="at">                  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Объекты <code>Service</code> используются для настройки трафика внутри кластера. Хотя получить трафик снаружи кластера можно при помощи <code>NodePort</code>, это обычно не применимо для продуктивного использования, и <code>NodePort</code> используются чаще всего только для задач отладки и тестирования. Исторически существовало множество (часть из них всё ещё развиваются и используются) различных надстроек над Kubernetes, позволявших настраивать получение трафика кластером, требовавших различных подходов к использованию и настройке. Сейчас в Kubernetes для таких задач есть общий механизм <code>Ingress</code>.</p>
 <p><code>Ingress</code> — унифицированное решение для управления попадающим в кластер снаружи трафиком независимо от того, как настроен кластер и как трафик доходит непосредственно до его узлов. Объекты типа <code>Ingress</code> позволяют управлять надстройкой <code>IngressController</code>, которых существует огромное множество под разные виды инфраструктуры, разные нужды и разные личные предпочтения. При наличии в кластере <code>IngressController</code> объект типа <code>Ingress</code> позволяет весьма просто получить трафик снаружи и направить его на <code>Service</code> внутри.</p>
@@ -735,7 +735,7 @@
 <h2>ConfigMap</h2>
 <div class="columns">
 <div class="column">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb11-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> ConfigMap</span></span>
 <span id="cb11-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb11-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-config</span></span>
@@ -752,9 +752,9 @@
 <span id="cb11-15"><a></a>            root /usr/share/nginx/html;</span>
 <span id="cb11-16"><a></a>            index index.html;</span>
 <span id="cb11-17"><a></a>        }</span>
-<span id="cb11-18"><a></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-18"><a></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb12-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
 <span id="cb12-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb12-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span></span>
@@ -782,7 +782,7 @@
 <span id="cb12-26"><a></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-config</span></span>
 <span id="cb12-27"><a></a><span class="at">        </span><span class="fu">items</span><span class="kw">:</span></span>
 <span id="cb12-28"><a></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">key</span><span class="kw">:</span><span class="at"> </span><span class="st">"nginx_conf"</span></span>
-<span id="cb12-29"><a></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"default.conf"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-29"><a></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"default.conf"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <aside class="notes">
 <p>Как уже упоминалось, поды в Kubernetes stateless. Они не хранят состояние, поэтому привычный сценарий “запустить приложение и настроить его” обычно малоприменим. Конечно, можно было бы собирать образа контейнеров с уже настроенным приложением внутри, но это было бы довольно неудобно — малейшее изменение конфигурации потребовало бы пересборки и последующей доставки образов. Поэтому в Kubernetes существуют специальные объекты, которые отвечают за хранение конфигурации для подов.</p>
@@ -802,7 +802,7 @@
 </section>
 <section id="secret" class="slide level2">
 <h2>Secret</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb13-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Secret</span></span>
 <span id="cb13-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb13-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> certs</span></span>
@@ -828,7 +828,7 @@
 <span id="cb13-24"><a></a><span class="fu">  key</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
 <span id="cb13-25"><a></a>    LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUJhWVVQNGZLRExxaFYxUU44aElNNWthMCt2QVVQRTVYRXA6VzgvMGJKUUdvQW9H</span>
 <span id="cb13-26"><a></a>    Q0NxR2NNNDkKQXdFSG9VUURRZ1FFVkdyMThpdUFCQVAxOFp3eDNTbmVEWTRIQWdTUit1Y0N5V0RkdXRwRWFSOU1EO25jYzVsMwpyRnpZb0IzYVhxYWdy</span>
-<span id="cb13-27"><a></a>    WnhoL0FINnREa0M3NFJ4N2N3dFZnPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-27"><a></a>    WnhoL0FINnREa0M3NFJ4N2N3dFZnPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Объект типа <code>Secret</code> является полным аналогом <code>ConfigMap</code> и используется аналогично, но имеет несколько отличий. В отличие от <code>ConfigMap</code>, <code>Secret</code>, как понятно из названия, существует для хранения секретных данных. Самым заметным отличием является то, что в конфигурации <code>Secret</code> данные закодированы base64, что конечно не даёт особой безопасности, но позволяет защитить данные от “подглядывания из-за спины”. Кроме того, кластер Kubernetes ограничивает доступ к ним для подов, избегает записи данных в них на диск всегда, когда возможно, и поддерживает опциональное шифрование данных <code>Secret</code> в хранилище etcd.</p>
 <p>Существует несколько разных типов <code>Secret</code> (определяются в блоке <code>type</code>). В большинстве случаев используется тип <code>Opaque</code>, не имеющий никаких специфических свойств, то также существует ряд специальных типов, используемых для авторизации SSH, Docker или даже в сам кластер Kubernetes.</p>
@@ -849,7 +849,7 @@
 <h2>PersistentVolume</h2>
 <div class="columns">
 <div class="column">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb14-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> PersistentVolumeClaim</span></span>
 <span id="cb14-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb14-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-stored-data</span></span>
@@ -861,8 +861,8 @@
 <span id="cb14-10"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> ReadWriteOnce</span></span>
 <span id="cb14-11"><a></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
 <span id="cb14-12"><a></a><span class="at">    </span><span class="fu">requests</span><span class="kw">:</span></span>
-<span id="cb14-13"><a></a><span class="at">      </span><span class="fu">storage</span><span class="kw">:</span><span class="at"> 3Gi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<span id="cb14-13"><a></a><span class="at">      </span><span class="fu">storage</span><span class="kw">:</span><span class="at"> 3Gi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb15-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> PersistentVolume</span></span>
 <span id="cb15-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb15-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> volume001</span></span>
@@ -875,9 +875,9 @@
 <span id="cb15-11"><a></a><span class="at">  </span><span class="fu">accessModes</span><span class="kw">:</span></span>
 <span id="cb15-12"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> ReadWriteOnce</span></span>
 <span id="cb15-13"><a></a><span class="at">  </span><span class="fu">hostPath</span><span class="kw">:</span></span>
-<span id="cb15-14"><a></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/mnt/data"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-14"><a></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/mnt/data"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1</span></span>
 <span id="cb16-2"><a></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Pod</span></span>
 <span id="cb16-3"><a></a><span class="fu">metadata</span><span class="kw">:</span></span>
 <span id="cb16-4"><a></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx-pod</span></span>
@@ -895,7 +895,7 @@
 <span id="cb16-16"><a></a><span class="at">  </span><span class="fu">volumes</span><span class="kw">:</span></span>
 <span id="cb16-17"><a></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> uploads</span></span>
 <span id="cb16-18"><a></a><span class="at">      </span><span class="fu">persistentVolumeClaim</span><span class="kw">:</span></span>
-<span id="cb16-19"><a></a><span class="at">        </span><span class="fu">claimName</span><span class="kw">:</span><span class="at"> stored-data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-19"><a></a><span class="at">        </span><span class="fu">claimName</span><span class="kw">:</span><span class="at"> stored-data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <aside class="notes">
 <p>Кроме конфигурации часто нужно хранить и какие-то данные, появившиеся непосредственно во время работы приложения. Для этого существуют <code>PersistentVolume</code>, во многом схожие с томами Docker.</p>

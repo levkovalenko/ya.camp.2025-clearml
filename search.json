@@ -110,463 +110,113 @@
     ]
   },
   {
-    "objectID": "1. yandex_kube.html",
-    "href": "1. yandex_kube.html",
-    "title": "Настройка Yandex Kubernetes",
+    "objectID": "2. clearml_yandex_kube.html",
+    "href": "2. clearml_yandex_kube.html",
+    "title": "Настройка ClearML Yandex",
     "section": "",
-    "text": "Общая инструкция по настройке Yandex Kubernetes\n\n\nСоздайте кластер вот с такой конфигурацией: \nСоздайте В нем группу узлов вот с такой конфигурацией: \n\n\n\nИнструкция по установке от yandex\nСкачайте скрипт установки и запустите:\ncurl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash\nПолучите ваш OauthToken и задайте его yc.\nyc config set token &lt;OAuth-токен&gt;\n\n\n\nИнструкция по установке от Kubernetes\nСкачайте к себе собранный бинарник kubectl\ncurl -LO https://dl.k8s.io/release/v1.33.0/bin/linux/amd64/kubectl\nИзмените права для исполнения kubectl\nchmod +x ./kubectl\nПереместите его в системную папку bin\nsudo mv ./kubectl /usr/local/bin/kubectl\n\n\n\nНастройте доступ к kubectl к кластеру\nyc managed-kubernetes cluster get-credentials --id &lt;Cluster ID&gt; --external\n\nПроверьте что все работает\nkubectl config view\nили\nkubectl get nodes\n\n\n\nСкачайте скрипт установки (см инструкцию helm)\ncurl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3\nИзмените права для запуска\nchmod 700 get_helm.sh\nЗапустите установку\n./get_helm.sh\n\n\n\nЧто бы подключить helm к yc выполните команду, воспользуйтесь своим OauthToken\nhelm registry login registry.yandexcloud.net -u oauth\nPassword: &lt;OAuth-токен&gt;",
+    "text": "Скачайте репозиторий clearml helm charts\n\n\nУпакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml \n\n\n\nСоздайте Cloud Registry для helm/docker.\nhelm push clearml-7.14.5.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;\n\n\n\nЗапустите готовый helm на вашем кластере kubernetes\nhelm install clearml oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml:7.14.5",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "1. yandex_kube.html#создание-кластера-kubernetes",
-    "href": "1. yandex_kube.html#создание-кластера-kubernetes",
-    "title": "Настройка Yandex Kubernetes",
+    "objectID": "2. clearml_yandex_kube.html#package-helm-chart",
+    "href": "2. clearml_yandex_kube.html#package-helm-chart",
+    "title": "Настройка ClearML Yandex",
     "section": "",
-    "text": "Создайте кластер вот с такой конфигурацией: \nСоздайте В нем группу узлов вот с такой конфигурацией:",
+    "text": "Упакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "1. yandex_kube.html#установка-yc",
-    "href": "1. yandex_kube.html#установка-yc",
-    "title": "Настройка Yandex Kubernetes",
+    "objectID": "2. clearml_yandex_kube.html#push-helm-chart",
+    "href": "2. clearml_yandex_kube.html#push-helm-chart",
+    "title": "Настройка ClearML Yandex",
     "section": "",
-    "text": "Инструкция по установке от yandex\nСкачайте скрипт установки и запустите:\ncurl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash\nПолучите ваш OauthToken и задайте его yc.\nyc config set token &lt;OAuth-токен&gt;",
+    "text": "Создайте Cloud Registry для helm/docker.\nhelm push clearml-7.14.5.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "1. yandex_kube.html#установка-kubectl",
-    "href": "1. yandex_kube.html#установка-kubectl",
-    "title": "Настройка Yandex Kubernetes",
+    "objectID": "2. clearml_yandex_kube.html#deploy-helm-chart",
+    "href": "2. clearml_yandex_kube.html#deploy-helm-chart",
+    "title": "Настройка ClearML Yandex",
     "section": "",
-    "text": "Инструкция по установке от Kubernetes\nСкачайте к себе собранный бинарник kubectl\ncurl -LO https://dl.k8s.io/release/v1.33.0/bin/linux/amd64/kubectl\nИзмените права для исполнения kubectl\nchmod +x ./kubectl\nПереместите его в системную папку bin\nsudo mv ./kubectl /usr/local/bin/kubectl",
+    "text": "Запустите готовый helm на вашем кластере kubernetes\nhelm install clearml oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml:7.14.5",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "1. yandex_kube.html#настройка-доступов-kubectl",
-    "href": "1. yandex_kube.html#настройка-доступов-kubectl",
-    "title": "Настройка Yandex Kubernetes",
-    "section": "",
-    "text": "Настройте доступ к kubectl к кластеру\nyc managed-kubernetes cluster get-credentials --id &lt;Cluster ID&gt; --external\n\nПроверьте что все работает\nkubectl config view\nили\nkubectl get nodes",
+    "objectID": "2. clearml_yandex_kube.html#package-helm-chart-1",
+    "href": "2. clearml_yandex_kube.html#package-helm-chart-1",
+    "title": "Настройка ClearML Yandex",
+    "section": "Package helm chart",
+    "text": "Package helm chart\nУпакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml-agent",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "1. yandex_kube.html#установка-helm",
-    "href": "1. yandex_kube.html#установка-helm",
-    "title": "Настройка Yandex Kubernetes",
-    "section": "",
-    "text": "Скачайте скрипт установки (см инструкцию helm)\ncurl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3\nИзмените права для запуска\nchmod 700 get_helm.sh\nЗапустите установку\n./get_helm.sh",
+    "objectID": "2. clearml_yandex_kube.html#push-helm-chart-1",
+    "href": "2. clearml_yandex_kube.html#push-helm-chart-1",
+    "title": "Настройка ClearML Yandex",
+    "section": "Push helm chart",
+    "text": "Push helm chart\nСоздайте Cloud Registry для helm/docker.\nhelm push clearml-agent-5.3.3.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "1. yandex_kube.html#настройка-доступов-helm",
-    "href": "1. yandex_kube.html#настройка-доступов-helm",
-    "title": "Настройка Yandex Kubernetes",
-    "section": "",
-    "text": "Что бы подключить helm к yc выполните команду, воспользуйтесь своим OauthToken\nhelm registry login registry.yandexcloud.net -u oauth\nPassword: &lt;OAuth-токен&gt;",
+    "objectID": "2. clearml_yandex_kube.html#deploy-helm-chart-1",
+    "href": "2. clearml_yandex_kube.html#deploy-helm-chart-1",
+    "title": "Настройка ClearML Yandex",
+    "section": "Deploy helm chart",
+    "text": "Deploy helm chart\nЗапустите готовый helm на вашем кластере kubernetes.\nhelm install clearml-agent oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml-agent:5.3.3  --set clearml.agentk8sglueKey=ACCESSKEY --set clearml.agentk8sglueSecret=SECRETKEY --set agentk8sglue.apiServerUrlReference=APISERVERURL --set agentk8sglue.fileServerUrlReference=FILESERVERURL --set agentk8sglue.webServerUrlReference=WEBSERVERURL\nСоздайте доступы в clearml (см. clearml_work.md) и заполните эти поля: * ACCESSKEY значение access_key в новых доступах * SECRETKEY значение secret_key в новых доступах * APISERVERURL значение api_server в новых доступах * FILESSERVERURL значение files_server в новых доступах * WEBSERVERURL значение web_server в новых доступах",
     "crumbs": [
       "Практика",
-      "Настройка Yandex Kubernetes"
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "slides/3.clearml.html#section",
-    "href": "slides/3.clearml.html#section",
-    "title": "ClearML",
-    "section": "",
-    "text": "Для начала давайте рассмотрим, что нам предлагает clearml, как фреймворк для проведения исследований. ClearML предоставляет как унифицированную платформу с открытым исходным кодом для непрерывного использования искусственного интеллекта, так и набор модулей для совместного взаимодействия. То есть авторы инструмента имеют в виду, что можно как ограничиться использование только clearml и проводить исследования в рамках платформы, так и использовать определенные модули clearml в своих процессах проведения исследований.\nClearml действительно имеет обширные возможности:\n\nвозможности dataops (версионирование и управление данными)\nтрекинг экспериментов\nплатформа для обучение моделей\nгенерация отчетов и реестр для их хранения\nmodel store, для упрощения поставок моделей и переиспользования предыдущих наработок\nзапуск CI-CD\nmodel servering - автоматическое развертывание моделей\n\nИ все это с уже настроенной оркестрацией, планировщиками и распределенными вычислениями. Звучит очень круто, как инструмент позволяющий покрыть практически весь процесс создания и поставки моделей.",
+    "objectID": "2. clearml_yandex_kube.html#package-helm-chart-2",
+    "href": "2. clearml_yandex_kube.html#package-helm-chart-2",
+    "title": "Настройка ClearML Yandex",
+    "section": "Package helm chart",
+    "text": "Package helm chart\nУпакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml-serving",
     "crumbs": [
-      "Лекции",
-      "ClearML"
+      "Практика",
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "slides/3.clearml.html#варианты-использования",
-    "href": "slides/3.clearml.html#варианты-использования",
-    "title": "ClearML",
-    "section": "Варианты использования",
-    "text": "Варианты использования\n\nClearML SaaS\nЧастное облако (VPC)\nЛокальная развертка\nУправляемое VPC\n\n\nClearML предлагает 4 варианта использования:\n\nУправляемый ClearML SaaS. Развертывание выделенного облачного сервера Clear ML. Все данные и вычисления остаются в контуре клиентов или VPC.\nРазвертывание виртуального частного облака. Все данные остаются в контуре клиента. Самоуправление с полной удаленной поддержкой.\nЛокально Запускайте ClearML на собственных локальных серверах и персональных устройствах клиентов. Самоуправление с полной удаленной поддержкой.\nVPC Полностью управляется ClearML в контуре.\n\nДалее мы будем рассматривать локальный запуск.",
+    "objectID": "2. clearml_yandex_kube.html#push-helm-chart-2",
+    "href": "2. clearml_yandex_kube.html#push-helm-chart-2",
+    "title": "Настройка ClearML Yandex",
+    "section": "Push helm chart",
+    "text": "Push helm chart\nСоздайте Cloud Registry для helm/docker.\nhelm push clearml-serving-1.6.0.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;",
     "crumbs": [
-      "Лекции",
-      "ClearML"
+      "Практика",
+      "Настройка ClearML Yandex"
     ]
   },
   {
-    "objectID": "slides/3.clearml.html#архитектура-clearml",
-    "href": "slides/3.clearml.html#архитектура-clearml",
-    "title": "ClearML",
-    "section": "Архитектура ClearML",
-    "text": "Архитектура ClearML\n\n\nClearML Server – решение поставляемое clearml – это внутренняя инфраструктура из набора сервисов ClearML . Существует бесплатная опенсорс-реализация этого ClearML Server. Ее можно развернуть на свои собственных мощностях и использовать внутри команды для совместной работы.\nClearML Server содержит следующие компоненты:\n\nВеб-приложение ClearML — одностраничный пользовательский интерфейс для управления экспериментами и просмотра данных.\nRESTful API для:\n\nДокументирование и регистрация информации, статистики и результатов эксперимента.\nЗапрос истории экспериментов, журналов и результатов\n\nЛокальный файловый сервер для хранения изображений и моделей, обеспечивающий легкий доступ к ним с помощью веб-приложения. При желании его можно заменить на s3-совместимое хранилище.\n\nЕго можно быстро развернуть с помощью Docker, AWS EC2 AMI или Kubernetes. Есть две конфигурации сервера с зафиксированными портами или саб-деменами. Дефолтно используются следующие порты\n\nВеб-приложение на порту 8080\nСлужба API на порту 8008\nСлужба хранения файлов на порту 8081\n\nОзнакомиться с запуском вы можете в документации, он несколько различается для разных систем. Но заключается в запуске docker-compose или kubectl. При запуске у вас будут запущены все компоненты clear ml, а также elatic, mongo db и redis для хранения информации на сервере clear ml.\nВажный нюанс, дефолтно clear ml не запускается функции аутентификации, и соответственно на селфхостед версию может зайти кто угодно. Для подключения аутентификации нужно изменить конфиг и прописать список пользователей (логин + пароль) для кого будет доступе сервис, то есть это будет дополнительная работа для админа.",
+    "objectID": "2. clearml_yandex_kube.html#deploy-helm-chart-2",
+    "href": "2. clearml_yandex_kube.html#deploy-helm-chart-2",
+    "title": "Настройка ClearML Yandex",
+    "section": "Deploy helm chart",
+    "text": "Deploy helm chart\nЗапустите готовый helm на вашем кластере kubernetes.\nhelm install clearml-serving oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml-serving:1.6.0  --set clearml.apiAccessKey=ACCESSKEY --set clearml.apiSecretKey=SECRETKEY --set clearml.apiHost=APISERVERURL --set clearml.filesHost=FILESERVERURL --set clearml.webHost=WEBSERVERURL --set clearml.servingTaskId=SERVERINGID\nСоздайте доступы в clearml (см. clearml_work.md) и заполните эти поля: * ACCESSKEY значение access_key в новых доступах * SECRETKEY значение secret_key в новых доступах * APISERVERURL значение api_server в новых доступах * FILESSERVERURL значение files_server в новых доступах * WEBSERVERURL значение web_server в новых доступах\nСоздайте с помощью clearml-serving пространство (8. clearml_serving.md), SERVERINGID это его id.",
     "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-agent",
-    "href": "slides/3.clearml.html#clearml-agent",
-    "title": "ClearML",
-    "section": "ClearML agent",
-    "text": "ClearML agent\n\n\nClearML Agent — это виртуальная среда и менеджер выполнения решений DL/ML на машинах с графическим процессором. Он интегрируется с пакетом ClearML Python и сервером ClearML, обеспечивая полноценное кластерное решение ИИ. Основное внимание уделяется:\n\nВоспроизведению экспериментов, включая их полную среду.\nМасштабированию рабочих процессов на нескольких целевых машинах.\n\nАгент ClearML выполняет эксперимент или другой рабочий процесс, воспроизводя состояние кода с исходного компьютера на удаленный компьютер. Для этого он клонирует состояние репозитория (определенный коммит) указанные в эксперименте и добавляет git diff от коммита, сохраненный в эксперименте.\nНа предыдущей диаграмме показан типичный процесс, в котором агент выполняет задачу:\n\nПоставьте задачу для выполнения в очередь.\nАгент извлекает задачу из очереди.\nАгент запускает Docker-контейнер, в котором выполняется код задачи.\nНастраивается среда выполнения задачи:\n\nВыполнить любой настроенный сценарий пользовательской установки.\nУстановить все необходимые системные пакеты.\nКлонируется код из репозитория git.\nПрименяются все записанные незафиксированные изменения.\nНастраивает среду Python и необходимые пакеты.\n\nСценарий/код задачи выполняется.\n\n\nАгент ClearML использует версию Python, доступную в среде или докере, в котором он выполняет код. Он не устанавливает Python, поэтому обязательно используйте докер или среду той версии, которая вам нужна.\n\n\nАгент ClearML может работать на Google Colab. Это помогает пользователям использовать вычислительные ресурсы, предоставляемые Google Colab, и отправлять на них эксперименты для выполнения.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-serving",
-    "href": "slides/3.clearml.html#clearml-serving",
-    "title": "ClearML",
-    "section": "ClearML serving",
-    "text": "ClearML serving\n\n\nClearML serving – это сервис для развертывания и оркестровки моделей. Он позволяет развертывать модели, включая обслуживание и предварительную обработку кода в кластере Kubernetes или пользовательском решении на основе контейнера.\nВажные качества такого подхода:\n\nПростота развертывания и настройки\n\nПоддержка моделей машинного обучения (Scikit Learn, XGBoost, LightGBM)\nПоддержка моделей глубокого обучения (TensorFlow, PyTorch, ONNX)\nНастраиваемый RestAPI для обслуживания (т.е. позволяет выполнять предварительную и последующую обработку для каждой модели для легкой интеграции)\n\nГибкость\n\nРазвертывание модели в режиме онлайн\nРазвертывание модели/версии конечной точки в режиме онлайн (т.е. нет необходимости останавливать работу сервиса)\nОтдельная предварительная и постобработка кода Python для каждой модели\n\nМасштабируемость\n\nНесколько моделей на контейнер\nНесколько моделей на одну услугу обслуживания\nПоддержка нескольких служб (полностью разделенные многофункциональные службы, работающие независимо)\nПоддержка нескольких кластеров\nАвтоматическое масштабирование узлов «из коробки» на основе нагрузки/использования\n\nЭффективность\n\nИспользование ресурсов нескольких контейнеров\nПоддержка узлов CPU и GPU\nАвтоматическое пакетирование для моделей DL\nАвтоматическое развертывание\nАвтоматические обновления моделей с поддержкой Canary\nПрограммируемый API для развертывания модели\nРазвертывание Canary A/B — онлайн-обновления Canary\n\nМониторинг\n\nОтчетность по показателям использования\nМетрическая панель инструментов\nМетрика производительности модели\nПанель управления производительностью модели",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#подключение-к-clearml-серверу",
-    "href": "slides/3.clearml.html#подключение-к-clearml-серверу",
-    "title": "ClearML",
-    "section": "Подключение к ClearML серверу",
-    "text": "Подключение к ClearML серверу\n~/clearml.conf\napi {\n    web_server: \"http://localhost:8008\"\n    api_server: \"http://localhost:8080\"\n    files_server: \"http://localhost:8081\"\n}\n\nПредварительно установите clearml в ваш проект с помощью pip/poetry/pdm и тд.\nДля подключения к серверу есть два варианта:\n\nЗапустить команду clearml-init для интерактивной настройки\nРучками прописать в файле ~/clearml.conf адреса основных компонент clear ml.\n\nПосле настройки вы легко сможете подключать clearm ml к серверу, загружать или выгружать данные, модели, результаты экспериментов. буквально парой строк кода.\nЕсть важное примечание, если вы используете саб-доменную конфигурацию, то нужно указывать протокол http/https, а так же порты если они отличаются от 80 и 443",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#трекинг-экспериментов",
-    "href": "slides/3.clearml.html#трекинг-экспериментов",
-    "title": "ClearML",
-    "section": "Трекинг экспериментов",
-    "text": "Трекинг экспериментов\n\n\nfrom clearml import Task\n\n\ndef main():\n    ...\n    task = Task.init(project_name='great project', task_name='best experiment')\n    ...\n    task.set_progress(0)\n    ...\n    task.set_progress(50)\n    print(task.get_progress())\n    ...\n    task.set_progress(100)\n\n\n\n\nВ ClearML эксперименты организованы в виде задач. ClearML автоматически регистрирует ваш эксперимент и код, включая выходные данные и параметры из популярных платформ машинного обучения, как только вы интегрируете ClearML со своим кодом.\nДля этого импортируете класс Task в код, инициализируйте Task, указав проект и имя эксперимента. Если проект еще не существует, новый создается автоматически. Действительно этих двух строк хватит что бы логировать практически любые эксперименты",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#что-логирует-clear-ml",
-    "href": "slides/3.clearml.html#что-логирует-clear-ml",
-    "title": "ClearML",
-    "section": "Что логирует clear ml",
-    "text": "Что логирует clear ml\n\n\n\nHyperparameters\n\nCommand Line Parsing\n\nclick\nargparse\nPython Fire\nLightningCLI\n\nTensorFlow Definitions (absl-py)\nHydra\n\nMetrics, scalars, plots\n\nMatplotlib\nTensorboard\nTensorboardX\n\nExecution details including\n\nGit information\nUncommitted code modifications\nPython environment\nExecution configuration\n\n\n\n\nModels\n\nTensorFlow\nKeras\nPyTorch\nAutoKeras\nCatBoost\nFast.ai\nLightGBM\nMegEngine\nMONAI\nscikit-learn (only using joblib)\nXGBoost (only using joblib)\nYOLOv8\nYOLOv5",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-task",
-    "href": "slides/3.clearml.html#clearml-task",
-    "title": "ClearML",
-    "section": "ClearML Task",
-    "text": "ClearML Task\n\n\nПолучение эксперимента по ID\nprev_task = Task.get_task(task_id='123456deadbeef')\nПолучение эксперимента по имени\nprev_task = Task.get_task(\n    project_name='great project',\n    task_name='best experiment',\n)\n\nФильтрация экспериментов по разным параметрам\ntask_list = Task.get_tasks(\n    task_ids=None,  # type Optional[Sequence[str]]\n    project_name=None,  # Optional[str]\n    task_name=None,  # Optional[str]\n    allow_archived=True, # [bool]\n    task_filter=None,  # Optional[Dict]#\n    # tasks with tag `included_tag` or without tag `excluded_tag`\n    tags=['included_tag', '-excluded_tag']\n)\n\n\nКаждый ранее выполненный эксперимент сохраняется как Задача. То есть атомарной единицей исследования в clearml является разовый запуск какого-то эксперимента. Эксперименту-задаче автоматически присваивается автоматически сгенерированный уникальный идентификатор (строка UUID), который нельзя изменить и который всегда определяет одну и ту же задачу в системе.\nМожно получить объект Task программным путем, запросив систему на основе идентификатора задачи или комбинации проекта и имени. Вы также можете запрашивать задачи на основе их свойств, например теговб имени проекта или задачи и тд.\nКогда вы получили объект Task, то можете получить его состояние: модель, датасет, метрики, параметры и тд.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-artifacts",
-    "href": "slides/3.clearml.html#clearml-artifacts",
-    "title": "ClearML",
-    "section": "ClearML artifacts",
-    "text": "ClearML artifacts\n\n\nДобавление артефактов\n# конкретный файл\ntask.upload_artifact(\n    name='data',\n    artifact_object='/path/to/preprocess_data.csv',\n)\n# дирректория и все файлы внутри нее\ntask.upload_artifact(name='folder', artifact_object='/path/to/folder/')\n# объект python\nnumpy_object = np.eye(100, 100)\ntask.upload_artifact(name='features', artifact_object=numpy_object)\n\nИспользование артефактов\npreprocess_task = Task.get_task(task_id='preprocessing_task_id')\nlocal_csv = preprocess_task.artifacts['data'].get_local_copy()\n\n\nprev_task = Task.get_task(task_id='the_training_task')\nlast_snapshot = prev_task.models['output'][-1]\nlocal_weights_path = last_snapshot.get_local_copy()\n\n\nClearML позволяет легко хранить выходные продукты эксперимента — снимок модели/файл весов, предварительную обработку данных, функциональное представление данных и многое другое!\nПо сути, артефакты — это файлы (или объекты Python), загруженные из сценария и хранящиеся вместе с задачей. К этим артефактам можно легко получить доступ через веб-интерфейс или программно.\nАртефакты можно хранить где угодно: на сервере ClearML, в любом решении для хранения объектов или в общей папке.\nЗарегистрированные артефакты могут использоваться другими задачами, будь то предварительно обученная модель или обработанные данные. Чтобы использовать артефакт, сначала вам необходимо получить экземпляр задачи, которая его изначально создала, затем вы либо загружаете его и получаете путь к нему, либо получаете объект артефакта напрямую.\ntask.artifacts— это словарь, ключами которого являются имена артефактов, а возвращаемый объект — это объект артефакта.\n\nВызов get_local_copy() создает локально копию артефакта и возвращает путь до объекта. Таким образом, при следующем выполнении кода вам не потребуется повторно загружать артефакт.\nВызов get() возвращает десериализованный python объект, не сохраняя его в локальный кеш.\n\nЕще хотелось бы уделить внимание моделям. Модели — это особый вид артефакта. Модели, созданные с помощью популярных платформ (таких как PyTorch, TensorFlow, Scikit-learn), автоматически регистрируются ClearML. Все снимки автоматически записываются. Чтобы убедиться, что вы также автоматически загружаете снимок модели (вместо сохранения ее локального пути), укажите место хранения файлов модели, в которые будут загружены. для этого надо добавить аргумент output_uri в инициализацию Task.\n\nОбщая папка:/mnt/share/folder\nS3:s3://bucket/folder\nСервисы, отличные от AWS S3 (например, MinIO):s3://host_addr:port/bucket\nОблачное хранилище Google:gs://bucket-name/folder\nХранилище Azure:azure://.blob.core.windows.net/path/to/file\n\nЧто бы получить модель, нужно получить экземпляр задачи, обучающей исходные файлы весов, затем вы можете запросить у задачи ее выходные модели (список снимков) и получить последний снимок.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-metrics",
-    "href": "slides/3.clearml.html#clearml-metrics",
-    "title": "ClearML",
-    "section": "ClearML metrics",
-    "text": "ClearML metrics\n\n\nАвтоматическое логирование\n\nTensorBoard\nTensorBoardX\nMatplotlib\n\n\n\n\n\n\n\nРучное логирование метрик\nlogger = task.get_logger()\n\nfor i in range(100):\n    logger.report_scalar(\n        \"unified graph\", \"series A\", iteration=i, value=1./(i+1)\n    )\n    logger.report_scalar(\n        \"unified graph\", \"series B\", iteration=i, value=10./(i+1)\n    )\n\n\n\n\n\n\n\nClearML автоматически фиксирует показатели, передаваемые в ведущие библиотеки визуализации, такие как TensorBoard и Matplotlib, без необходимости использования дополнительного кода.\nКроме того, ClearML фиксирует и регистрирует все, что выводится на стандартный вывод, — от сообщений отладки до ошибок и предупреждающих сообщений библиотеки.\nИнформация о графическом процессоре, процессоре, памяти и сети также фиксируется автоматически.\nClearML также поддерживает составление вручную отчетов по нескольким типам показателей и графиков, таких как линейные графики, гистограммы и даже графические диаграммы.\nОбъект, используемый для ручного логирования метрик, называется logger и получается путем вызова Task.get_logger(). Например в него можно залогировать набор значений и в дальнейшем clearml построит график по тим значениям.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-logging",
-    "href": "slides/3.clearml.html#clearml-logging",
-    "title": "ClearML",
-    "section": "ClearML logging",
-    "text": "ClearML logging\n\n\n\nТекст report_text\nСкаляры report_scalar\nОдинарное значение метрики report_single_value\nОтладочные примеры\n\nИзображений report_image\nHTML и Медиа (аудио, видео) report_media\n\nJupyter Notebook как отчет по эксперименту jupiter logging\n\n\n\nГрафики\n\n2D графики report_scatter2d\n\nГистограммы\nМатрицы ошибок\nДиаграммы рассеяния\n\n3D графики report_scatter3d\n\nГрафики поверхностей(surface)\nДиаграммы рассеяния\n\nТаблицы report_table\n\nPandas DataFrame\nCSV-файл\n\nMatplotlib figures report_matplotlib_figure\nPlotly figures report_plotly\n\n\n\n\nЭто весь список того что можно передать в logger, то есть можно сохранить текст, метрики, динамику метрик, какие-то графики из сырых данных, matplolib или plotly figures, различные таблицы данных и все это потом будет доступно в clearml при просмотре эксперимента.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clearml-data",
-    "href": "slides/3.clearml.html#clearml-data",
-    "title": "ClearML",
-    "section": "ClearML data",
-    "text": "ClearML data\n\n\nclearml-data — Утилита CLI для управления датасетами.\nclearml-data create [-h] [--parents [PARENTS [PARENTS ...]]] [--project PROJECT]\n                    --name NAME [--version VERSION] [--output-uri OUTPUT_URI]\n                    [--tags [TAGS [TAGS ...]]\n\nclearml.Dataset — Интерфейс Python для управления данными.\nfrom clearml import Dataset\n\ndataset = Dataset.create(\n  dataset_name='dataset name',\n  dataset_project='dataset project',\n  dataset_version=\"1.0\",\n)\n\n\n\nClearML Data Management решает две важные задачи:\n\nДоступность. Обеспечение легкого доступа к данным с любого компьютера.\nУправление версиями — связывание данных и экспериментов для лучшей прослеживаемости.\n\nНаборы clearml dataset можно настроить для наследования от других наборов данных, что позволяет создавать линии передачи данных, а пользователи могут отслеживать, когда и как изменяются их данные. Изменения набора данных сохраняются с использованием дифференцируемого хранилища, то есть версия будет хранить набор изменений из предыдущего родительского набора данных.\nУправлять можно из CLI и из питона, используя соответствующие инструменты clearml-data и clearml.Dataset.\nК хорошим практикам управления данными относятся:\n\nверсионирование данных (если нужно как-то изменить набор данных, то создайте новую версию набора данных, а не новый датасет, так будет проще отслеживать изменения)\nдокументирование данных (Dataset.get_logger() и вы получаете те же возможности, что и в эксперименте)\nструктура данных, наборы данных можно организовывать в проекты (и подпроекты) . Кроме того, при создании набора данных к набору данных можно применять теги, что упростит поиск набора данных.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/3.clearml.html#clear-ml-pipelines",
-    "href": "slides/3.clearml.html#clear-ml-pipelines",
-    "title": "ClearML",
-    "section": "Clear ML pipelines",
-    "text": "Clear ML pipelines\n\n\nПайплайны — это способ оптимизировать и соединить несколько процессов, используя выходные данные одного шага как входные данные другого.\nПайплайны ClearML реализуются с помощью задачи контроллера, которая содержит логику взаимодействия шагов пайплайна. В зависимости от спецификаций, изложенных в задаче контроллера, параметры шага могут быть переопределены, что позволяет использовать продукты выполнения других шагов, такие как артефакты и параметры.\nПри запуске контроллер последовательно запускает этапы пайплайна. Логика и шаги пайплайна могут выполняться локально или на любом компьютере с помощью Clearml-агента.\nClearML поддерживает несколько режимов выполнения пайлайна:\n\nУдаленный режим (по умолчанию). В этом режиме логика pipeline controller выполняется через назначенную очередь, и все шаги пайплайна запускаются удаленно через соответствующие очереди. Поскольку каждая задача выполняется независимо, она может контролировать свой репозиторий git (при необходимости), необходимые пакеты Python и конкретный контейнер, который будет использоваться.\nЛокальный режим. В этом режиме Пайплайн выполняется локально, а шаги выполняются как подпроцессы. Каждый подпроцесс использует ту же среду Python, что и логика основного пайплайна.\nРежим отладки (для PipelineDecorator). В этом режиме весь пайплайн выполняется локально, при этом контроллер пайплайна и шаги вызываются синхронно, как обычные функции Python, обеспечивая полную возможность отладки каждого вызова функции.\n\nПайплайны ClearML создаются из кода с использованием одного из следующих способов:\n\nКласс PipelineController — Pythonic интерфейс для определения и настройки контроллера пайплайна и его шагов. Контроллер и шаги могут быть функциями в вашем коде Python или существующими задачами ClearML .\nКласс PipelineDecorator — набор декораторов Python, которые преобразуют ваши функции в контроллер пайплайна и шаги.\n\n\nПоскольку контроллер пайплайна сам по себе является задачей-экспериментом ClearML , его можно использовать в качестве шага пайплайна. Это позволяет создавать более сложные рабочие процессы, например пайплайны, выполняющие другие пайплайны, или пайплайны, выполняющие несколько задач одновременно.",
-    "crumbs": [
-      "Лекции",
-      "ClearML"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#чуть-чуть-интерактива",
-    "href": "slides/1.intro.html#чуть-чуть-интерактива",
-    "title": "Intro",
-    "section": "Чуть-чуть интерактива",
-    "text": "Чуть-чуть интерактива\nvk.cc/cNpPry",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#план-занятий",
-    "href": "slides/1.intro.html#план-занятий",
-    "title": "Intro",
-    "section": "План занятий",
-    "text": "План занятий\n\nОпределимся: Что такое MLOps?\nПоговорим о проблемах ML\nПосмотрим подходы к их решению\nПосвятим много времени ClearML",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#что-такое-mlops",
-    "href": "slides/1.intro.html#что-такое-mlops",
-    "title": "Intro",
-    "section": "Что такое MLOps?",
-    "text": "Что такое MLOps?",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#данные",
-    "href": "slides/1.intro.html#данные",
-    "title": "Intro",
-    "section": "Данные",
-    "text": "Данные\n\n\n\nЛежат локально\nМеняются произвольно\nНет настроенных потоков данных\nНет версий датасетов",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#исследования",
-    "href": "slides/1.intro.html#исследования",
-    "title": "Intro",
-    "section": "Исследования",
-    "text": "Исследования\n\n\n\nНет культуры исследований\nРезультаты теряются\nЧасто не воспроизводимы\nСложно разобраться “а что сделано-то?”",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#модели",
-    "href": "slides/1.intro.html#модели",
-    "title": "Intro",
-    "section": "Модели",
-    "text": "Модели\n\n\n\n“А где модель то?”\n“Как ее запустить?”\n“А она еще работает?”\n“Что-то не так, дай новую модельку”",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#командное-взаимодействие",
-    "href": "slides/1.intro.html#командное-взаимодействие",
-    "title": "Intro",
-    "section": "Командное взаимодействие",
-    "text": "Командное взаимодействие\n\n\n\nКаждый кодит как он хочет\nИсследования независимы\nНет обмена знаниями\n“А что мы вообще делаем?”",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "slides/1.intro.html#как-же-все-это-решать",
-    "href": "slides/1.intro.html#как-же-все-это-решать",
-    "title": "Intro",
-    "section": "Как же все это решать?",
-    "text": "Как же все это решать?\nматрица зрелости инженерных практик\n\nПостепенно менять процессы работы\nВнедрять инструменты автоматизации\nПовышать культуру и компетенции команды\nДелать сразу как надо",
-    "crumbs": [
-      "Лекции",
-      "Intro"
-    ]
-  },
-  {
-    "objectID": "README.html",
-    "href": "README.html",
-    "title": "MLOps/DataOps YA.CAMP 2025",
-    "section": "",
-    "text": "В репозитории представлены материалы для занятий MLOps/DataOps YA.CAMP 2025.\n\n\nИсточники для подготовленных материалов:\n\nДокументация ClearML\nКурс MLOps и production в DS исследованиях 3.0\nКурс Инженерные практики в ML\n\n\n\n\n\nВведение в MLOps, что это и зачем нужно?\nИнструменты MLOps (краткий перечень)\nClearML как единая платформа для ML исследований\nНебольшая справка по Kubernetes\n\n\n\n\n\nclearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2.1 clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n2.2 clearml docker.md – как развернуть clearml через docker compose\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить\n\n\n\n\nНа практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
-  },
-  {
-    "objectID": "README.html#источники",
-    "href": "README.html#источники",
-    "title": "MLOps/DataOps YA.CAMP 2025",
-    "section": "",
-    "text": "Источники для подготовленных материалов:\n\nДокументация ClearML\nКурс MLOps и production в DS исследованиях 3.0\nКурс Инженерные практики в ML"
-  },
-  {
-    "objectID": "README.html#теория",
-    "href": "README.html#теория",
-    "title": "MLOps/DataOps YA.CAMP 2025",
-    "section": "",
-    "text": "Введение в MLOps, что это и зачем нужно?\nИнструменты MLOps (краткий перечень)\nClearML как единая платформа для ML исследований\nНебольшая справка по Kubernetes"
-  },
-  {
-    "objectID": "README.html#практика",
-    "href": "README.html#практика",
-    "title": "MLOps/DataOps YA.CAMP 2025",
-    "section": "",
-    "text": "clearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2.1 clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n2.2 clearml docker.md – как развернуть clearml через docker compose\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить"
-  },
-  {
-    "objectID": "README.html#задание",
-    "href": "README.html#задание",
-    "title": "MLOps/DataOps YA.CAMP 2025",
-    "section": "",
-    "text": "На практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
-  },
-  {
-    "objectID": "README.html#footnotes",
-    "href": "README.html#footnotes",
-    "title": "MLOps/DataOps YA.CAMP 2025",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nЕсли не получается то локлаьно через docker-compose↩︎\nЕсли неполчается, то реализовать приложение fastpai, которое при запуске забирает определенную версию модели из clearml↩︎"
-  },
-  {
-    "objectID": "slides/2.tools.html#tools-types",
-    "href": "slides/2.tools.html#tools-types",
-    "title": "MLOps Tools",
-    "section": "Tools types",
-    "text": "Tools types\n\n\n\nData Management\nData Validation\nWorkflow Managment\nModel Lifecycle\n\n\n\nKnowledge Sharing\nModel Serving\nMonitoring & Dashboards\nMLOps Platforms\n\n\nИ это еще не всё…1\nСмотрите в awesome-mlops и mlops-references",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#data-management",
-    "href": "slides/2.tools.html#data-management",
-    "title": "MLOps Tools",
-    "section": "Data Management",
-    "text": "Data Management\n\nGit LFS – расширение git для больших файлов\nDVC – система версионирования данных и моделей в ml проектах\nHugging Face – платформа для публикации открытых моделей и датасетов\nLakeFS – git like система версионирования данных в объектных хранилищах",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#data-validation",
-    "href": "slides/2.tools.html#data-validation",
-    "title": "MLOps Tools",
-    "section": "Data Validation",
-    "text": "Data Validation\n\nGreat Expectations – фреймворк для валидации данных\nPandera – задание модели данных pandas и polars\nData contract – валидация как хранилищ данных, так и отдельных файлов",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#workflow-managment",
-    "href": "slides/2.tools.html#workflow-managment",
-    "title": "MLOps Tools",
-    "section": "Workflow Managment",
-    "text": "Workflow Managment\n\nGNU Make – олдовый workflow manager на основе файлов\nSnakeMake – аналог для управления workflow в DS проектах\nLuigi – python оркестратор workflow\nMetaflow – оркестратор для ML workflow\nMage AI – фреймворк для управления ml workflow\nAirFlow –мощный и популярный оркестратор workflow",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#model-lifecycle",
-    "href": "slides/2.tools.html#model-lifecycle",
-    "title": "MLOps Tools",
-    "section": "Model Lifecycle",
-    "text": "Model Lifecycle\n\nMLflow – платформа для трекинга артефактов экспериментов\nNeptune AI – колобаративный инструмент трекинга артефактов и датасетов\nWeights and Biases – инструмент визуализации и отслеживания обучения ваших моделей\nTensorBoard – инструмент визуализации обучения ваших нейронных сетей",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#knowledge-sharing",
-    "href": "slides/2.tools.html#knowledge-sharing",
-    "title": "MLOps Tools",
-    "section": "Knowledge Sharing",
-    "text": "Knowledge Sharing\n\nKnowledge Repo – платформа обмена знаниями для исследователей\nKyso – инструмент публикации и ревью отчетов",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#model-serving",
-    "href": "slides/2.tools.html#model-serving",
-    "title": "MLOps Tools",
-    "section": "Model Serving",
-    "text": "Model Serving\n\nTriton Inference Server – python сервис для деплоя различных моделей и оптимизацией их исполнения\nTensorFlow Serving – гибкий, мощный инструмент деплоя tensorflow в продакшен\nTorchServe – аналог для моделей pytorch\nOpyrator – простой способ получить API/интерфейс модели\nGradio – инструмент построения простых ML web-приложений",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#monitoring-dashboards",
-    "href": "slides/2.tools.html#monitoring-dashboards",
-    "title": "MLOps Tools",
-    "section": "Monitoring & Dashboards",
-    "text": "Monitoring & Dashboards\n\nStreamlit – простой инструмент построения dashboards чего либо на питоне\nDash – аналог от команды plotly\nGrafana – простой сервис для построения dashboards\nPrometheus – инструмент сбора метрик и ошибок\nGrayLog – сборщик и анализатор логов",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
-    ]
-  },
-  {
-    "objectID": "slides/2.tools.html#mlops-platforms",
-    "href": "slides/2.tools.html#mlops-platforms",
-    "title": "MLOps Tools",
-    "section": "MLOps Platforms",
-    "text": "MLOps Platforms\n\nClearML – платформа все в одном\nKubeflow – платформа для ML на основе kubernetes\nИ много много других",
-    "crumbs": [
-      "Лекции",
-      "MLOps Tools"
+      "Практика",
+      "Настройка ClearML Yandex"
     ]
   },
   {
@@ -801,113 +451,474 @@
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html",
-    "href": "2. clearml_yandex_kube.html",
-    "title": "Настройка ClearML Yandex",
+    "objectID": "slides/2.tools.html#tools-types",
+    "href": "slides/2.tools.html#tools-types",
+    "title": "MLOps Tools",
+    "section": "Tools types",
+    "text": "Tools types\n\n\n\nData Management\nData Validation\nWorkflow Managment\nModel Lifecycle\n\n\n\nKnowledge Sharing\nModel Serving\nMonitoring & Dashboards\nMLOps Platforms\n\n\nИ это еще не всё…1\nСмотрите в awesome-mlops и mlops-references",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#data-management",
+    "href": "slides/2.tools.html#data-management",
+    "title": "MLOps Tools",
+    "section": "Data Management",
+    "text": "Data Management\n\nGit LFS – расширение git для больших файлов\nDVC – система версионирования данных и моделей в ml проектах\nHugging Face – платформа для публикации открытых моделей и датасетов\nLakeFS – git like система версионирования данных в объектных хранилищах",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#data-validation",
+    "href": "slides/2.tools.html#data-validation",
+    "title": "MLOps Tools",
+    "section": "Data Validation",
+    "text": "Data Validation\n\nGreat Expectations – фреймворк для валидации данных\nPandera – задание модели данных pandas и polars\nData contract – валидация как хранилищ данных, так и отдельных файлов",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#workflow-managment",
+    "href": "slides/2.tools.html#workflow-managment",
+    "title": "MLOps Tools",
+    "section": "Workflow Managment",
+    "text": "Workflow Managment\n\nGNU Make – олдовый workflow manager на основе файлов\nSnakeMake – аналог для управления workflow в DS проектах\nLuigi – python оркестратор workflow\nMetaflow – оркестратор для ML workflow\nMage AI – фреймворк для управления ml workflow\nAirFlow –мощный и популярный оркестратор workflow",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#model-lifecycle",
+    "href": "slides/2.tools.html#model-lifecycle",
+    "title": "MLOps Tools",
+    "section": "Model Lifecycle",
+    "text": "Model Lifecycle\n\nMLflow – платформа для трекинга артефактов экспериментов\nNeptune AI – колобаративный инструмент трекинга артефактов и датасетов\nWeights and Biases – инструмент визуализации и отслеживания обучения ваших моделей\nTensorBoard – инструмент визуализации обучения ваших нейронных сетей",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#knowledge-sharing",
+    "href": "slides/2.tools.html#knowledge-sharing",
+    "title": "MLOps Tools",
+    "section": "Knowledge Sharing",
+    "text": "Knowledge Sharing\n\nKnowledge Repo – платформа обмена знаниями для исследователей\nKyso – инструмент публикации и ревью отчетов",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#model-serving",
+    "href": "slides/2.tools.html#model-serving",
+    "title": "MLOps Tools",
+    "section": "Model Serving",
+    "text": "Model Serving\n\nTriton Inference Server – python сервис для деплоя различных моделей и оптимизацией их исполнения\nTensorFlow Serving – гибкий, мощный инструмент деплоя tensorflow в продакшен\nTorchServe – аналог для моделей pytorch\nOpyrator – простой способ получить API/интерфейс модели\nGradio – инструмент построения простых ML web-приложений",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#monitoring-dashboards",
+    "href": "slides/2.tools.html#monitoring-dashboards",
+    "title": "MLOps Tools",
+    "section": "Monitoring & Dashboards",
+    "text": "Monitoring & Dashboards\n\nStreamlit – простой инструмент построения dashboards чего либо на питоне\nDash – аналог от команды plotly\nGrafana – простой сервис для построения dashboards\nPrometheus – инструмент сбора метрик и ошибок\nGrayLog – сборщик и анализатор логов",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "slides/2.tools.html#mlops-platforms",
+    "href": "slides/2.tools.html#mlops-platforms",
+    "title": "MLOps Tools",
+    "section": "MLOps Platforms",
+    "text": "MLOps Platforms\n\nClearML – платформа все в одном\nKubeflow – платформа для ML на основе kubernetes\nИ много много других",
+    "crumbs": [
+      "Лекции",
+      "MLOps Tools"
+    ]
+  },
+  {
+    "objectID": "README.html",
+    "href": "README.html",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
-    "text": "Скачайте репозиторий clearml helm charts\n\n\nУпакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml \n\n\n\nСоздайте Cloud Registry для helm/docker.\nhelm push clearml-7.14.5.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;\n\n\n\nЗапустите готовый helm на вашем кластере kubernetes\nhelm install clearml oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml:7.14.5",
-    "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
-    ]
+    "text": "В репозитории представлены материалы для занятий MLOps/DataOps YA.CAMP 2025.\n\n\nИсточники для подготовленных материалов:\n\nДокументация ClearML\nКурс MLOps и production в DS исследованиях 3.0\nКурс Инженерные практики в ML\n\n\n\n\n\nВведение в MLOps, что это и зачем нужно?\nИнструменты MLOps (краткий перечень)\nClearML как единая платформа для ML исследований\nНебольшая справка по Kubernetes\n\n\n\n\n\nclearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2.1 clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n2.2 clearml docker.md – как развернуть clearml через docker compose\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить\n\n\n\n\nНа практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#package-helm-chart",
-    "href": "2. clearml_yandex_kube.html#package-helm-chart",
-    "title": "Настройка ClearML Yandex",
+    "objectID": "README.html#источники",
+    "href": "README.html#источники",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
-    "text": "Упакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml",
-    "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
-    ]
+    "text": "Источники для подготовленных материалов:\n\nДокументация ClearML\nКурс MLOps и production в DS исследованиях 3.0\nКурс Инженерные практики в ML"
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#push-helm-chart",
-    "href": "2. clearml_yandex_kube.html#push-helm-chart",
-    "title": "Настройка ClearML Yandex",
+    "objectID": "README.html#теория",
+    "href": "README.html#теория",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
-    "text": "Создайте Cloud Registry для helm/docker.\nhelm push clearml-7.14.5.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;",
-    "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
-    ]
+    "text": "Введение в MLOps, что это и зачем нужно?\nИнструменты MLOps (краткий перечень)\nClearML как единая платформа для ML исследований\nНебольшая справка по Kubernetes"
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#deploy-helm-chart",
-    "href": "2. clearml_yandex_kube.html#deploy-helm-chart",
-    "title": "Настройка ClearML Yandex",
+    "objectID": "README.html#практика",
+    "href": "README.html#практика",
+    "title": "MLOps/DataOps YA.CAMP 2025",
     "section": "",
-    "text": "Запустите готовый helm на вашем кластере kubernetes\nhelm install clearml oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml:7.14.5",
+    "text": "clearml-helm-charts – подготовленные helm charts для запуска на YC clearml и выполнения примера. В них заранее заменены образы которые попали под блокировку, поэтому развертка должна пройти без проблем.\nmlops-example – подготовленный демо пример того, как и что можно делать c clearml, показаны основные возможности и способы работы.\nИнстуркции к работе с примером также приложены в репозиторий, надеюсь они помогут разобраться с ним:\n\n1. yandex_kube.md – настрйока kuber в yc, куда нужно посмотреть и как настроить локальные инструменты.\n2.1 clearml_yandex_kube.md – как развернуть на yc kuber нужные для практики сервисы clearml.\n2.2 clearml docker.md – как развернуть clearml через docker compose\n3. clearml_work.md – как настроить окружение демо примера у себя и настроить работу с clearml\n4. clearml_data.md – информация по работе с clearml data, как с ней взаимодействовать и как подготовить данные для демо примера и загрузить в clearml.\n5. clearml_pipeline.md – базовое создание пайплайнов и способы их запуска: локально и удаленно, пример пайплайна по подготовке данных\n6. clearml_research.md – как проводить исследваония в clearml, что для этого нужно, как логировать метрики, артефакты и модели, а так же сравнвивать экперименты между собой.\n7. clearml_reports.md – Немного про отчеты, как их легко делать и хранить в clearml\n8. clearml_serving.md – как развернуть модели с помощью clearml, описание демо примера.\n9. clearml_extend_pipes.md – чуть больше возможностей пайплайнов, как составить пайплайн из готовых задач.\n\n\n\nСначала ознакомьтесь со всеми материалами, а уже потом пробуйте запустить"
+  },
+  {
+    "objectID": "README.html#задание",
+    "href": "README.html#задание",
+    "title": "MLOps/DataOps YA.CAMP 2025",
+    "section": "",
+    "text": "На практике необходимо выполнить задание, его подробности вам опишет практик, но основная часть такая:\nПервая практика\n\nРазвернуть инфру на YC1\nЗагрузить несколько версий датасета в clearml\nРеализовать пайплайн обработки версий датасета для подготовки данных для обучения моделей.\n\nВторая практика\n\nРеализовать обучение модели на подготовленном датасет\nНастроить логирования метрик, семплов и моделей в clearml\nЗапустить удаленные эксперименты на агенте clearml\nСформировать отчёт с сравнением моделей в clearml reports\n\nТретья практика\n\nНастроить model servering в YC 2\nЗадеплоить туда одну из моделей\nРеализовать простой интерфейс для взаимодействия с API модели на streamlit/dash"
+  },
+  {
+    "objectID": "README.html#footnotes",
+    "href": "README.html#footnotes",
+    "title": "MLOps/DataOps YA.CAMP 2025",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nЕсли не получается то локлаьно через docker-compose↩︎\nЕсли неполчается, то реализовать приложение fastpai, которое при запуске забирает определенную версию модели из clearml↩︎"
+  },
+  {
+    "objectID": "slides/1.intro.html#чуть-чуть-интерактива",
+    "href": "slides/1.intro.html#чуть-чуть-интерактива",
+    "title": "Intro",
+    "section": "Чуть-чуть интерактива",
+    "text": "Чуть-чуть интерактива\nvk.cc/cNpPry",
     "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
+      "Лекции",
+      "Intro"
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#package-helm-chart-1",
-    "href": "2. clearml_yandex_kube.html#package-helm-chart-1",
-    "title": "Настройка ClearML Yandex",
-    "section": "Package helm chart",
-    "text": "Package helm chart\nУпакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml-agent",
+    "objectID": "slides/1.intro.html#план-занятий",
+    "href": "slides/1.intro.html#план-занятий",
+    "title": "Intro",
+    "section": "План занятий",
+    "text": "План занятий\n\nОпределимся: Что такое MLOps?\nПоговорим о проблемах ML\nПосмотрим подходы к их решению\nПосвятим много времени ClearML",
     "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
+      "Лекции",
+      "Intro"
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#push-helm-chart-1",
-    "href": "2. clearml_yandex_kube.html#push-helm-chart-1",
-    "title": "Настройка ClearML Yandex",
-    "section": "Push helm chart",
-    "text": "Push helm chart\nСоздайте Cloud Registry для helm/docker.\nhelm push clearml-agent-5.3.3.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;",
+    "objectID": "slides/1.intro.html#что-такое-mlops",
+    "href": "slides/1.intro.html#что-такое-mlops",
+    "title": "Intro",
+    "section": "Что такое MLOps?",
+    "text": "Что такое MLOps?",
     "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
+      "Лекции",
+      "Intro"
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#deploy-helm-chart-1",
-    "href": "2. clearml_yandex_kube.html#deploy-helm-chart-1",
-    "title": "Настройка ClearML Yandex",
-    "section": "Deploy helm chart",
-    "text": "Deploy helm chart\nЗапустите готовый helm на вашем кластере kubernetes.\nhelm install clearml-agent oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml-agent:5.3.3  --set clearml.agentk8sglueKey=ACCESSKEY --set clearml.agentk8sglueSecret=SECRETKEY --set agentk8sglue.apiServerUrlReference=APISERVERURL --set agentk8sglue.fileServerUrlReference=FILESERVERURL --set agentk8sglue.webServerUrlReference=WEBSERVERURL\nСоздайте доступы в clearml (см. clearml_work.md) и заполните эти поля: * ACCESSKEY значение access_key в новых доступах * SECRETKEY значение secret_key в новых доступах * APISERVERURL значение api_server в новых доступах * FILESSERVERURL значение files_server в новых доступах * WEBSERVERURL значение web_server в новых доступах",
+    "objectID": "slides/1.intro.html#данные",
+    "href": "slides/1.intro.html#данные",
+    "title": "Intro",
+    "section": "Данные",
+    "text": "Данные\n\n\n\nЛежат локально\nМеняются произвольно\nНет настроенных потоков данных\nНет версий датасетов",
     "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
+      "Лекции",
+      "Intro"
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#package-helm-chart-2",
-    "href": "2. clearml_yandex_kube.html#package-helm-chart-2",
-    "title": "Настройка ClearML Yandex",
-    "section": "Package helm chart",
-    "text": "Package helm chart\nУпакуйте helm для дальнейшего использования\nhelm package clearml-helm-charts/charts/clearml-serving",
+    "objectID": "slides/1.intro.html#исследования",
+    "href": "slides/1.intro.html#исследования",
+    "title": "Intro",
+    "section": "Исследования",
+    "text": "Исследования\n\n\n\nНет культуры исследований\nРезультаты теряются\nЧасто не воспроизводимы\nСложно разобраться “а что сделано-то?”",
     "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
+      "Лекции",
+      "Intro"
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#push-helm-chart-2",
-    "href": "2. clearml_yandex_kube.html#push-helm-chart-2",
-    "title": "Настройка ClearML Yandex",
-    "section": "Push helm chart",
-    "text": "Push helm chart\nСоздайте Cloud Registry для helm/docker.\nhelm push clearml-serving-1.6.0.tgz oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;",
+    "objectID": "slides/1.intro.html#модели",
+    "href": "slides/1.intro.html#модели",
+    "title": "Intro",
+    "section": "Модели",
+    "text": "Модели\n\n\n\n“А где модель то?”\n“Как ее запустить?”\n“А она еще работает?”\n“Что-то не так, дай новую модельку”",
     "crumbs": [
-      "Практика",
-      "Настройка ClearML Yandex"
+      "Лекции",
+      "Intro"
     ]
   },
   {
-    "objectID": "2. clearml_yandex_kube.html#deploy-helm-chart-2",
-    "href": "2. clearml_yandex_kube.html#deploy-helm-chart-2",
-    "title": "Настройка ClearML Yandex",
-    "section": "Deploy helm chart",
-    "text": "Deploy helm chart\nЗапустите готовый helm на вашем кластере kubernetes.\nhelm install clearml-serving oci://registry.yandexcloud.net/&lt;Cloud registry ID&gt;/clearml-serving:1.6.0  --set clearml.apiAccessKey=ACCESSKEY --set clearml.apiSecretKey=SECRETKEY --set clearml.apiHost=APISERVERURL --set clearml.filesHost=FILESERVERURL --set clearml.webHost=WEBSERVERURL --set clearml.servingTaskId=SERVERINGID\nСоздайте доступы в clearml (см. clearml_work.md) и заполните эти поля: * ACCESSKEY значение access_key в новых доступах * SECRETKEY значение secret_key в новых доступах * APISERVERURL значение api_server в новых доступах * FILESSERVERURL значение files_server в новых доступах * WEBSERVERURL значение web_server в новых доступах\nСоздайте с помощью clearml-serving пространство (8. clearml_serving.md), SERVERINGID это его id.",
+    "objectID": "slides/1.intro.html#командное-взаимодействие",
+    "href": "slides/1.intro.html#командное-взаимодействие",
+    "title": "Intro",
+    "section": "Командное взаимодействие",
+    "text": "Командное взаимодействие\n\n\n\nКаждый кодит как он хочет\nИсследования независимы\nНет обмена знаниями\n“А что мы вообще делаем?”",
+    "crumbs": [
+      "Лекции",
+      "Intro"
+    ]
+  },
+  {
+    "objectID": "slides/1.intro.html#как-же-все-это-решать",
+    "href": "slides/1.intro.html#как-же-все-это-решать",
+    "title": "Intro",
+    "section": "Как же все это решать?",
+    "text": "Как же все это решать?\nматрица зрелости инженерных практик\n\nПостепенно менять процессы работы\nВнедрять инструменты автоматизации\nПовышать культуру и компетенции команды\nДелать сразу как надо",
+    "crumbs": [
+      "Лекции",
+      "Intro"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#section",
+    "href": "slides/3.clearml.html#section",
+    "title": "ClearML",
+    "section": "",
+    "text": "Для начала давайте рассмотрим, что нам предлагает clearml, как фреймворк для проведения исследований. ClearML предоставляет как унифицированную платформу с открытым исходным кодом для непрерывного использования искусственного интеллекта, так и набор модулей для совместного взаимодействия. То есть авторы инструмента имеют в виду, что можно как ограничиться использование только clearml и проводить исследования в рамках платформы, так и использовать определенные модули clearml в своих процессах проведения исследований.\nClearml действительно имеет обширные возможности:\n\nвозможности dataops (версионирование и управление данными)\nтрекинг экспериментов\nплатформа для обучение моделей\nгенерация отчетов и реестр для их хранения\nmodel store, для упрощения поставок моделей и переиспользования предыдущих наработок\nзапуск CI-CD\nmodel servering - автоматическое развертывание моделей\n\nИ все это с уже настроенной оркестрацией, планировщиками и распределенными вычислениями. Звучит очень круто, как инструмент позволяющий покрыть практически весь процесс создания и поставки моделей.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#варианты-использования",
+    "href": "slides/3.clearml.html#варианты-использования",
+    "title": "ClearML",
+    "section": "Варианты использования",
+    "text": "Варианты использования\n\nClearML SaaS\nЧастное облако (VPC)\nЛокальная развертка\nУправляемое VPC\n\n\nClearML предлагает 4 варианта использования:\n\nУправляемый ClearML SaaS. Развертывание выделенного облачного сервера Clear ML. Все данные и вычисления остаются в контуре клиентов или VPC.\nРазвертывание виртуального частного облака. Все данные остаются в контуре клиента. Самоуправление с полной удаленной поддержкой.\nЛокально Запускайте ClearML на собственных локальных серверах и персональных устройствах клиентов. Самоуправление с полной удаленной поддержкой.\nVPC Полностью управляется ClearML в контуре.\n\nДалее мы будем рассматривать локальный запуск.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#архитектура-clearml",
+    "href": "slides/3.clearml.html#архитектура-clearml",
+    "title": "ClearML",
+    "section": "Архитектура ClearML",
+    "text": "Архитектура ClearML\n\n\nClearML Server – решение поставляемое clearml – это внутренняя инфраструктура из набора сервисов ClearML . Существует бесплатная опенсорс-реализация этого ClearML Server. Ее можно развернуть на свои собственных мощностях и использовать внутри команды для совместной работы.\nClearML Server содержит следующие компоненты:\n\nВеб-приложение ClearML — одностраничный пользовательский интерфейс для управления экспериментами и просмотра данных.\nRESTful API для:\n\nДокументирование и регистрация информации, статистики и результатов эксперимента.\nЗапрос истории экспериментов, журналов и результатов\n\nЛокальный файловый сервер для хранения изображений и моделей, обеспечивающий легкий доступ к ним с помощью веб-приложения. При желании его можно заменить на s3-совместимое хранилище.\n\nЕго можно быстро развернуть с помощью Docker, AWS EC2 AMI или Kubernetes. Есть две конфигурации сервера с зафиксированными портами или саб-деменами. Дефолтно используются следующие порты\n\nВеб-приложение на порту 8080\nСлужба API на порту 8008\nСлужба хранения файлов на порту 8081\n\nОзнакомиться с запуском вы можете в документации, он несколько различается для разных систем. Но заключается в запуске docker-compose или kubectl. При запуске у вас будут запущены все компоненты clear ml, а также elatic, mongo db и redis для хранения информации на сервере clear ml.\nВажный нюанс, дефолтно clear ml не запускается функции аутентификации, и соответственно на селфхостед версию может зайти кто угодно. Для подключения аутентификации нужно изменить конфиг и прописать список пользователей (логин + пароль) для кого будет доступе сервис, то есть это будет дополнительная работа для админа.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-agent",
+    "href": "slides/3.clearml.html#clearml-agent",
+    "title": "ClearML",
+    "section": "ClearML agent",
+    "text": "ClearML agent\n\n\nClearML Agent — это виртуальная среда и менеджер выполнения решений DL/ML на машинах с графическим процессором. Он интегрируется с пакетом ClearML Python и сервером ClearML, обеспечивая полноценное кластерное решение ИИ. Основное внимание уделяется:\n\nВоспроизведению экспериментов, включая их полную среду.\nМасштабированию рабочих процессов на нескольких целевых машинах.\n\nАгент ClearML выполняет эксперимент или другой рабочий процесс, воспроизводя состояние кода с исходного компьютера на удаленный компьютер. Для этого он клонирует состояние репозитория (определенный коммит) указанные в эксперименте и добавляет git diff от коммита, сохраненный в эксперименте.\nНа предыдущей диаграмме показан типичный процесс, в котором агент выполняет задачу:\n\nПоставьте задачу для выполнения в очередь.\nАгент извлекает задачу из очереди.\nАгент запускает Docker-контейнер, в котором выполняется код задачи.\nНастраивается среда выполнения задачи:\n\nВыполнить любой настроенный сценарий пользовательской установки.\nУстановить все необходимые системные пакеты.\nКлонируется код из репозитория git.\nПрименяются все записанные незафиксированные изменения.\nНастраивает среду Python и необходимые пакеты.\n\nСценарий/код задачи выполняется.\n\n\nАгент ClearML использует версию Python, доступную в среде или докере, в котором он выполняет код. Он не устанавливает Python, поэтому обязательно используйте докер или среду той версии, которая вам нужна.\n\n\nАгент ClearML может работать на Google Colab. Это помогает пользователям использовать вычислительные ресурсы, предоставляемые Google Colab, и отправлять на них эксперименты для выполнения.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-serving",
+    "href": "slides/3.clearml.html#clearml-serving",
+    "title": "ClearML",
+    "section": "ClearML serving",
+    "text": "ClearML serving\n\n\nClearML serving – это сервис для развертывания и оркестровки моделей. Он позволяет развертывать модели, включая обслуживание и предварительную обработку кода в кластере Kubernetes или пользовательском решении на основе контейнера.\nВажные качества такого подхода:\n\nПростота развертывания и настройки\n\nПоддержка моделей машинного обучения (Scikit Learn, XGBoost, LightGBM)\nПоддержка моделей глубокого обучения (TensorFlow, PyTorch, ONNX)\nНастраиваемый RestAPI для обслуживания (т.е. позволяет выполнять предварительную и последующую обработку для каждой модели для легкой интеграции)\n\nГибкость\n\nРазвертывание модели в режиме онлайн\nРазвертывание модели/версии конечной точки в режиме онлайн (т.е. нет необходимости останавливать работу сервиса)\nОтдельная предварительная и постобработка кода Python для каждой модели\n\nМасштабируемость\n\nНесколько моделей на контейнер\nНесколько моделей на одну услугу обслуживания\nПоддержка нескольких служб (полностью разделенные многофункциональные службы, работающие независимо)\nПоддержка нескольких кластеров\nАвтоматическое масштабирование узлов «из коробки» на основе нагрузки/использования\n\nЭффективность\n\nИспользование ресурсов нескольких контейнеров\nПоддержка узлов CPU и GPU\nАвтоматическое пакетирование для моделей DL\nАвтоматическое развертывание\nАвтоматические обновления моделей с поддержкой Canary\nПрограммируемый API для развертывания модели\nРазвертывание Canary A/B — онлайн-обновления Canary\n\nМониторинг\n\nОтчетность по показателям использования\nМетрическая панель инструментов\nМетрика производительности модели\nПанель управления производительностью модели",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#подключение-к-clearml-серверу",
+    "href": "slides/3.clearml.html#подключение-к-clearml-серверу",
+    "title": "ClearML",
+    "section": "Подключение к ClearML серверу",
+    "text": "Подключение к ClearML серверу\n~/clearml.conf\napi {\n    web_server: \"http://localhost:8008\"\n    api_server: \"http://localhost:8080\"\n    files_server: \"http://localhost:8081\"\n}\n\nПредварительно установите clearml в ваш проект с помощью pip/poetry/pdm и тд.\nДля подключения к серверу есть два варианта:\n\nЗапустить команду clearml-init для интерактивной настройки\nРучками прописать в файле ~/clearml.conf адреса основных компонент clear ml.\n\nПосле настройки вы легко сможете подключать clearm ml к серверу, загружать или выгружать данные, модели, результаты экспериментов. буквально парой строк кода.\nЕсть важное примечание, если вы используете саб-доменную конфигурацию, то нужно указывать протокол http/https, а так же порты если они отличаются от 80 и 443",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#трекинг-экспериментов",
+    "href": "slides/3.clearml.html#трекинг-экспериментов",
+    "title": "ClearML",
+    "section": "Трекинг экспериментов",
+    "text": "Трекинг экспериментов\n\n\nfrom clearml import Task\n\n\ndef main():\n    ...\n    task = Task.init(project_name='great project', task_name='best experiment')\n    ...\n    task.set_progress(0)\n    ...\n    task.set_progress(50)\n    print(task.get_progress())\n    ...\n    task.set_progress(100)\n\n\n\n\nВ ClearML эксперименты организованы в виде задач. ClearML автоматически регистрирует ваш эксперимент и код, включая выходные данные и параметры из популярных платформ машинного обучения, как только вы интегрируете ClearML со своим кодом.\nДля этого импортируете класс Task в код, инициализируйте Task, указав проект и имя эксперимента. Если проект еще не существует, новый создается автоматически. Действительно этих двух строк хватит что бы логировать практически любые эксперименты",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#что-логирует-clear-ml",
+    "href": "slides/3.clearml.html#что-логирует-clear-ml",
+    "title": "ClearML",
+    "section": "Что логирует clear ml",
+    "text": "Что логирует clear ml\n\n\n\nHyperparameters\n\nCommand Line Parsing\n\nclick\nargparse\nPython Fire\nLightningCLI\n\nTensorFlow Definitions (absl-py)\nHydra\n\nMetrics, scalars, plots\n\nMatplotlib\nTensorboard\nTensorboardX\n\nExecution details including\n\nGit information\nUncommitted code modifications\nPython environment\nExecution configuration\n\n\n\n\nModels\n\nTensorFlow\nKeras\nPyTorch\nAutoKeras\nCatBoost\nFast.ai\nLightGBM\nMegEngine\nMONAI\nscikit-learn (only using joblib)\nXGBoost (only using joblib)\nYOLOv8\nYOLOv5",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-task",
+    "href": "slides/3.clearml.html#clearml-task",
+    "title": "ClearML",
+    "section": "ClearML Task",
+    "text": "ClearML Task\n\n\nПолучение эксперимента по ID\nprev_task = Task.get_task(task_id='123456deadbeef')\nПолучение эксперимента по имени\nprev_task = Task.get_task(\n    project_name='great project',\n    task_name='best experiment',\n)\n\nФильтрация экспериментов по разным параметрам\ntask_list = Task.get_tasks(\n    task_ids=None,  # type Optional[Sequence[str]]\n    project_name=None,  # Optional[str]\n    task_name=None,  # Optional[str]\n    allow_archived=True, # [bool]\n    task_filter=None,  # Optional[Dict]#\n    # tasks with tag `included_tag` or without tag `excluded_tag`\n    tags=['included_tag', '-excluded_tag']\n)\n\n\nКаждый ранее выполненный эксперимент сохраняется как Задача. То есть атомарной единицей исследования в clearml является разовый запуск какого-то эксперимента. Эксперименту-задаче автоматически присваивается автоматически сгенерированный уникальный идентификатор (строка UUID), который нельзя изменить и который всегда определяет одну и ту же задачу в системе.\nМожно получить объект Task программным путем, запросив систему на основе идентификатора задачи или комбинации проекта и имени. Вы также можете запрашивать задачи на основе их свойств, например теговб имени проекта или задачи и тд.\nКогда вы получили объект Task, то можете получить его состояние: модель, датасет, метрики, параметры и тд.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-artifacts",
+    "href": "slides/3.clearml.html#clearml-artifacts",
+    "title": "ClearML",
+    "section": "ClearML artifacts",
+    "text": "ClearML artifacts\n\n\nДобавление артефактов\n# конкретный файл\ntask.upload_artifact(\n    name='data',\n    artifact_object='/path/to/preprocess_data.csv',\n)\n# дирректория и все файлы внутри нее\ntask.upload_artifact(name='folder', artifact_object='/path/to/folder/')\n# объект python\nnumpy_object = np.eye(100, 100)\ntask.upload_artifact(name='features', artifact_object=numpy_object)\n\nИспользование артефактов\npreprocess_task = Task.get_task(task_id='preprocessing_task_id')\nlocal_csv = preprocess_task.artifacts['data'].get_local_copy()\n\n\nprev_task = Task.get_task(task_id='the_training_task')\nlast_snapshot = prev_task.models['output'][-1]\nlocal_weights_path = last_snapshot.get_local_copy()\n\n\nClearML позволяет легко хранить выходные продукты эксперимента — снимок модели/файл весов, предварительную обработку данных, функциональное представление данных и многое другое!\nПо сути, артефакты — это файлы (или объекты Python), загруженные из сценария и хранящиеся вместе с задачей. К этим артефактам можно легко получить доступ через веб-интерфейс или программно.\nАртефакты можно хранить где угодно: на сервере ClearML, в любом решении для хранения объектов или в общей папке.\nЗарегистрированные артефакты могут использоваться другими задачами, будь то предварительно обученная модель или обработанные данные. Чтобы использовать артефакт, сначала вам необходимо получить экземпляр задачи, которая его изначально создала, затем вы либо загружаете его и получаете путь к нему, либо получаете объект артефакта напрямую.\ntask.artifacts— это словарь, ключами которого являются имена артефактов, а возвращаемый объект — это объект артефакта.\n\nВызов get_local_copy() создает локально копию артефакта и возвращает путь до объекта. Таким образом, при следующем выполнении кода вам не потребуется повторно загружать артефакт.\nВызов get() возвращает десериализованный python объект, не сохраняя его в локальный кеш.\n\nЕще хотелось бы уделить внимание моделям. Модели — это особый вид артефакта. Модели, созданные с помощью популярных платформ (таких как PyTorch, TensorFlow, Scikit-learn), автоматически регистрируются ClearML. Все снимки автоматически записываются. Чтобы убедиться, что вы также автоматически загружаете снимок модели (вместо сохранения ее локального пути), укажите место хранения файлов модели, в которые будут загружены. для этого надо добавить аргумент output_uri в инициализацию Task.\n\nОбщая папка:/mnt/share/folder\nS3:s3://bucket/folder\nСервисы, отличные от AWS S3 (например, MinIO):s3://host_addr:port/bucket\nОблачное хранилище Google:gs://bucket-name/folder\nХранилище Azure:azure://.blob.core.windows.net/path/to/file\n\nЧто бы получить модель, нужно получить экземпляр задачи, обучающей исходные файлы весов, затем вы можете запросить у задачи ее выходные модели (список снимков) и получить последний снимок.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-metrics",
+    "href": "slides/3.clearml.html#clearml-metrics",
+    "title": "ClearML",
+    "section": "ClearML metrics",
+    "text": "ClearML metrics\n\n\nАвтоматическое логирование\n\nTensorBoard\nTensorBoardX\nMatplotlib\n\n\n\n\n\n\n\nРучное логирование метрик\nlogger = task.get_logger()\n\nfor i in range(100):\n    logger.report_scalar(\n        \"unified graph\", \"series A\", iteration=i, value=1./(i+1)\n    )\n    logger.report_scalar(\n        \"unified graph\", \"series B\", iteration=i, value=10./(i+1)\n    )\n\n\n\n\n\n\n\nClearML автоматически фиксирует показатели, передаваемые в ведущие библиотеки визуализации, такие как TensorBoard и Matplotlib, без необходимости использования дополнительного кода.\nКроме того, ClearML фиксирует и регистрирует все, что выводится на стандартный вывод, — от сообщений отладки до ошибок и предупреждающих сообщений библиотеки.\nИнформация о графическом процессоре, процессоре, памяти и сети также фиксируется автоматически.\nClearML также поддерживает составление вручную отчетов по нескольким типам показателей и графиков, таких как линейные графики, гистограммы и даже графические диаграммы.\nОбъект, используемый для ручного логирования метрик, называется logger и получается путем вызова Task.get_logger(). Например в него можно залогировать набор значений и в дальнейшем clearml построит график по тим значениям.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-logging",
+    "href": "slides/3.clearml.html#clearml-logging",
+    "title": "ClearML",
+    "section": "ClearML logging",
+    "text": "ClearML logging\n\n\n\nТекст report_text\nСкаляры report_scalar\nОдинарное значение метрики report_single_value\nОтладочные примеры\n\nИзображений report_image\nHTML и Медиа (аудио, видео) report_media\n\nJupyter Notebook как отчет по эксперименту jupiter logging\n\n\n\nГрафики\n\n2D графики report_scatter2d\n\nГистограммы\nМатрицы ошибок\nДиаграммы рассеяния\n\n3D графики report_scatter3d\n\nГрафики поверхностей(surface)\nДиаграммы рассеяния\n\nТаблицы report_table\n\nPandas DataFrame\nCSV-файл\n\nMatplotlib figures report_matplotlib_figure\nPlotly figures report_plotly\n\n\n\n\nЭто весь список того что можно передать в logger, то есть можно сохранить текст, метрики, динамику метрик, какие-то графики из сырых данных, matplolib или plotly figures, различные таблицы данных и все это потом будет доступно в clearml при просмотре эксперимента.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clearml-data",
+    "href": "slides/3.clearml.html#clearml-data",
+    "title": "ClearML",
+    "section": "ClearML data",
+    "text": "ClearML data\n\n\nclearml-data — Утилита CLI для управления датасетами.\nclearml-data create [-h] [--parents [PARENTS [PARENTS ...]]] [--project PROJECT]\n                    --name NAME [--version VERSION] [--output-uri OUTPUT_URI]\n                    [--tags [TAGS [TAGS ...]]\n\nclearml.Dataset — Интерфейс Python для управления данными.\nfrom clearml import Dataset\n\ndataset = Dataset.create(\n  dataset_name='dataset name',\n  dataset_project='dataset project',\n  dataset_version=\"1.0\",\n)\n\n\n\nClearML Data Management решает две важные задачи:\n\nДоступность. Обеспечение легкого доступа к данным с любого компьютера.\nУправление версиями — связывание данных и экспериментов для лучшей прослеживаемости.\n\nНаборы clearml dataset можно настроить для наследования от других наборов данных, что позволяет создавать линии передачи данных, а пользователи могут отслеживать, когда и как изменяются их данные. Изменения набора данных сохраняются с использованием дифференцируемого хранилища, то есть версия будет хранить набор изменений из предыдущего родительского набора данных.\nУправлять можно из CLI и из питона, используя соответствующие инструменты clearml-data и clearml.Dataset.\nК хорошим практикам управления данными относятся:\n\nверсионирование данных (если нужно как-то изменить набор данных, то создайте новую версию набора данных, а не новый датасет, так будет проще отслеживать изменения)\nдокументирование данных (Dataset.get_logger() и вы получаете те же возможности, что и в эксперименте)\nструктура данных, наборы данных можно организовывать в проекты (и подпроекты) . Кроме того, при создании набора данных к набору данных можно применять теги, что упростит поиск набора данных.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "slides/3.clearml.html#clear-ml-pipelines",
+    "href": "slides/3.clearml.html#clear-ml-pipelines",
+    "title": "ClearML",
+    "section": "Clear ML pipelines",
+    "text": "Clear ML pipelines\n\n\nПайплайны — это способ оптимизировать и соединить несколько процессов, используя выходные данные одного шага как входные данные другого.\nПайплайны ClearML реализуются с помощью задачи контроллера, которая содержит логику взаимодействия шагов пайплайна. В зависимости от спецификаций, изложенных в задаче контроллера, параметры шага могут быть переопределены, что позволяет использовать продукты выполнения других шагов, такие как артефакты и параметры.\nПри запуске контроллер последовательно запускает этапы пайплайна. Логика и шаги пайплайна могут выполняться локально или на любом компьютере с помощью Clearml-агента.\nClearML поддерживает несколько режимов выполнения пайлайна:\n\nУдаленный режим (по умолчанию). В этом режиме логика pipeline controller выполняется через назначенную очередь, и все шаги пайплайна запускаются удаленно через соответствующие очереди. Поскольку каждая задача выполняется независимо, она может контролировать свой репозиторий git (при необходимости), необходимые пакеты Python и конкретный контейнер, который будет использоваться.\nЛокальный режим. В этом режиме Пайплайн выполняется локально, а шаги выполняются как подпроцессы. Каждый подпроцесс использует ту же среду Python, что и логика основного пайплайна.\nРежим отладки (для PipelineDecorator). В этом режиме весь пайплайн выполняется локально, при этом контроллер пайплайна и шаги вызываются синхронно, как обычные функции Python, обеспечивая полную возможность отладки каждого вызова функции.\n\nПайплайны ClearML создаются из кода с использованием одного из следующих способов:\n\nКласс PipelineController — Pythonic интерфейс для определения и настройки контроллера пайплайна и его шагов. Контроллер и шаги могут быть функциями в вашем коде Python или существующими задачами ClearML .\nКласс PipelineDecorator — набор декораторов Python, которые преобразуют ваши функции в контроллер пайплайна и шаги.\n\n\nПоскольку контроллер пайплайна сам по себе является задачей-экспериментом ClearML , его можно использовать в качестве шага пайплайна. Это позволяет создавать более сложные рабочие процессы, например пайплайны, выполняющие другие пайплайны, или пайплайны, выполняющие несколько задач одновременно.",
+    "crumbs": [
+      "Лекции",
+      "ClearML"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html",
+    "href": "1. yandex_kube.html",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Общая инструкция по настройке Yandex Kubernetes\n\n\nСоздайте кластер вот с такой конфигурацией: \nСоздайте В нем группу узлов вот с такой конфигурацией: \n\n\n\nИнструкция по установке от yandex\nСкачайте скрипт установки и запустите:\ncurl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash\nПолучите ваш OauthToken и задайте его yc.\nyc config set token &lt;OAuth-токен&gt;\n\n\n\nИнструкция по установке от Kubernetes\nСкачайте к себе собранный бинарник kubectl\ncurl -LO https://dl.k8s.io/release/v1.33.0/bin/linux/amd64/kubectl\nИзмените права для исполнения kubectl\nchmod +x ./kubectl\nПереместите его в системную папку bin\nsudo mv ./kubectl /usr/local/bin/kubectl\n\n\n\nНастройте доступ к kubectl к кластеру\nyc managed-kubernetes cluster get-credentials --id &lt;Cluster ID&gt; --external\n\nПроверьте что все работает\nkubectl config view\nили\nkubectl get nodes\n\n\n\nСкачайте скрипт установки (см инструкцию helm)\ncurl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3\nИзмените права для запуска\nchmod 700 get_helm.sh\nЗапустите установку\n./get_helm.sh\n\n\n\nЧто бы подключить helm к yc выполните команду, воспользуйтесь своим OauthToken\nhelm registry login registry.yandexcloud.net -u oauth\nPassword: &lt;OAuth-токен&gt;",
     "crumbs": [
       "Практика",
-      "Настройка ClearML Yandex"
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html#создание-кластера-kubernetes",
+    "href": "1. yandex_kube.html#создание-кластера-kubernetes",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Создайте кластер вот с такой конфигурацией: \nСоздайте В нем группу узлов вот с такой конфигурацией:",
+    "crumbs": [
+      "Практика",
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html#установка-yc",
+    "href": "1. yandex_kube.html#установка-yc",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Инструкция по установке от yandex\nСкачайте скрипт установки и запустите:\ncurl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash\nПолучите ваш OauthToken и задайте его yc.\nyc config set token &lt;OAuth-токен&gt;",
+    "crumbs": [
+      "Практика",
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html#установка-kubectl",
+    "href": "1. yandex_kube.html#установка-kubectl",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Инструкция по установке от Kubernetes\nСкачайте к себе собранный бинарник kubectl\ncurl -LO https://dl.k8s.io/release/v1.33.0/bin/linux/amd64/kubectl\nИзмените права для исполнения kubectl\nchmod +x ./kubectl\nПереместите его в системную папку bin\nsudo mv ./kubectl /usr/local/bin/kubectl",
+    "crumbs": [
+      "Практика",
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html#настройка-доступов-kubectl",
+    "href": "1. yandex_kube.html#настройка-доступов-kubectl",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Настройте доступ к kubectl к кластеру\nyc managed-kubernetes cluster get-credentials --id &lt;Cluster ID&gt; --external\n\nПроверьте что все работает\nkubectl config view\nили\nkubectl get nodes",
+    "crumbs": [
+      "Практика",
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html#установка-helm",
+    "href": "1. yandex_kube.html#установка-helm",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Скачайте скрипт установки (см инструкцию helm)\ncurl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3\nИзмените права для запуска\nchmod 700 get_helm.sh\nЗапустите установку\n./get_helm.sh",
+    "crumbs": [
+      "Практика",
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "1. yandex_kube.html#настройка-доступов-helm",
+    "href": "1. yandex_kube.html#настройка-доступов-helm",
+    "title": "Настройка Yandex Kubernetes",
+    "section": "",
+    "text": "Что бы подключить helm к yc выполните команду, воспользуйтесь своим OauthToken\nhelm registry login registry.yandexcloud.net -u oauth\nPassword: &lt;OAuth-токен&gt;",
+    "crumbs": [
+      "Практика",
+      "Настройка Yandex Kubernetes"
+    ]
+  },
+  {
+    "objectID": "2.2 clearml docker.html",
+    "href": "2.2 clearml docker.html",
+    "title": "ClearML docker compose run",
+    "section": "",
+    "text": "ClearML docker compose run\nТе у кого не завелся кубер могут попробовать запустит это через docker (для командной работы лучше это сделать на виртуальной машине в YC).\nВсе настройки будут происходить в папке docker. Сначала вам нужно скорректировать конфигурацию, для этого в файле clearml_config/apiserver.conf укажите список пользователей по шаблону для работы с ClearML.\nТеперь вы можете запустить docker-compose:\ndocker compose up -d \nУ вас выпадут ошибки связанные с clearml-agent, что у него отсутствуют переменные:\n\nCLEARML_API_ACCESS_KEY: ${CLEARML_AGENT_ACCESS_KEY:-}\nCLEARML_API_SECRET_KEY: ${CLEARML_AGENT_SECRET_KEY:-}\nCLEARML_AGENT_GIT_USER: ${CLEARML_AGENT_GIT_USER}\nCLEARML_AGENT_GIT_PASS: ${CLEARML_AGENT_GIT_PASS}\n\n\nПоэтому сначала настройте все согласно 3. clearml_work.md а затем вернитесь к агенту и заполните пропуски, вместо git user name и password, можно использовать access token.\nexport CLEARML_AGENT_ACCESS_KEY=\"access key\"\nexport CLEARML_AGENT_SECRET_KEY=\"secrete key\"\nexport CLEARML_AGENT_GIT_USER=\"git username\"\nexport CLEARML_AGENT_GIT_PASS=\"git user password\"\nТогда вы увидите такую картину в логах контейнера агента: \nА также во вкладке WORKERS AND QUEUES появится один активный воркер. \nТак же агента можно попробовать запустить на google_colab.\nДля его более тонкой настройке добавляйте различные переменные окружения в docker compose. Наиболее полезные: - CLEARML_DOCKER_IMAGE или CLEARML_AGENT_DEFAULT_BASE_DOCKER для указания базового образа docker.",
+    "crumbs": [
+      "Практика",
+      "ClearML docker compose run"
     ]
   },
   {

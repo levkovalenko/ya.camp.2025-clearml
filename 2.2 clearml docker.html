@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>clearml_yandex_kube – MLOps/DataOps YA.Camp 2025</title>
+<title>clearml-docker – MLOps/DataOps YA.Camp 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2.2 clearml docker.html" rel="next">
-<link href="./1. yandex_kube.html" rel="prev">
+<link href="./3. clearml_work.html" rel="next">
+<link href="./2. clearml_yandex_kube.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1. yandex_kube.html">Практика</a></li><li class="breadcrumb-item"><a href="./2. clearml_yandex_kube.html">Настройка ClearML Yandex</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1. yandex_kube.html">Практика</a></li><li class="breadcrumb-item"><a href="./2.2 clearml docker.html">ClearML docker compose run</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -195,13 +195,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2. clearml_yandex_kube.html" class="sidebar-item-text sidebar-link active">
+  <a href="./2. clearml_yandex_kube.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Настройка ClearML Yandex</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2.2 clearml docker.html" class="sidebar-item-text sidebar-link">
+  <a href="./2.2 clearml docker.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">ClearML docker compose run</span></a>
   </div>
 </li>
@@ -259,92 +259,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#настройка-clearml-yandex" id="toc-настройка-clearml-yandex" class="nav-link active" data-scroll-target="#настройка-clearml-yandex">Настройка ClearML Yandex</a>
-  <ul class="collapse">
-  <li><a href="#package-helm-chart" id="toc-package-helm-chart" class="nav-link" data-scroll-target="#package-helm-chart">Package helm chart</a></li>
-  <li><a href="#push-helm-chart" id="toc-push-helm-chart" class="nav-link" data-scroll-target="#push-helm-chart">Push helm chart</a></li>
-  <li><a href="#deploy-helm-chart" id="toc-deploy-helm-chart" class="nav-link" data-scroll-target="#deploy-helm-chart">Deploy helm chart</a></li>
-  </ul></li>
-  <li><a href="#настройка-clearml-agent-yandex" id="toc-настройка-clearml-agent-yandex" class="nav-link" data-scroll-target="#настройка-clearml-agent-yandex">Настройка ClearML agent Yandex</a>
-  <ul class="collapse">
-  <li><a href="#package-helm-chart-1" id="toc-package-helm-chart-1" class="nav-link" data-scroll-target="#package-helm-chart-1">Package helm chart</a></li>
-  <li><a href="#push-helm-chart-1" id="toc-push-helm-chart-1" class="nav-link" data-scroll-target="#push-helm-chart-1">Push helm chart</a></li>
-  <li><a href="#deploy-helm-chart-1" id="toc-deploy-helm-chart-1" class="nav-link" data-scroll-target="#deploy-helm-chart-1">Deploy helm chart</a></li>
-  </ul></li>
-  <li><a href="#настройка-clearml-serving-yandex" id="toc-настройка-clearml-serving-yandex" class="nav-link" data-scroll-target="#настройка-clearml-serving-yandex">Настройка ClearML serving Yandex</a>
-  <ul class="collapse">
-  <li><a href="#package-helm-chart-2" id="toc-package-helm-chart-2" class="nav-link" data-scroll-target="#package-helm-chart-2">Package helm chart</a></li>
-  <li><a href="#push-helm-chart-2" id="toc-push-helm-chart-2" class="nav-link" data-scroll-target="#push-helm-chart-2">Push helm chart</a></li>
-  <li><a href="#deploy-helm-chart-2" id="toc-deploy-helm-chart-2" class="nav-link" data-scroll-target="#deploy-helm-chart-2">Deploy helm chart</a></li>
-  </ul></li>
+  <li><a href="#clearml-docker-compose-run" id="toc-clearml-docker-compose-run" class="nav-link active" data-scroll-target="#clearml-docker-compose-run">ClearML docker compose run</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1. yandex_kube.html">Практика</a></li><li class="breadcrumb-item"><a href="./2. clearml_yandex_kube.html">Настройка ClearML Yandex</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1. yandex_kube.html">Практика</a></li><li class="breadcrumb-item"><a href="./2.2 clearml docker.html">ClearML docker compose run</a></li></ol></nav></header>
 
 
 
 
-<section id="настройка-clearml-yandex" class="level1">
-<h1>Настройка ClearML Yandex</h1>
-<p>Скачайте репозиторий <a href="https://github.com/levkovalenko/clearml-helm-charts">clearml helm charts</a></p>
-<section id="package-helm-chart" class="level2">
-<h2 class="anchored" data-anchor-id="package-helm-chart">Package helm chart</h2>
-<p>Упакуйте helm для дальнейшего использования</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> package clearml-helm-charts/charts/clearml </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="push-helm-chart" class="level2">
-<h2 class="anchored" data-anchor-id="push-helm-chart">Push helm chart</h2>
-<p>Создайте <a href="https://yandex.cloud/ru/docs/cloud-registry/concepts/registry">Cloud Registry</a> для helm/docker.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> push clearml-7.14.5.tgz oci://registry.yandexcloud.net/<span class="op">&lt;</span>Cloud registry ID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="deploy-helm-chart" class="level2">
-<h2 class="anchored" data-anchor-id="deploy-helm-chart">Deploy helm chart</h2>
-<p>Запустите готовый helm на вашем кластере kubernetes</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> install clearml oci://registry.yandexcloud.net/<span class="op">&lt;</span>Cloud registry ID<span class="op">&gt;</span>/clearml:7.14.5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="настройка-clearml-agent-yandex" class="level1">
-<h1>Настройка ClearML agent Yandex</h1>
-<section id="package-helm-chart-1" class="level2">
-<h2 class="anchored" data-anchor-id="package-helm-chart-1">Package helm chart</h2>
-<p>Упакуйте helm для дальнейшего использования</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> package clearml-helm-charts/charts/clearml-agent  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="push-helm-chart-1" class="level2">
-<h2 class="anchored" data-anchor-id="push-helm-chart-1">Push helm chart</h2>
-<p>Создайте <a href="https://yandex.cloud/ru/docs/cloud-registry/concepts/registry">Cloud Registry</a> для helm/docker.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> push clearml-agent-5.3.3.tgz oci://registry.yandexcloud.net/<span class="op">&lt;</span>Cloud registry ID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="deploy-helm-chart-1" class="level2">
-<h2 class="anchored" data-anchor-id="deploy-helm-chart-1">Deploy helm chart</h2>
-<p>Запустите готовый helm на вашем кластере kubernetes.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> install clearml-agent oci://registry.yandexcloud.net/<span class="op">&lt;</span>Cloud registry ID<span class="op">&gt;</span>/clearml-agent:5.3.3  <span class="at">--set</span> clearml.agentk8sglueKey=ACCESSKEY <span class="at">--set</span> clearml.agentk8sglueSecret=SECRETKEY <span class="at">--set</span> agentk8sglue.apiServerUrlReference=APISERVERURL <span class="at">--set</span> agentk8sglue.fileServerUrlReference=FILESERVERURL <span class="at">--set</span> agentk8sglue.webServerUrlReference=WEBSERVERURL</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Создайте доступы в clearml (см. <a href="./3. clearml_work.html">clearml_work.md</a>) и заполните эти поля: * <code>ACCESSKEY</code> значение <code>access_key</code> в новых доступах * <code>SECRETKEY</code> значение <code>secret_key</code> в новых доступах * <code>APISERVERURL</code> значение <code>api_server</code> в новых доступах * <code>FILESSERVERURL</code> значение <code>files_server</code> в новых доступах * <code>WEBSERVERURL</code> значение <code>web_server</code> в новых доступах</p>
-</section>
-</section>
-<section id="настройка-clearml-serving-yandex" class="level1">
-<h1>Настройка ClearML serving Yandex</h1>
-<section id="package-helm-chart-2" class="level2">
-<h2 class="anchored" data-anchor-id="package-helm-chart-2">Package helm chart</h2>
-<p>Упакуйте helm для дальнейшего использования</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> package clearml-helm-charts/charts/clearml-serving  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="push-helm-chart-2" class="level2">
-<h2 class="anchored" data-anchor-id="push-helm-chart-2">Push helm chart</h2>
-<p>Создайте <a href="https://yandex.cloud/ru/docs/cloud-registry/concepts/registry">Cloud Registry</a> для helm/docker.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> push clearml-serving-1.6.0.tgz oci://registry.yandexcloud.net/<span class="op">&lt;</span>Cloud registry ID<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="deploy-helm-chart-2" class="level2">
-<h2 class="anchored" data-anchor-id="deploy-helm-chart-2">Deploy helm chart</h2>
-<p>Запустите готовый helm на вашем кластере kubernetes.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">helm</span> install clearml-serving oci://registry.yandexcloud.net/<span class="op">&lt;</span>Cloud registry ID<span class="op">&gt;</span>/clearml-serving:1.6.0  <span class="at">--set</span> clearml.apiAccessKey=ACCESSKEY <span class="at">--set</span> clearml.apiSecretKey=SECRETKEY <span class="at">--set</span> clearml.apiHost=APISERVERURL <span class="at">--set</span> clearml.filesHost=FILESERVERURL <span class="at">--set</span> clearml.webHost=WEBSERVERURL <span class="at">--set</span> clearml.servingTaskId=SERVERINGID</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Создайте доступы в clearml (см. <a href="./3. clearml_work.html">clearml_work.md</a>) и заполните эти поля: * <code>ACCESSKEY</code> значение <code>access_key</code> в новых доступах * <code>SECRETKEY</code> значение <code>secret_key</code> в новых доступах * <code>APISERVERURL</code> значение <code>api_server</code> в новых доступах * <code>FILESSERVERURL</code> значение <code>files_server</code> в новых доступах * <code>WEBSERVERURL</code> значение <code>web_server</code> в новых доступах</p>
-<p>Создайте с помощью clearml-serving пространство (<a href="./8. clearml_serving.html">8. clearml_serving.md</a>), <code>SERVERINGID</code> это его id.</p>
+<section id="clearml-docker-compose-run" class="level1">
+<h1>ClearML docker compose run</h1>
+<p>Те у кого не завелся кубер могут попробовать запустит это через docker (для командной работы лучше это сделать на виртуальной машине в YC).</p>
+<p>Все настройки будут происходить в папке <a href="./docker/">docker</a>. Сначала вам нужно скорректировать конфигурацию, для этого в файле <a href="./docker/clearml_config/apiserver.conf">clearml_config/apiserver.conf</a> укажите список пользователей по шаблону для работы с ClearML.</p>
+<p>Теперь вы можете запустить docker-compose:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>У вас выпадут ошибки связанные с clearml-agent, что у него отсутствуют переменные:</p>
+<ul>
+<li><code>CLEARML_API_ACCESS_KEY: ${CLEARML_AGENT_ACCESS_KEY:-}</code></li>
+<li><code>CLEARML_API_SECRET_KEY: ${CLEARML_AGENT_SECRET_KEY:-}</code></li>
+<li><code>CLEARML_AGENT_GIT_USER: ${CLEARML_AGENT_GIT_USER}</code></li>
+<li><code>CLEARML_AGENT_GIT_PASS: ${CLEARML_AGENT_GIT_PASS}</code></li>
+</ul>
+<p><img src="./images/clearml.docker.png" class="img-fluid"></p>
+<p>Поэтому сначала настройте все согласно <a href="./3. clearml_work.html">3. clearml_work.md</a> а затем вернитесь к агенту и заполните пропуски, вместо git user name и password, можно использовать <code>access token</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLEARML_AGENT_ACCESS_KEY</span><span class="op">=</span><span class="st">"access key"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLEARML_AGENT_SECRET_KEY</span><span class="op">=</span><span class="st">"secrete key"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLEARML_AGENT_GIT_USER</span><span class="op">=</span><span class="st">"git username"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLEARML_AGENT_GIT_PASS</span><span class="op">=</span><span class="st">"git user password"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Тогда вы увидите такую картину в логах контейнера агента: <img src="./images/agent.docker.png" class="img-fluid"></p>
+<p>А также во вкладке <code>WORKERS AND QUEUES</code> появится один активный воркер. <img src="./images/clearml.workers.png" class="img-fluid"></p>
+<p>Так же агента можно попробовать <a href="https://clear.ml/docs/latest/docs/guides/ide/google_colab/">запустить на google_colab</a>.</p>
+<p>Для его более тонкой настройке добавляйте различные <a href="https://clear.ml/docs/latest/docs/clearml_agent/clearml_agent_env_var/">переменные окружения</a> в docker compose. Наиболее полезные: - <code>CLEARML_DOCKER_IMAGE</code> или <code>CLEARML_AGENT_DEFAULT_BASE_DOCKER</code> для указания базового образа docker.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -749,13 +698,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./1. yandex_kube.html" class="pagination-link" aria-label="Настройка Yandex Kubernetes">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Настройка Yandex Kubernetes</span>
+      <a href="./2. clearml_yandex_kube.html" class="pagination-link" aria-label="Настройка ClearML Yandex">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Настройка ClearML Yandex</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2.2 clearml docker.html" class="pagination-link" aria-label="ClearML docker compose run">
-        <span class="nav-page-text">ClearML docker compose run</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./3. clearml_work.html" class="pagination-link" aria-label="Работа с ClearML">
+        <span class="nav-page-text">Работа с ClearML</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
