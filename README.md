@@ -55,3 +55,8 @@
 
 [^1]: Если не получается то локлаьно через docker-compose
 [^2]: Если неполчается, то реализовать приложение fastpai, которое при запуске забирает определенную версию модели из clearml
+
+
+## [Обратная связь](https://docs.google.com/forms/d/1Hq6uR6o6krYRqzrIZnwz3wF6PxlstOKCjfMI_7fp-eU/edit#settings)
+
+![](./images/qr_cNx2Ag.png)
