@@ -9,7 +9,7 @@ from mlops_example.visualisation import class_distribution
 pipe = PipelineController(
     name="DataPrepare",
     project="Amazon reviews",
-    version="0.0.1",
+    version="0.0.2",
     packages=["./mlops-example"],
     docker="python:3.11.13-slim-bookworm",
     enable_local_imports=True,
@@ -154,7 +154,8 @@ pipe.add_function_step(
     ),
     function_return=["raw_train_dataframe", "raw_test_dataframe", "splited_dataset_id"],
     cache_executed_step=True,
-    execution_queue="default",
+    execution_queue="services",
+    docker="python:3.11.13-slim-bookworm",
     helper_functions=[class_distribution],
     packages=[
         "plotly>=6.2.0,<7",
@@ -183,9 +184,10 @@ pipe.add_function_step(
     ),
     function_return=["processed_train_dataframe", "dataset_id"],
     cache_executed_step=True,
-    execution_queue="default",
+    execution_queue="services",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
     parents=["train_test_split"],
+    docker="python:3.11.13-slim-bookworm",
     packages=[
         "plotly>=6.2.0,<7",
         "plotly-express>=0.4.1,<0.5",
@@ -213,7 +215,8 @@ pipe.add_function_step(
     ),
     function_return=["processed_test_dataframe", "dataset_id"],
     cache_executed_step=True,
-    execution_queue="default",
+    execution_queue="services",
+    docker="python:3.11.13-slim-bookworm",
     helper_functions=[lemmatize, dataframe_preprocessing, text_preprocessing],
     parents=["train_test_split"],
     packages=[
@@ -230,4 +233,4 @@ pipe.add_function_step(
 )
 
 
-pipe.start("default")
+pipe.start()

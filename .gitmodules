@@ -1,3 +1,6 @@
 [submodule "clearml-helm-charts"]
 	path = clearml-helm-charts
 	url = https://github.com/levkovalenko/clearml-helm-charts.git
+[submodule "clearml-serving"]
+	path = clearml-serving
+	url = https://github.com/clearml/clearml-serving

@@ -21,9 +21,9 @@ output_model = OutputModel(task=task, framework="scikit-learn")
 args = {
     "dataset_name": "Amazon reviews dataset",
     "dataset_project": "Amazon reviews",
-    "train_dataset_version": "1.2.2",
-    "test_dataset_version": "1.2.3",
-    "dataset_version": "1.2.4",
+    "train_dataset_version": "1.1.2",
+    "test_dataset_version": "1.1.3",
+    "dataset_version": "1.1.4",
     "random_state": 42,
     "max_features": 1000,
     "analyzer": "word",
