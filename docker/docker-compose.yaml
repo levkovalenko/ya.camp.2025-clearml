@@ -25,11 +25,13 @@ services:
       CLEARML_REDIS_SERVICE_HOST: redis
       CLEARML_REDIS_SERVICE_PORT: 6379
       CLEARML_SERVER_DEPLOYMENT_TYPE: linux
+      CLEARML__apiserver__files__default_storage__fileserver: "http://fileserver:8081"
+      CLEARML__apiserver__files__default_storage__base_url: "http://fileserver:8081"
       CLEARML__apiserver__pre_populate__enabled: "true"
       CLEARML__apiserver__pre_populate__zip_files: "/opt/clearml/db-pre-populate"
       CLEARML__apiserver__pre_populate__artifacts_path: "/mnt/fileserver"
       CLEARML__services__async_urls_delete__enabled: "true"
-      CLEARML__services__async_urls_delete__fileserver__url_prefixes: "[${CLEARML_FILES_HOST:-}]"
+      CLEARML__services__async_urls_delete__fileserver__url_prefixes: "[${CLEARML_FILES_HOST:-http://fileserver:8081}]"
       CLEARML__secure__credentials__services_agent__user_key: ${CLEARML_AGENT_ACCESS_KEY:-}
       CLEARML__secure__credentials__services_agent__user_secret: ${CLEARML_AGENT_SECRET_KEY:-}
     ports:
@@ -113,6 +115,8 @@ services:
     command:
     - webserver
     container_name: clearml-webserver
+    environment:
+      CLEARML__apiserver__files__default_storage__fileserver: "http://fileserver:8081"
     # environment:
     #  CLEARML_SERVER_SUB_PATH : clearml-web # Allow Clearml to be served with a URL path prefix.
     image: allegroai/clearml:2.0.0

@@ -8,8 +8,8 @@ from mlops_example.visualisation import class_distribution
 
 pipe = PipelineController(
     name="DataPrepare",
-    project="Amazon reviews",
-    version="0.0.2",
+    project="Amazon reviews demo",
+    version="0.0.1",
     packages=["./mlops-example"],
     docker="python:3.11.13-slim-bookworm",
     enable_local_imports=True,
@@ -18,17 +18,17 @@ pipe = PipelineController(
 pipe.add_parameter(
     name="dataset_name",
     description="ClearML dataset name",
-    default="Amazon reviews dataset",
+    default="Amazon reviews demo dataset",
 )
 pipe.add_parameter(
     name="dataset_project",
     description="ClearML project",
-    default="Amazon reviews",
+    default="Amazon reviews demo",
 )
 pipe.add_parameter(
     name="dataset_version",
     description="ClearML dataset version",
-    default="1.2",
+    default="1.1",
 )
 pipe.add_parameter(
     name="test_size", description="Test ratio size", default=0.2, param_type="float"
