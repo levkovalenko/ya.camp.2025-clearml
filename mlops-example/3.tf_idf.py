@@ -10,7 +10,7 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.pipeline import Pipeline
 
 task = Task.init(
-    project_name="Amazon reviews",
+    project_name="Amazon reviews demo",
     task_name="TF-IDF Vectorize BernoulliNB",
     output_uri=True,
 )
@@ -19,11 +19,11 @@ task.add_requirements("pyarrow", "20.0.0")
 logger: Logger = task.get_logger()
 output_model = OutputModel(task=task, framework="scikit-learn")
 args = {
-    "dataset_name": "Amazon reviews dataset",
-    "dataset_project": "Amazon reviews",
-    "train_dataset_version": "1.2.2",
-    "test_dataset_version": "1.2.3",
-    "dataset_version": "1.2.4",
+    "dataset_name": "Amazon reviews demo dataset",
+    "dataset_project": "Amazon reviews demo",
+    "train_dataset_version": "1.1.2",
+    "test_dataset_version": "1.1.3",
+    "dataset_version": "1.1.4",
     "random_state": 42,
     "max_features": 1000,
     "analyzer": "word",
