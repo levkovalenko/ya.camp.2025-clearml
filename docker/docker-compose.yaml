@@ -25,11 +25,13 @@ services:
       CLEARML_REDIS_SERVICE_HOST: redis
       CLEARML_REDIS_SERVICE_PORT: 6379
       CLEARML_SERVER_DEPLOYMENT_TYPE: linux
+      CLEARML__apiserver__files__default_storage__fileserver: "http://fileserver:8081"
+      CLEARML__apiserver__files__default_storage__base_url: "http://fileserver:8081"
       CLEARML__apiserver__pre_populate__enabled: "true"
       CLEARML__apiserver__pre_populate__zip_files: "/opt/clearml/db-pre-populate"
       CLEARML__apiserver__pre_populate__artifacts_path: "/mnt/fileserver"
       CLEARML__services__async_urls_delete__enabled: "true"
-      CLEARML__services__async_urls_delete__fileserver__url_prefixes: "[${CLEARML_FILES_HOST:-}]"
+      CLEARML__services__async_urls_delete__fileserver__url_prefixes: "[${CLEARML_FILES_HOST:-http://fileserver:8081}]"
       CLEARML__secure__credentials__services_agent__user_key: ${CLEARML_AGENT_ACCESS_KEY:-}
       CLEARML__secure__credentials__services_agent__user_secret: ${CLEARML_AGENT_SECRET_KEY:-}
     ports:
@@ -113,6 +115,8 @@ services:
     command:
     - webserver
     container_name: clearml-webserver
+    environment:
+      CLEARML__apiserver__files__default_storage__fileserver: "http://fileserver:8081"
     # environment:
     #  CLEARML_SERVER_SUB_PATH : clearml-web # Allow Clearml to be served with a URL path prefix.
     image: allegroai/clearml:2.0.0
@@ -157,25 +161,27 @@ services:
       - ./clearml_config:/opt/clearml/config
 
   agent-services:
-    networks:
-      - bagel
+    # networks:
+    #   - bagel
     container_name: clearml-agent-services
     image: allegroai/clearml-agent-services:services-1.3.0-80
     deploy:
       restart_policy:
         condition: on-failure
     privileged: true
+    network_mode: "host"
     environment:
-      CLEARML_HOST_IP: 127.0.0.1
-      CLEARML_WEB_HOST: ${CLEARML_WEB_HOST:-http://webserver:80}
-      CLEARML_API_HOST: http://apiserver:8008
-      CLEARML_FILES_HOST: ${CLEARML_FILES_HOST:-http://fileserver:8081}
+      CLEARML_HOST_IP: 172.18.213.156
+      CLEARML_WEB_HOST: http://localhost:8080 
+      CLEARML_API_HOST: http://localhost:8008
+      CLEARML_FILES_HOST: http://localhost:8081
       CLEARML_API_ACCESS_KEY: ${CLEARML_AGENT_ACCESS_KEY}
       CLEARML_API_SECRET_KEY: ${CLEARML_AGENT_SECRET_KEY}
       CLEARML_AGENT_GIT_USER: ${CLEARML_AGENT_GIT_USER}
       CLEARML_AGENT_GIT_PASS: ${CLEARML_AGENT_GIT_PASS}
-      CLEARML_AGENT_UPDATE_VERSION: ${CLEARML_AGENT_UPDATE_VERSION:->=0.17.0}
-      CLEARML_AGENT_DEFAULT_BASE_DOCKER: "ubuntu:18.04"
+      CLEARML_AGENT_UPDATE_VERSION: ${CLEARML_AGENT_UPDATE_VERSION:-==1.9.2}
+      # CLEARML_AGENT_NO_UPDATE: true
+      CLEARML_AGENT_DEFAULT_BASE_DOCKER: "python:3.11.13-slim-bookworm"
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
       AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-}
@@ -187,11 +193,11 @@ services:
       SHUTDOWN_IF_NO_ACCESS_KEY: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - clearml_agent:/root/.clearml
+      - /opt/clearml/agent:/root/.clearml
     depends_on:
       - apiserver
     entrypoint: >
-      bash -c "curl --retry 10 --retry-delay 10 --retry-connrefused 'http://apiserver:8008/debug.ping' && /usr/agent/entrypoint.sh"
+      bash -c "curl --retry 10 --retry-delay 10 --retry-connrefused 'http://localhost:8008/debug.ping' && /usr/agent/entrypoint.sh"
 
 networks:
   frontend:
